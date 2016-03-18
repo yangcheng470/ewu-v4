@@ -7,7 +7,7 @@ class Account(models.Model):
     name=models.CharField(max_length=50,null=False)
     sex=models.CharField(max_length=1,null=False)  # m for male, f for female
     pwd=models.CharField(max_length=64,null=False)
-    salt=models.CharField(max_length=,null=False64)
+    salt=models.CharField(max_length=64,null=False)
     email=models.EmailField(null=False)
     email_verified=models.BooleanField(default=False)
     phone=models.CharField(max_length=11) 

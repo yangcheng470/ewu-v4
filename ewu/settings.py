@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'accounts',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -78,6 +80,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ewu',
+        'USER': 'ewuadmin',
         'PASSWORD': '123456789',
     }
 }
