@@ -41,3 +41,10 @@ class Product(models.Model):
     imgs=models.CharField(max_length=200)  
 
     content=models.TextField()
+
+    # return content for admin interface
+    def get_content(self):
+        if len(self.content)>80:
+            return self.content[:77]+' ...'
+        else:
+            return self.content
