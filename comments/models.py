@@ -5,8 +5,8 @@ from django.utils import timezone
 
 
 class Comment(models.Model):
-    comment_from=models.ForeignKey('accounts.Account',related_name='comment_from')
-    comment_to=models.ForeignKey('accounts.Account',related_name='comment_to')
+    comment_from=models.ForeignKey('accounts.Account')
+    product=models.ForeignKey('products.Product',null=True)
     pub_date=models.DateTimeField(default=timezone.now)
     content=models.CharField(max_length=300)
 

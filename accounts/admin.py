@@ -6,6 +6,5 @@ from .models import Account
 
 class AccountAdmin(admin.ModelAdmin):
     list_display=['id','name','campus','phone','email','reg_time','last_ip']
-    readonly_fields=['pwd','salt']
 
 admin.site.register(Account,AccountAdmin)
