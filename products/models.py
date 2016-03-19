@@ -36,7 +36,8 @@ class Product(models.Model):
     owner=models.ForeignKey('accounts.Account')
 
     # S for sale, E for exchange
-    status=models.CharField(max_length=1,default='S')  
+    # This is function is to be done
+    # status=models.CharField(max_length=1,default='S')  
 
     # Most 5 imgs, file name split with ':'
     imgs=models.CharField(max_length=200)  
