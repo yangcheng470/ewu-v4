@@ -10,5 +10,13 @@ class Comment(models.Model):
     pub_date=models.DateTimeField(default=timezone.now)
     content=models.CharField(max_length=300)
 
+    def get_content(self):
+        if len(self.content)>80:
+            return self.contene[:77]+' ...'
+        else:
+            return self.content
+
+    get_content.short_description='Comment contene'
+
     def __str__(self):
-        return self.comment_from
+        return self.content

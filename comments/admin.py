@@ -5,7 +5,7 @@ from .models import Comment
 
 
 class CommentAdmin(admin.ModelAdmin):
-    pass
+    list_display=['comment_from','comment_to','pub_date','get_content']
 
 
 admin.site.register(Comment,CommentAdmin)
