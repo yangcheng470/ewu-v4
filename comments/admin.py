@@ -6,6 +6,7 @@ from .models import Comment
 
 class CommentAdmin(admin.ModelAdmin):
     list_display=['id','comment_from','product','pub_date','get_content']
+    ordering=['id']
 
 
 admin.site.register(Comment,CommentAdmin)

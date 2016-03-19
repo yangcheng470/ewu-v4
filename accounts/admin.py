@@ -6,5 +6,6 @@ from .models import Account
 
 class AccountAdmin(admin.ModelAdmin):
     list_display=['id','name','campus','phone','email','reg_time','last_ip']
+    ordering=['id']
 
 admin.site.register(Account,AccountAdmin)
