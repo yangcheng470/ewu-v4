@@ -17,7 +17,6 @@ class Account(models.Model):
 
     CAMPUS_CHOICES=(
             ('NQ','南区'),
-            ('BQ','北区'),
             ('NL','南岭'),
             ('NH','南湖'),
             ('HP','和平'),
