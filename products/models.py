@@ -24,7 +24,8 @@ class Product(models.Model):
                               default='QT'
     )
 
-    price=models.PositiveIntegerField(default=0) # Must be positive price
+    # Most 7 digits, with 2 decimals, for instance, 45.98
+    price=models.DecimalField(max_digits=7,decimal_places=2,default=0) 
 
     # Condition of the product, with one decimal and most two integer
     # For instance, 9.8    10.0
