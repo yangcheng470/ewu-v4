@@ -6,7 +6,12 @@ from django.utils import timezone
 
 class Account(models.Model):
     name=models.CharField(max_length=50,null=False)
-    sex=models.CharField(max_length=1,null=False)  # m for male, f for female
+    
+    SEX_CHOICES=(
+            ('M','Male'),
+            ('F','Female'),
+    )
+    sex=models.CharField(max_length=1,choices=SEX_CHOICES,default='M')
     pwd=models.CharField(max_length=64,null=False)
     salt=models.CharField(max_length=64,null=False)
     email=models.EmailField(null=False)
