@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 
 class Product(models.Model):
@@ -41,6 +42,11 @@ class Product(models.Model):
     imgs=models.CharField(max_length=200)  
 
     content=models.TextField()
+
+    pub_date=models.DateTimeField(default=timezone.now())
+
+    # If sold, valid field can be set to False
+    valid=models.BooleanField(default=True)
 
     # return content for admin interface
     def get_content(self):
