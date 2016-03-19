@@ -44,7 +44,7 @@ class Product(models.Model):
 
     content=models.TextField()
 
-    pub_date=models.DateTimeField(default=timezone.now())
+    pub_date=models.DateTimeField(default=timezone.now)
 
     # If sold, valid field can be set to False
     valid=models.BooleanField(default=True)
@@ -57,3 +57,6 @@ class Product(models.Model):
             return self.content
 
     get_content.short_description='Content'
+
+    def __str__(self):
+        return self.name

@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 
@@ -12,7 +13,7 @@ class Account(models.Model):
     email_verified=models.BooleanField(default=False)
     phone=models.CharField(max_length=11) 
     phone_verified=models.BooleanField(default=False)
-    reg_time=models.DateTimeField(null=True)
+    reg_time=models.DateTimeField(default=timezone.now)
     last_ip=models.GenericIPAddressField(null=True)
 
     CAMPUS_CHOICES=(
