@@ -3,4 +3,4 @@ from django.http import HttpResponse
 
 
 def index(request):
-    return HttpResponse('<h1>Product Index Here.</h1>')
+    return HttpResponse('<h1>Index Page Here.</h1>')
