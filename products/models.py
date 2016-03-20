@@ -49,6 +49,8 @@ class Product(models.Model):
     # If sold, valid field can be set to False
     valid=models.BooleanField(default=True)
 
+    visitors=models.PositiveIntegerField(default=0)
+
     # return content for admin interface
     def get_content(self):
         if len(self.content)>80:

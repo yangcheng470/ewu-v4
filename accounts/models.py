@@ -20,6 +20,7 @@ class Account(models.Model):
     phone_verified=models.BooleanField(default=False)
     reg_time=models.DateTimeField(default=timezone.now)
     last_ip=models.GenericIPAddressField(null=True)
+    visitors=models.PositiveIntegerField(default=0)
 
     CAMPUS_CHOICES=(
             ('NQ','南区'),
