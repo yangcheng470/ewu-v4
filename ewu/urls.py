@@ -21,6 +21,6 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^',include('index.urls',namespace='index')),     # Index page
-    url(r'^product/',include('products.urls',namespace='products')),
-    url(r'^ucenter/',include('accounts.urls',namespace='accounts')),
+    # url(r'^product/',include('products.urls',namespace='products')),
+    # url(r'^ucenter/',include('accounts.urls',namespace='accounts')),
 ]
