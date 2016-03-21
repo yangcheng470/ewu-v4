@@ -9,8 +9,18 @@ This is the version 4.0 of [jluewu](http://www.jluewu.com). All codes(including 
 
 ----------------------------
 
-Applications:
+## Applications:
 - accounts
 - comments
 - products
 
+## URL description:
+- index
+	- product ( this is the search result page )
+	- publish
+		- success
+	- register
+		- success
+	- ucenter
+	- help
+	- about
