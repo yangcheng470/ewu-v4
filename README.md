@@ -16,11 +16,16 @@ This is the version 4.0 of [jluewu](http://www.jluewu.com). All codes(including 
 
 ## URL description:
 - index
-	- product ( this is the search result page )
+	- product
+	- search
 	- publish
 		- success
 	- register
 		- success
 	- ucenter
+		- reset-password
+			- success
+		- delete-account
+			- success
 	- help
 	- about
