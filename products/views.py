@@ -3,10 +3,6 @@ from django.http import HttpResponse
 from .models import Product
 
 
-def index(request):
-    return HttpResponse('<h1>Product Index Here.</h1>')
-
-
 def detail(request,product_id):
     try:
         product=Product.objects.get(pk=product_id)

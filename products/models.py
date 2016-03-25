@@ -46,12 +46,14 @@ class Product(models.Model):
 
     pub_date=models.DateTimeField(default=timezone.now)
 
-    # If sold, valid field can be set to False
+    # If sold or other reason, valid field will be set to False
     valid=models.BooleanField(default=True)
 
     visitors=models.PositiveIntegerField(default=0)
 
-    # return content for admin interface
+    # Return content for admin interface
+    # If content's length is greater than 80,
+    # only 77 chars will be displayed together with "..."
     def get_content(self):
         if len(self.content)>80:
             return self.content[:77]+' ...'

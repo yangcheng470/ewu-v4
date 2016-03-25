@@ -6,6 +6,11 @@ def index(request):
     return HttpResponse('Index Page Here.')
 
 
+# Search result page, keyword conveyed by GET method
+def search(request):
+    return HttpResponse('Search Page Here.')
+
+
 def publish(request):
     return HttpResponse('Publish Page Here.')
 
