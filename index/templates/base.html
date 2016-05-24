@@ -1,0 +1,23 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>{% block title %}吉大易物{% endblock title %}</title>
+		<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" >
+		<link rel="stylesheet" href="{% static "css/style.css" %}">
+    <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<script src="{% static "js/index.js" %}"></script>
+  </head>
+  
+  <body>
+    {% block qr_code %}<img id="tdc" src="{% static "image/二维码.jpg" %}" />{% endblock qr_code %}
+		{% block header %}{% include "includes/header.html" %}{% endblock header %}
+		{% block body %}
+		{% endblock body %}
+    {% block footer %}{% include "includes/footer.html" %}{% endblock footer %}
+  </body>
+
+</html>

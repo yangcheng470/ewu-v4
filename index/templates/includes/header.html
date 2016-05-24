@@ -1,0 +1,120 @@
+{% load staticfiles %}
+<nav class="navbar navbar-default navbar-fixed-top" style="margin-bottom: 0px">
+  <div class="container">
+    <p class="navbar-text"><span>Hi！欢迎来到<a href="index.php" display="none" >吉大易物网</a>！</span></p>
+				<form class="navbar-form navbar-left" role="search" style="margin-left: 180px;display: none" id="flowSearchForm">
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="请输入宝贝名称或关键字" style="border:1px solid #ff6600;width: 300px">
+					</div>
+					<button type="submit" class="btn" style="background-color: #ff6600;">
+						<span class="glyphicon glyphicon-search" aria-hidden="true" style="color: white;width: 60px;"></span>
+					</button>
+				</form>
+    <p class="navbar-text navbar-right">
+      <ul class="nav navbar-nav navbar-right" style="line-height:34px;">
+        <li id="login-control" data-toggle="modal" data-target="#loginModal"><a href="#">登录</a></li>
+        <li id="reg-control" data-toggle="modal" data-target="#loginModal"><a href="#">注册</a></li>
+        <li><a href="#">站内信</a></li>
+      </ul>
+    </p>
+  </div>
+</nav>
+<!-- Modal -->
+<center>
+  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div id="login-model-body" class="modal-content" style="height:400px; width:450px;">
+  
+        <ul class="nav nav-tabs nav-justified" style="background-color:#CCCCCC;">
+          <li role="presentation" class="active"><a href="#">登录</a></li>
+          <li role="presentation"><a href="#">注册</a></li>
+        </ul>
+  
+        <!-- 登录框-->
+        <div style="display:block;" class="modal-body form-div">
+          <form id="form-login" action="#">
+            <div style="height:51px;">
+              <label class="label">注册信息:</label>
+              <input type="text" id="account" class="input" placeholder="&nbsp;用户名&nbsp;/&nbsp;邮箱" required autofocus />
+            </div>
+            <div style="height:51px;">
+              <label class="label">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码&nbsp;:</label>
+              <input type="password" id="password" class="input" placeholder="&nbsp;密码" required>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" id="rememberme" value="remember-me">记住我</label>
+              <label><span><abbr title="Click to reset your password" class="text-right" id="forget-pwd">忘记密码?</abbr></span></label>
+              <div class="row">
+                <div class="col-md-6 col-sm-6" style="left:105px; top:12px; position:relative;">
+                  <input type="button" value="登录" id="btn-login" class="btn btn-primary btn-block" />
+                </div>
+              </div>
+              <hr/>
+              <input type="text" style="text-align:center; border:0px;" value="其他登录方式" />
+              <div style="height:80px; width:400px; top:25px; position:relative;">
+                <div class="img">
+														<a href="#"><img src="{% static "image/u347.jpg" %}" /></a>
+                </div>
+                <div class="img">
+														<a href="#"><img src="{% static "image/u349.jpg" %}" /></a>
+                </div>
+                <div class="img">
+														<a href="#"><img src="{% static "image/u345.gif" %}" /></a>
+                </div>
+                <div class="img">
+														<a href="#"><img src="{% static "image/u351.png" %}" /></a>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <!-- 注册框 -->
+        <div style="display:none;" class="modal-body form-div">
+          <form id="form-register" action="#">
+            <div style="height:51px;">
+              <label class="label">用&nbsp;户&nbsp;名&nbsp;:</label>
+              <input type="text" class="input account" placeholder="&nbsp;起个响亮的名字吧~" required autofocus />
+            </div>
+            <div style="height:51px;">
+              <label class="label">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱&nbsp;:</label>
+              <input type="email" class="input r-email" placeholder="&nbsp;邮箱" required autofocus>
+            </div>
+            <div style="height:51px;">
+              <label class="label">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码&nbsp;:</label>
+              <input type="password" class="input password" placeholder="&nbsp;请输入密码" required autofocus />
+            </div>
+            <div style="height:51px;">
+              <label class="label">确认密码&nbsp;:</label>
+              <input type="password" class="input password" placeholder="&nbsp;请再次输入密码" required autofocus />
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" class="rememberme" value="remember-me">已阅读并同意相关服务条款</label>
+              <hr/>
+              <div class="row">
+                <div class="col-md-6 col-sm-6" style="left:105px;">
+                  <input type="button" value="注册" id="btn-register" class="btn btn-default btn-block" />
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+</center>
+<div class="row" style="margin-top: 50px;text-align: center;vertical-align: middle;background-color: white;margin-bottom: 10px">
+  <div style="width: 80%;margin-left: 10%">
+    <div class="col-md-2" style="text-align: center;">
+								<img src="{% static "image/logo.png" %}" style="width: 70px">
+    </div>
+    <div class="input-group col-md-5 col-md-offset-3" style="padding:15px 0 0 70px;">
+      <input type="text" class="form-control" placeholder="请输入宝贝名称或关键字" style="border:1px solid #ff6600">
+      <span class="input-group-addon" style="background-color: #ff6600;width: 60px">
+        <span class="glyphicon glyphicon-search" aria-hidden="true" style="color: white;"></span>
+      </span>
+    </div>
+  </div>
+</div>
