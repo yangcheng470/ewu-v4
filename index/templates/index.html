@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>吉大易物</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <style type="text/css">
+      body {
+        font-family: "微软雅黑";
+        background-color: #f5f5f5;
+      }
+  
+      li {
+        list-style: none;
+      }
+  
+      #classifyTag {
+        padding: 0px;
+      }
+  
+      #classifyTag>.panel-body {
+        color: black;
+      }
+  
+      #basedOnCampus {
+        border-width: 0px 1px 0px 0px;
+        border-style: solid;
+      }
+  
+      #basedOnSort a {
+        margin: 0px 15px;
+      }
+  
+      #classifyTag>.panel-body {}
+  
+      #classifyTag>.panel-heading {
+        background-color: #ff6600;
+        border-width: 0px;
+        color: #ffffff;
+      }
+  
+      #classifyTag a {
+        text-decoration: none;
+        color: black;
+      }
+  
+      #contentNav {
+        border-bottom: 1px solid #ff6600;
+      }
+  
+      #contentNav>li.active>a {
+        color: #ffffff;
+        background-color: #ff6600;
+        border-width: 0px;
+      }
+  
+      #contentNav>li {
+        margin-bottom: 0px;
+      }
+  
+      #contentNav a {
+        color: #000000;
+        border-bottom-width: 0px;
+      }
+  
+      #contentNav a:hover {
+        background-color: #ffcc99;
+      }
+  
+      .product-price {
+        font-weight: bold;
+        color: #ff6600;
+      }
+  
+      .product-tag {
+        color: white;
+        display: inline-block;
+        background-color: #ff6600;
+        padding: 0 2px;
+        border-radius: 2px;
+        text-align: center;
+      }
+  
+      .product-info {
+        font-size: small;
+      }
+  
+      .input {
+        width: 300px;
+        height: 35px;
+        border: 1px solid #999999;
+        margin: 8px;
+        position: relative;
+        float: right;
+        right: 20px;
+      }
+  
+      .img {
+        width: 50%;
+        height: 62.5%;
+      }
+  
+      .label {
+        display: block;
+        float: left;
+        height: 42px;
+        width: 65px;
+        margin-right: 10px;
+        line-height: 42px;
+        font-size: 14px;
+        color: #666;
+        font-weight: bold;
+        text-align: right;
+      }
+  
+      .img {
+        height: 80px;
+        width: 100px;
+        position: relative;
+        float: left;
+      }
+  
+      #footer a:link {
+        color: #999999;
+      }
+  
+      #footer a:hover {
+        color: #999999;
+      }
+  
+      #footer a:visited {
+        color: #999999;
+        text-decoration: none;
+      }
+  
+      #footer a:active {
+        color: #999999;
+      }
+  
+      #footer a {
+        color: #999999;
+      }
+  
+      #tdc {
+        height: 100px;
+        width: 100px;
+        position: fixed;
+        right: -80px;
+        top: 45%;
+        z-index: 2000;
+      }
+    </style>
+    <script type="text/javascript">
+      $(function() {
+        $(window).scroll(function() {
+          var top = $(this).scrollTop();
+          var flowSearch = $("#flowSearchForm");
+          if (top - 36 < 0) {
+            flowSearch.css("display", "none");
+          } else {
+            flowSearch.css("display", "block");
+          }
+        });
+      });
+  
+      window.onload = function() {
+        var oDiv = document.getElementById('login-model-body');
+        var aBtn = oDiv.getElementsByTagName('li');
+        var aDiv = document.querySelectorAll(".form-div");
+  
+        for (var i = 0; i < aBtn.length; i++) {
+          aBtn[i].index = i;
+          aBtn[i].addEventListener('click', function() {
+            for (var i = 0; i < aBtn.length; i++) {
+              aBtn[i].className = '';
+              aDiv[i].style.display = "none";
+            }
+            this.className = 'active';
+            aDiv[this.index].style.display = "block";
+          }, false);
+        }
+  
+        var oBlock = document.getElementById('contentNav');
+        var aLi = oBlock.getElementsByTagName('li');
+  
+        for (var i = 0; i < aLi.length; i++) {
+          aLi[i].addEventListener('click', function() {
+            for (var i = 0; i < aLi.length; i++) {
+              aLi[i].className = '';
+            }
+            this.className = 'active';
+          }, false);
+        }
+  
+        function getByClass(tagName, className) {
+          var tag = document.getElementsByTagName(tagName);
+          var tagAll = [];
+          for (var i = 0; i < tag.length; i++) {
+            if (tag[i].className.indexOf(className) != -1) {
+              tagAll[tagAll.length] = tag[i];
+            }
+          }
+          return tagAll;
+        }
+      }
+  
+      var oTdc = document.getElementById("tdc");
+  
+      oTdc.addEventListener('mouseover', function() {
+        startMove(oTdc, {
+          right: 0
+        }, false);
+      }, false);
+    </script>
+  </head>
+  
+  <body>
+  
+    <img id="tdc" src="image/二维码.jpg" />
+    <nav class="navbar navbar-default navbar-fixed-top" style="margin-bottom: 0px">
+      <div class="container">
+        <p class="navbar-text"><span>Hi！欢迎来到<a href="index.php" display="none" >吉大易物网</a>！</span></p>
+        <form class="navbar-form navbar-left" role="search" style="margin-left: 180px;display: none" id="flowSearchForm">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="请输入宝贝名称或关键字" style="border:1px solid #ff6600;width: 300px">
+          </div>
+          <button type="submit" class="btn" style="background-color: #ff6600;">
+            <span class="glyphicon glyphicon-search" aria-hidden="true" style="color: white;width: 60px;"></span>
+          </button>
+        </form>
+        <p class="navbar-text navbar-right">
+          <ul class="nav navbar-nav navbar-right" style="line-height:34px;">
+            <li id="login-control" data-toggle="modal" data-target="#loginModal"><a href="#">登录</a></li>
+            <li id="reg-control" data-toggle="modal" data-target="#loginModal"><a href="#">注册</a></li>
+            <li><a href="#">站内信</a></li>
+          </ul>
+        </p>
+      </div>
+    </nav>
+    <!-- Modal -->
+    <center>
+      <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div id="login-model-body" class="modal-content" style="height:400px; width:450px;">
+  
+            <ul class="nav nav-tabs nav-justified" style="background-color:#CCCCCC;">
+              <li role="presentation" class="active"><a href="#">登录</a></li>
+              <li role="presentation"><a href="#">注册</a></li>
+            </ul>
+  
+            <!-- 登录框-->
+            <div style="display:block;" class="modal-body form-div">
+              <form id="form-login" action="#">
+                <div style="height:51px;">
+                  <label class="label">注册信息:</label>
+                  <input type="text" id="account" class="input" placeholder="&nbsp;用户名&nbsp;/&nbsp;邮箱" required autofocus />
+                </div>
+                <div style="height:51px;">
+                  <label class="label">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码&nbsp;:</label>
+                  <input type="password" id="password" class="input" placeholder="&nbsp;密码" required>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" id="rememberme" value="remember-me">记住我</label>
+                  <label><span><abbr title="Click to reset your password" class="text-right" id="forget-pwd">忘记密码?</abbr></span></label>
+                  <div class="row">
+                    <div class="col-md-6 col-sm-6" style="left:105px; top:12px; position:relative;">
+                      <input type="button" value="登录" id="btn-login" class="btn btn-primary btn-block" />
+                    </div>
+                  </div>
+                  <hr/>
+                  <input type="text" style="text-align:center; border:0px;" value="其他登录方式" />
+                  <div style="height:80px; width:400px; top:25px; position:relative;">
+                    <div class="img">
+                      <a href="#"><img src="image/u347.jpg" /></a>
+                    </div>
+                    <div class="img">
+                      <a href="#"><img src="image/u349.jpg" /></a>
+                    </div>
+                    <div class="img">
+                      <a href="#"><img src="image/u345.gif" /></a>
+                    </div>
+                    <div class="img">
+                      <a href="#"><img src="image/u351.png" /></a>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <!-- 注册框 -->
+            <div style="display:none;" class="modal-body form-div">
+              <form id="form-register" action="#">
+                <div style="height:51px;">
+                  <label class="label">用&nbsp;户&nbsp;名&nbsp;:</label>
+                  <input type="text" class="input account" placeholder="&nbsp;起个响亮的名字吧~" required autofocus />
+                </div>
+                <div style="height:51px;">
+                  <label class="label">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱&nbsp;:</label>
+                  <input type="email" class="input r-email" placeholder="&nbsp;邮箱" required autofocus>
+                </div>
+                <div style="height:51px;">
+                  <label class="label">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码&nbsp;:</label>
+                  <input type="password" class="input password" placeholder="&nbsp;请输入密码" required autofocus />
+                </div>
+                <div style="height:51px;">
+                  <label class="label">确认密码&nbsp;:</label>
+                  <input type="password" class="input password" placeholder="&nbsp;请再次输入密码" required autofocus />
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" class="rememberme" value="remember-me">已阅读并同意相关服务条款</label>
+                  <hr/>
+                  <div class="row">
+                    <div class="col-md-6 col-sm-6" style="left:105px;">
+                      <input type="button" value="注册" id="btn-register" class="btn btn-default btn-block" />
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+  
+          </div>
+        </div>
+      </div>
+    </center>
+    <div class="row" style="margin-top: 50px;text-align: center;vertical-align: middle;background-color: white;margin-bottom: 10px">
+      <div style="width: 80%;margin-left: 10%">
+        <div class="col-md-2" style="text-align: center;">
+          <img src="image/logo.png" style="width: 70px">
+        </div>
+        <div class="input-group col-md-5 col-md-offset-3" style="padding:15px 0 0 70px;">
+          <input type="text" class="form-control" placeholder="请输入宝贝名称或关键字" style="border:1px solid #ff6600">
+          <span class="input-group-addon" style="background-color: #ff6600;width: 60px">
+            <span class="glyphicon glyphicon-search" aria-hidden="true" style="color: white;"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="panel panel-default col-md-3" id="classifyTag">
+          <div class="panel-heading">
+            <h3 style="margin: 0">宝贝分类标签</h3></div>
+          <div class="panel-body">
+            <div id="basedOnCampus" class="col-md-5">
+              <h4><span class="glyphicon glyphicon-home" aria-hidden="true" style="color: #2aabd2;"></span>按校区</h4>
+              <p><a href="javascript:void (0)">中心校区</a></p>
+              <p><a href="javascript:void (0)">南岭校区</a></p>
+              <p><a href="javascript:void (0)">南湖校区</a></p>
+              <p><a href="javascript:void (0)">新民校区</a></p>
+              <p><a href="javascript:void (0)">朝阳校区</a></p>
+              <p><a href="javascript:void (0)">和平校区</a></p>
+            </div>
+            <div id="basedOnSort" class="col-md-7">
+              <h4><span class="glyphicon glyphicon-tasks" aria-hidden="true" style="color: #ff6600;"></span>按类别</h4>
+              <p><a href="javascript:void (0)">代步</a><a href="javascript:void (0)">数码</a></p>
+              <p><a href="javascript:void (0)">电器</a><a href="javascript:void (0)">文体</a></p>
+              <p><a href="javascript:void (0)">服饰</a><a href="javascript:void (0)">书刊</a></p>
+              <p><a href="javascript:void (0)">鞋履</a><a href="javascript:void (0)">装饰</a></p>
+              <p><a href="javascript:void (0)">虚拟</a><a href="javascript:void (0)">日用</a></p>
+              <p><a href="javascript:void (0)">食品</a><a href="javascript:void (0)">其他</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <img src="image/homePage.jpg" width="100%">
+        </div>
+        <div class="col-md-3">
+          <button class="btn col-md-6" style="background-color: #ff6600;color: white;width: 45%;float: left">转让宝贝</button>
+          <button class="btn col-md-6" style="background-color: #ff6600;color: white;width: 45%;float: right">求购宝贝</button>
+          <div style="width:100%;height: 70px;clear: both;text-align: center;vertical-align: middle;background-color: white;position:absolute;margin-top: 45px">
+            暂无公告
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <ul class="nav nav-tabs" id="contentNav">
+          <li role="presentation" class="active"><a href="javascript:void (0)">新品上架</a></li>
+          <li role="presentation"><a href="javascript:void (0)">热门宝贝</a></li>
+          <li role="presentation"><a href="javascript:void (0)">交换专区</a></li>
+          <li role="presentation"><a href="javascript:void (0)">求购信息</a></li>
+        </ul>
+      </div>
+      <div class="row">
+        <div class="col-md-2" style="margin-top: 10px;background-color: white;padding: 0">
+          <img src="image/product1.jpg" width="100%" style="margin-bottom: 2px;">
+          <p style="text-align: center">
+            <span class="product-price" style="float: left">$200</span>
+            <span class="product-tag" style="float:right;text-align: center">南区</span>
+          </p>
+          <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
+        </div>
+      </div>
+      <div class="row">
+        <div style="text-align: center" id="paging">
+          <nav>
+            <ul class="pagination">
+              <li>
+                <a href="#" aria-label="Previous">
+                  <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+                </a>
+              </li>
+              <li><a href="#">1</a></li>
+              <li><a href="#">2</a></li>
+              <li><a href="#">3</a></li>
+              <li><a href="#">4</a></li>
+              <li><a href="#">5</a></li>
+              <li>
+                <a href="#" aria-label="Next">
+                  <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <footer class="row" style="text-align: center; color:#999999;">
+        <hr style="border: 1px solid #e5e5e5">
+        <div id="footer">
+          <span class="copyright-text">
+          ©2016&nbsp;
+          <a href="http://www.jluewu.com" target="_blank">吉大易物网</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+          <a href="http://www.miibeian.gov.cn/" target="_blank" rel="external nofollow">吉ICP备15002340</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+          <a href="help.php">帮助</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+          <a href="feedback.php">问题反馈</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+          <a href="help.php#qid-6">联系我们</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+          <a href="help.php#qid-1">关于</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+          <a href="#">友情链接</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+          <a href="#">站长统计</a>
+          </span>
+        </div>
+      </footer>
+    </div>
+  </body>
+
+</html>
