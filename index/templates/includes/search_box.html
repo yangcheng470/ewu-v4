@@ -1,0 +1,22 @@
+{% load staticfiles %}
+<header id="search-zone" class="panel" >
+  <div class="container">
+    <div class="row">
+      <div class="col-md-15 col-sm-15 hidden-xs" style="text-align: center; ">
+        <img src="{% static 'image/logo.png' %}" style="width: 70px">
+      </div>
+      <div class="col-md-40 col-sm-40 col-xs-60" style="padding-top:20px;">
+        <form action="" method="" role="search" id="flowSearchForm" style="display:block; ">
+        <div class="row">
+          <div class="col-md-40 col-sm-40 col-xs-52" style="padding-right:0;">
+            <input type="text" class="form-control " placeholder="请输入宝贝名称或关键字" style="border:1px solid orange;"/>
+          </div>
+          <div class="col-md-2 col-sm-2 col-xs-4" style="padding-left:0;">
+            <button type="submit" class="btn" style="background-color:orange;"><span class="glyphicon glyphicon-search" aria-hidden="true" style="color: white;"></span></button>
+          </div>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</header>

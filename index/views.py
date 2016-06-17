@@ -3,7 +3,7 @@ from django.http import HttpResponse
 
 
 def index(request):
-    return render(request, "index.html", {})
+    return render(request, "base.html", {})
 
 
 # Search result page, keyword conveyed by GET method

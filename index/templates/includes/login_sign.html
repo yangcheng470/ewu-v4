@@ -1,0 +1,74 @@
+{% load staticfiles %}
+<!-- Modal -->
+<div class="cd-user-modal nav nav-tabs nav-justified ">
+  <div id="bg"></div>
+  <div class="cd-user-modal-container "  >
+    <p id="close"><img width="20" height="20" style="position:absolute; right:-10px;top:-10px; border-radius:2em; background-color:orange;" src="{% static 'image/close.png' %}" ></p>
+    <ul class="cd-switcher ">
+      <li><a href="#0">登录</a></li>
+      <li><a href="#0">注册</a></li>
+    </ul>
+    <!-- 登录框-->
+    <div id="cd-login" class="modal-body form-div ">
+      <form class="cd-form " >
+        <div style="height:51px;">
+          <input type="text" id="account" class="input col-xs-50 " placeholder="&nbsp;用户名&nbsp;/&nbsp;邮箱" required autofocus  />
+        </div>
+        <div style="height:51px;">
+          <input type="password"  id="password" class="input col-xs-50" placeholder="&nbsp;密码" required >
+        </div>
+        <div class="checkbox">
+          <label style="margin:0 80px 0 55px;" ><input type="checkbox" id="rememberme" value="remember-me">记住我</label>
+          <label ><span><abbr title="Click to reset your password" class="text-right" id="forget-pwd">忘记密码?</abbr></span></label>
+
+        </div>
+        <div class="row">
+          <div class="clo-md-10 col-sm-10 col-xs-10"></div>
+          <div class="clo-md-40 col-sm-40 col-xs-40" style=" top:12px; position:relative;">
+            
+            <input type="button" value="登录" id="btn-login" class="btn btn-primary btn-block" />
+            
+          </div>
+        </div>
+        <hr/>
+          <div id="otherMethods" >
+          <p>其它登录方式</p>
+          <i class="icon iconfont"><a style="margin-left:56px;" href="">&#xe643;</a></i>
+          <i class="icon iconfont"><a href="">&#xe604;</a></i>
+          <i class="icon iconfont"><a href="">&#xe60b;</a></i>
+
+          </div>
+    </div>
+    <!-- 注册框 -->
+    <div id="cd-signup" class="modal-body form-div ">
+      <form class="cd-form ">
+        <div style="height:51px;">
+          <input type="text" class="input account col-xs-50 " placeholder="&nbsp;起个响亮的名字吧~" required autofocus />
+        </div>
+        <div style="height:51px;">
+          <input type="email" class="input r-email col-xs-50" placeholder="&nbsp;邮箱" required autofocus>
+        </div>
+        <div style="height:51px;">
+          <input type="password" class="input password col-xs-50" placeholder="&nbsp;请输入密码" required autofocus />
+        </div>
+        <div style="height:51px;">
+          <input type="password" class="input password col-xs-50" placeholder="&nbsp;请再次输入密码" required autofocus />
+        </div>
+        <div class="checkbox">
+          <label style="margin-left:55px;">
+            <input type="checkbox"  class="rememberme" value="remember-me" />已阅读并同意相关服务条款
+          </label>
+
+        </div>
+        <hr/>
+        <div class="row">
+          <div class="clo-md-10 col-sm-10 col-xs-10"></div>
+          <div class="col-md-40 col-sm-40 col-xs-40" >
+            <input type="button" value="注册" id="btn-register" style="background-color:orange; color:white;" class="btn btn-default btn-block col-md-40 col-sm-40 col-xs-40 " />
+          </div>
+        </div>
+      </form>
+    </div>
+   </div>
+   
+</div>

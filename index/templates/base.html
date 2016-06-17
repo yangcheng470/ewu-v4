@@ -1,23 +1,616 @@
 {% load staticfiles %}
 <!DOCTYPE html>
-<html lang="zh">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>{% block title %}吉大易物{% endblock title %}</title>
-		<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" >
-		<link rel="stylesheet" href="{% static "css/style.css" %}">
-    <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
-    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-		<script src="{% static "js/index.js" %}"></script>
-  </head>
-  
-  <body>
-    {% block qr_code %}<img id="tdc" src="{% static "image/二维码.jpg" %}" />{% endblock qr_code %}
-		{% block header %}{% include "includes/header.html" %}{% endblock header %}
-		{% block body %}
-		{% endblock body %}
-    {% block footer %}{% include "includes/footer.html" %}{% endblock footer %}
-  </body>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+	{% block title %}<title>吉大易物</title>{% endblock title %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+</head>
 
+<body>
+  {% block header %}{% include 'includes/header.html' %}{% endblock header %}
+  {% block right_bar %}{% include 'includes/right_bar.html' %}{% endblock right_bar %}
+  {% block qrcode %}
+  <div id="tdc">
+    <img src="{% static 'image/二维码.jpg' %}" />
+  </div>
+  {% endblock qrcode %}
+
+  {% block login_sign %}{% include 'includes/login_sign.html' %}{% endblock login_sign %}
+  
+  {% block search_box %}{% include 'includes/search_box.html' %}{% endblock search_box %}
+ 
+<div class="container">
+  <div class="row">
+   <div class="panel panel-default col-md-12 col-sm-12 col-xs-60" id="classifyTag" style="margin-bottom:0;">
+    <div class="panel-heading hidden-xs">
+      <h3  style="margin:0; text-align:center">宝贝分类标签</h3>
+    </div>
+    <div class="panel-body" >
+      
+      <div id="basedOnCampus" class="col-md-20 col-sm-20 col-xs-60" style="padding:0;" >
+        <div class="col-md-60 col-sm-60 col-xs-60 lab labtitle" > 
+        <a href="#"><h4 id="leftlabel"><span class="glyphicon glyphicon-home" aria-hidden="true" style="color: #2aabd2; margin-left:-20px;"></span>校区</h4></a>
+        </div>
+        <div class="col-md-50 col-sm-50 col-xs-10 lab"> 
+        <p><a  href="javascript:void (0)">南区</a></p>
+        </div>
+        <div class="col-md-50 col-sm-50 col-xs-10  lab"> 
+        <p><a href="javascript:void (0)">南岭</a></p>
+        </div>
+        <div class="col-md-50 col-sm-50 col-xs-10  lab"> 
+        <p><a href="javascript:void (0)">南湖</a></p>
+        </div>
+        <div class="col-md-50 col-sm-50 col-xs-10 lab"> 
+        <p><a href="javascript:void (0)">新民</a></p>
+        </div>
+        <div class="col-md-50 col-sm-50 col-xs-10 lab"> 
+        <p><a href="javascript:void (0)">朝阳</a></p>
+        </div>
+        <div class="col-md-50 col-sm-50 col-xs-10 lab"> 
+        <p><a href="javascript:void (0)">和平</a></p>
+         </div>                      
+        
+      </div> 
+    
+     <div id="basedOnSort" class="col-md-20 col-sm-20 col-xs-60" style="margin-bottom:-35px; padding:0;">
+      <div class="col-md-60 col-sm-60 col-xs-60 lab labtitle"> 
+      <a href="#"><h4><span class="glyphicon glyphicon-tasks" aria-hidden="true" style="color: #ff6600;"></span>类别</h4></a>
+      </div>
+      <div class="col-md-60 col-sm-60 col-xs-10 lab">
+      <p><a href="javascript:void (0)">代步</a></p>
+      </div>
+      <div class="col-md-60 col-sm-60 col-xs-10  lab">
+      <p><a href="javascript:void (0)"> 数码</a></p>
+      </div>
+      <div class="col-md-60 col-sm-60 col-xs-10  lab">
+      <p><a href="javascript:void (0)">装饰</a></p> 
+      </div>
+      <div class="col-md-60 col-sm-60 col-xs-10  lab">
+      <p><a href="javascript:void (0)"> 鞋履</a></p>
+      </div>
+      <div class="col-md-60 col-sm-60 col-xs-10 lab">             
+      <p><a href="javascript:void (0)">电器</a></p>
+      </div>
+      <div class="col-md-60 col-sm-60 col-xs-10  lab">
+      <p><a href="javascript:void (0)"> 虚拟</a></p>
+      </div>
+    </div>
+    <div id="basedOnSort" class="col-md-20 col-sm-20 col-xs-60" style="margin-top:27px;  padding:0; ">
+      <div class="col-md-60 col-sm-60 col-xs-10  lab">
+      <p><a href="javascript:void (0)">文体</a></p>
+      </div>
+      <div class="col-md-60 col-sm-60 col-xs-10  lab">
+      <p><a href="javascript:void (0)"> 日用</a></p>
+      </div>
+      <div class="col-md-60 col-sm-60 col-xs-10  lab">
+      <p><a href="javascript:void (0)">服饰</a></p>
+      </div>
+      <div class="col-md-60 col-sm-60 col-xs-10  lab"> 
+      <p><a href="javascript:void (0)"> 食品</a></p>
+      </div>
+      <div class="col-md-60 col-sm-60 col-xs-10  lab">
+      <p><a href="javascript:void (0)">书刊</a></p>
+      </div>
+      <div class="col-md-60 col-sm-60 col-xs-10  lab">
+      <p><a href="javascript:void (0)"> 其他</a></p>
+      </div>      
+     </div>           
+    </div>           
+   </div>
+  <div class="col-md-36 col-sm-36 hidden-xs  ">
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+     
+  <!--          <ol class="carousel-indicators">
+      <li  data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+      <li  data-target="#carousel-example-generic" data-slide-to="1"></li>
+      <li  data-target="#carousel-example-generic" data-slide-to="2"></li>
+      </ol>-->
+      <div class="carousel-inner" role="listbox">
+      <div class="item active">
+        <img src="{% static 'image/homePage.jpg' %}" alt="...">
+        <div class="carousel-caption">
+      
+        </div>
+      </div>
+      <div class="item">
+        <img src="{% static 'image/phone3.jpg' %}" alt="...">
+        <div class="carousel-caption">
+       
+        </div>
+      </div>
+      <div class="item">
+        <img src="{% static 'image/phone2.jpg' %}" alt="...">
+        <div class="carousel-caption">
+        
+        </div>
+      </div>
+     
+      </div>
+    
+    
+      <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">上一页</span>
+      </a>
+      <a class="right carousel-control"  href="#carousel-example-generic" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">下一页</span>
+      </a>
+    </div>
+  </div>
+  <div class="col-md-12 col-sm-12 hidden-xs " style="padding:0;">
+      
+        <button class="btn col-md-25 col-sm-25" style="background-color: orange;color: white;float: left">转让</button>
+        <button class="btn col-md-25 col-sm-25" style="background-color: orange;color: white;float: right">求购</button>
+        <div class="col-md-60 col-sm-60" style="height:236px; text-align:center; background-color: white; margin-top:10px;">
+          暂无公告
+         
+        </div>
+  </div>
+  </div>
+  
+  <div class="row">
+     <ul class="nav nav-tabs" id="contentNav" class="col-md-60 col-sm-60  col-xs-60">
+          <li role="presentation" class="active"><a href="javascript:void (0)">新品上架</a></li>
+          <li role="presentation" class=""><a href="javascript:void (0)">热门宝贝</a></li>
+          <li role="presentation" class=""><a href="javascript:void (0)">交换专区</a></li>
+          <li role="presentation" class=""><a href="javascript:void (0)">求购信息</a></li>     
+     </ul>
+  </div>
+
+  <div class="row">
+          <div class="col-xs-30 col-sm-20 col-md-12 thum">
+          <a href="#" class="thumbnail">
+            <img src="{% static 'image/product1.jpg' %}" alt="...">
+          </a>
+            <div style="background:white;">
+            <span class="product-price" style="float: left">￥200</span>
+            <span class="product-tag" style="float:right;text-align: center">南区</span>
+            <p class="product-info" style="clear: both">这是一只小猫咪……喵呀呀呀呀呀呀啊啊啊啊</p>
+            </div>
+          </div>
+          <div class="col-xs-30 col-sm-20 col-md-12 thum">
+          <a href="#" class="thumbnail">
+            <img src="{% static 'image/product1.jpg' %}" alt="...">
+          </a>
+            <div style="background:white;">
+            <span class="product-price" style="float: left">￥200</span>
+            <span class="product-tag" style="float:right;text-align: center">南区</span>
+            <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
+            </div>
+          </div>
+          <div class="col-xs-30 col-sm-20 col-md-12 thum">
+          <a href="#" class="thumbnail">
+            <img src="{% static 'image/product1.jpg' %}" alt="...">
+          </a>
+            <div style="background:white;">
+            <span class="product-price" style="float: left">￥200</span>
+            <span class="product-tag" style="float:right;text-align: center">南区</span>
+            <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
+            </div>
+          </div>
+          <div class="col-xs-30 col-sm-20 col-md-12 thum">
+          <a href="#" class="thumbnail">
+            <img src="{% static 'image/product1.jpg' %}" alt="...">
+          </a>
+            <div style="background:white;">
+            <span class="product-price" style="float: left">￥200</span>
+            <span class="product-tag" style="float:right;text-align: center">南区</span>
+            <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
+            </div>
+          </div>
+          <div class="col-xs-30 col-sm-20 col-md-12 thum">
+          <a href="#" class="thumbnail">
+            <img src="{% static 'image/product1.jpg' %}" alt="...">
+          </a>
+            <div style="background:white;">
+            <span class="product-price" style="float: left">￥200</span>
+            <span class="product-tag" style="float:right;text-align: center">南区</span>
+            <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
+            </div>
+          </div>
+          <div class="col-xs-30 col-sm-20 col-md-12 thum">
+          <a href="#" class="thumbnail">
+            <img src="{% static 'image/product1.jpg' %}" alt="...">
+          </a>
+            <div style="background:white;">
+            <span class="product-price" style="float: left">￥200</span>
+            <span class="product-tag" style="float:right;text-align: center">南区</span>
+            <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
+            </div>
+          </div>
+          <div class="col-xs-30 col-sm-20 col-md-12 thum">
+          <a href="#" class="thumbnail">
+            <img src="{% static 'image/product1.jpg' %}" alt="...">
+          </a>
+            <div style="background:white;">
+            <span class="product-price" style="float: left">￥200</span>
+            <span class="product-tag" style="float:right;text-align: center">南区</span>
+            <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
+            </div>
+          </div>
+          <div class="col-xs-30 col-sm-20 col-md-12 thum">
+          <a href="#" class="thumbnail">
+            <img src="{% static 'image/product1.jpg' %}" alt="...">
+          </a>
+            <div style="background:white;">
+            <span class="product-price" style="float: left">￥200</span>
+            <span class="product-tag" style="float:right;text-align: center">南区</span>
+            <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
+            </div>
+          </div>
+          <div class="col-xs-30 col-sm-20 col-md-12 thum">
+          <a href="#" class="thumbnail">
+            <img src="{% static 'image/product1.jpg' %}" alt="...">
+          </a>
+            <div style="background:white;">
+            <span class="product-price" style="float: left">￥200</span>
+            <span class="product-tag" style="float:right;text-align: center">南区</span>
+            <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
+            </div>
+          </div>
+          <div class="col-xs-30 col-sm-20 col-md-12 thum">
+          <a href="#" class="thumbnail">
+            <img src="{% static 'image/product1.jpg' %}" alt="...">
+          </a>
+            <div style="background:white;">
+            <span class="product-price" style="float: left">￥200</span>
+            <span class="product-tag" style="float:right;text-align: center">南区</span>
+            <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
+            </div>
+          </div>
+          <div class="col-xs-30 col-sm-20 col-md-12 thum">
+          <a href="#" class="thumbnail">
+            <img src="{% static 'image/product1.jpg' %}" alt="...">
+          </a>
+            <div style="background:white;">
+            <span class="product-price" style="float: left">￥200</span>
+            <span class="product-tag" style="float:right;text-align: center">南区</span>
+            <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
+            </div>
+          </div>
+          <div class="col-xs-30 col-sm-20 col-md-12 thum">
+          <a href="#" class="thumbnail">
+            <img src="{% static 'image/product1.jpg' %}" alt="...">
+          </a>
+            <div style="background:white;">
+            <span class="product-price" style="float: left">￥200</span>
+            <span class="product-tag" style="float:right;text-align: center">南区</span>
+            <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
+            </div>
+          </div>
+          <div class="col-xs-30 col-sm-20 col-md-12 thum">
+          <a href="#" class="thumbnail">
+            <img src="{% static 'image/product1.jpg' %}" alt="...">
+          </a>
+            <div style="background:white;">
+            <span class="product-price" style="float: left">￥200</span>
+            <span class="product-tag" style="float:right;text-align: center">南区</span>
+            <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
+            </div>
+          </div>
+          <div class="col-xs-30 col-sm-20 col-md-12 thum">
+          <a href="#" class="thumbnail">
+            <img src="{% static 'image/product1.jpg' %}" alt="...">
+          </a>
+            <div style="background:white;">
+            <span class="product-price" style="float: left">￥200</span>
+            <span class="product-tag" style="float:right;text-align: center">南区</span>
+            <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
+            </div>
+          </div>
+          <div class="col-xs-30 col-sm-20 col-md-12 thum">
+          <a href="#" class="thumbnail">
+            <img src="{% static 'image/product1.jpg' %}" alt="...">
+          </a>
+            <div style="background:white;">
+            <span class="product-price" style="float: left">￥200</span>
+            <span class="product-tag" style="float:right;text-align: center">南区</span>
+            <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
+            </div>
+          </div>
+          <div class="col-xs-30 col-sm-20 col-md-12 thum">
+          <a href="#" class="thumbnail">
+            <img src="{% static 'image/product1.jpg' %}" alt="...">
+          </a>
+            <div style="background:white;">
+            <span class="product-price" style="float: left">￥200</span>
+            <span class="product-tag" style="float:right;text-align: center">南区</span>
+            <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
+            </div>
+          </div>
+          <div class="col-xs-30 col-sm-20 col-md-12 thum">
+          <a href="#" class="thumbnail">
+            <img src="{% static 'image/product1.jpg' %}" alt="...">
+          </a>
+            <div style="background:white;">
+            <span class="product-price" style="float: left">￥200</span>
+            <span class="product-tag" style="float:right;text-align: center">南区</span>
+            <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
+            </div>
+          </div>
+          <div class="col-xs-30 col-sm-20 col-md-12 thum">
+          <a href="#" class="thumbnail">
+            <img src="{% static 'image/product1.jpg' %}" alt="...">
+          </a>
+            <div style="background:white;">
+            <span class="product-price" style="float: left">￥200</span>
+            <span class="product-tag" style="float:right;text-align: center">南区</span>
+            <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
+            </div>
+          </div>
+          <div class="col-xs-30 col-sm-20 col-md-12 thum">
+          <a href="#" class="thumbnail">
+            <img src="{% static 'image/product1.jpg' %}" alt="...">
+          </a>
+            <div style="background:white;">
+            <span class="product-price" style="float: left">￥200</span>
+            <span class="product-tag" style="float:right;text-align: center">南区</span>
+            <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
+            </div>
+          </div>
+          <div class="col-xs-30 col-sm-20 col-md-12 thum">
+          <a href="#" class="thumbnail">
+            <img src="{% static 'image/product1.jpg' %}" alt="...">
+          </a>
+            <div style="background:white;">
+            <span class="product-price" style="float: left">￥200</span>
+            <span class="product-tag" style="float:right;text-align: center">南区</span>
+            <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
+            </div>
+          </div>
+<div class="col-xs-30 col-sm-20 col-md-12 thum">
+          <a href="#" class="thumbnail">
+            <img src="{% static 'image/product1.jpg' %}" alt="...">
+          </a>
+            <div style="background:white;">
+            <span class="product-price" style="float: left">￥200</span>
+            <span class="product-tag" style="float:right;text-align: center">南区</span>
+            <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
+            </div>
+          </div>
+          <div class="col-xs-30 col-sm-20 col-md-12 thum">
+          <a href="#" class="thumbnail">
+            <img src="{% static 'image/product1.jpg' %}" alt="...">
+          </a>
+            <div style="background:white;">
+            <span class="product-price" style="float: left">￥200</span>
+            <span class="product-tag" style="float:right;text-align: center">南区</span>
+            <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
+            </div>
+          </div>
+          <div class="col-xs-30 col-sm-20 col-md-12 thum">
+          <a href="#" class="thumbnail">
+            <img src="{% static 'image/product1.jpg' %}" alt="...">
+          </a>
+            <div style="background:white;">
+            <span class="product-price" style="float: left">￥200</span>
+            <span class="product-tag" style="float:right;text-align: center">南区</span>
+            <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
+            </div>
+          </div>
+          <div class="col-xs-30 col-sm-20 col-md-12 thum">
+          <a href="#" class="thumbnail">
+            <img src="{% static 'image/product1.jpg' %}" alt="...">
+          </a>
+            <div style="background:white;">
+            <span class="product-price" style="float: left">￥200</span>
+            <span class="product-tag" style="float:right;text-align: center">南区</span>
+            <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
+            </div>
+          </div>
+          <div class="col-xs-30 col-sm-20 col-md-12 thum">
+          <a href="#" class="thumbnail">
+            <img src="{% static 'image/product1.jpg' %}" alt="...">
+          </a>
+            <div style="background:white;">
+            <span class="product-price" style="float: left">￥200</span>
+            <span class="product-tag" style="float:right;text-align: center">南区</span>
+            <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
+            </div>
+          </div>
+          <div class="col-xs-30 col-sm-20 col-md-12 thum">
+          <a href="#" class="thumbnail">
+            <img src="{% static 'image/product1.jpg' %}" alt="...">
+          </a>
+            <div style="background:white;">
+            <span class="product-price" style="float: left">￥200</span>
+            <span class="product-tag" style="float:right;text-align: center">南区</span>
+            <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
+            </div>
+          </div>
+          <div class="col-xs-30 col-sm-20 col-md-12 thum">
+          <a href="#" class="thumbnail">
+            <img src="{% static 'image/product1.jpg' %}" alt="...">
+          </a>
+            <div style="background:white;">
+            <span class="product-price" style="float: left">￥200</span>
+            <span class="product-tag" style="float:right;text-align: center">南区</span>
+            <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
+            </div>
+          </div>
+          <div class="col-xs-30 col-sm-20 col-md-12 thum">
+          <a href="#" class="thumbnail">
+            <img src="{% static 'image/product1.jpg' %}" alt="...">
+          </a>
+            <div style="background:white;">
+            <span class="product-price" style="float: left">￥200</span>
+            <span class="product-tag" style="float:right;text-align: center">南区</span>
+            <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
+            </div>
+          </div>
+          <div class="col-xs-30 col-sm-20 col-md-12 thum">
+          <a href="#" class="thumbnail">
+            <img src="{% static 'image/product1.jpg' %}" alt="...">
+          </a>
+            <div style="background:white;">
+            <span class="product-price" style="float: left">￥200</span>
+            <span class="product-tag" style="float:right;text-align: center">南区</span>
+            <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
+            </div>
+          </div>
+          <div class="col-xs-30 col-sm-20 col-md-12 thum">
+          <a href="#" class="thumbnail">
+            <img src="{% static 'image/product1.jpg' %}" alt="...">
+          </a>
+            <div style="background:white;">
+            <span class="product-price" style="float: left">￥200</span>
+            <span class="product-tag" style="float:right;text-align: center">南区</span>
+            <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
+            </div>
+          </div>
+          <div class="col-xs-30 col-sm-20 col-md-12 thum">
+          <a href="#" class="thumbnail">
+            <img src="{% static 'image/product1.jpg' %}" alt="...">
+          </a>
+            <div style="background:white;">
+            <span class="product-price" style="float: left">￥200</span>
+            <span class="product-tag" style="float:right;text-align: center">南区</span>
+            <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
+            </div>
+          </div>
+          <div class="col-xs-30 col-sm-20 col-md-12 thum">
+          <a href="#" class="thumbnail">
+            <img src="{% static 'image/product1.jpg' %}" alt="...">
+          </a>
+            <div style="background:white;">
+            <span class="product-price" style="float: left">￥200</span>
+            <span class="product-tag" style="float:right;text-align: center">南区</span>
+            <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
+            </div>
+          </div>
+          <div class="col-xs-30 col-sm-20 col-md-12 thum">
+          <a href="#" class="thumbnail">
+            <img src="{% static 'image/product1.jpg' %}" alt="...">
+          </a>
+            <div style="background:white;">
+            <span class="product-price" style="float: left">￥200</span>
+            <span class="product-tag" style="float:right;text-align: center">南区</span>
+            <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
+            </div>
+          </div>
+          <div class="col-xs-30 col-sm-20 col-md-12 thum">
+          <a href="#" class="thumbnail">
+            <img src="{% static 'image/product1.jpg' %}" alt="...">
+          </a>
+            <div style="background:white;">
+            <span class="product-price" style="float: left">￥200</span>
+            <span class="product-tag" style="float:right;text-align: center">南区</span>
+            <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
+            </div>
+          </div>
+          <div class="col-xs-30 col-sm-20 col-md-12 thum">
+          <a href="#" class="thumbnail">
+            <img src="{% static 'image/product1.jpg' %}" alt="...">
+          </a>
+            <div style="background:white;">
+            <span class="product-price" style="float: left">￥200</span>
+            <span class="product-tag" style="float:right;text-align: center">南区</span>
+            <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
+            </div>
+          </div>
+          <div class="col-xs-30 col-sm-20 col-md-12 thum">
+          <a href="#" class="thumbnail">
+            <img src="{% static 'image/product1.jpg' %}" alt="...">
+          </a>
+            <div style="background:white;">
+            <span class="product-price" style="float: left">￥200</span>
+            <span class="product-tag" style="float:right;text-align: center">南区</span>
+            <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
+            </div>
+          </div>
+          <div class="col-xs-30 col-sm-20 col-md-12 thum">
+          <a href="#" class="thumbnail">
+            <img src="{% static 'image/product1.jpg' %}" alt="...">
+          </a>
+            <div style="background:white;">
+            <span class="product-price" style="float: left">￥200</span>
+            <span class="product-tag" style="float:right;text-align: center">南区</span>
+            <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
+            </div>
+          </div>
+          <div class="col-xs-30 col-sm-20 col-md-12 thum">
+          <a href="#" class="thumbnail">
+            <img src="{% static 'image/product1.jpg' %}" alt="...">
+          </a>
+            <div style="background:white;">
+            <span class="product-price" style="float: left">￥200</span>
+            <span class="product-tag" style="float:right;text-align: center">南区</span>
+            <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
+            </div>
+          </div>
+          <div class="col-xs-30 col-sm-20 col-md-12 thum">
+          <a href="#" class="thumbnail">
+            <img src="{% static 'image/product1.jpg' %}" alt="...">
+          </a>
+            <div style="background:white;">
+            <span class="product-price" style="float: left">￥200</span>
+            <span class="product-tag" style="float:right;text-align: center">南区</span>
+            <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
+            </div>
+          </div>
+          <div class="col-xs-30 col-sm-20 col-md-12 thum">
+          <a href="#" class="thumbnail">
+            <img src="{% static 'image/product1.jpg' %}" alt="...">
+          </a>
+            <div style="background:white;">
+            <span class="product-price" style="float: left">￥200</span>
+            <span class="product-tag" style="float:right;text-align: center">南区</span>
+            <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
+            </div>
+          </div>
+  </div>
+        
+  <div class="row">          
+       <div style="text-align: center" id="paging">
+        <nav>
+          <ul class="pagination">
+            <li>
+              <a href="#" aria-label="Previous">
+                <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+              </a>
+            </li>
+            <li><a href="#"><span>1</span></a></li>
+            <li><a href="#"><span>2</span></a></li>
+            <li><a href="#"><span>3</span></a></li>
+            <li><a href="#"><span>4</span></a></li>
+            <li><a href="#"><span>5</span></a></li>
+            <li>
+              <a href="#" style="margin-right:0;"aria-label="Next">
+                <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+  </div>
+  <div class="row">   
+  <footer class="foot" style="text-align: center; color:#999999;">
+    <div id="footer">
+      <span class="copyright-text ">
+      ©2016&nbsp;
+      <a href="http://www.jluewu.com" target="_blank">吉大易物网</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+      <a href="http://www.miibeian.gov.cn/" target="_blank" rel="external nofollow">吉ICP备15002340</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+      <a href="help.php">帮助</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+      <a href="feedback.php">问题反馈</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+      <a href="help.php#qid-6">联系我们</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+      <a href="help.php#qid-1">关于</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+      <a href="#">友情链接</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+      <a href="#">站长统计</a>
+      </span>
+    </div>
+  </footer>
+  </div>
+</div>
+
+
+
+  <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+
+</body>
 </html>
