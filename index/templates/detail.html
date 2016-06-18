@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}物品详情{% endblock title %}
+{% block spec_css %}<link rel="stylesheet" type="text/css" href="{% static 'css/detail.css' %}">{% endblock spec_css %}
+
+{% block body %}
+  <div class="container" >
+    <div class="row">
+        <div id="pic" class=" col-md-30 col-sm-30 col-xs-60 ">
+          <div class=" col-md-60 col-xs-60 ">
+            <a class="thumbnail">
+              <img id="tar" src="{% static 'image/phone3.jpg' %}" alt="...">
+            </a>
+          </div>
+
+         <div id="select">
+              <li class="col-md-15 col-xs-15">
+                <a  class="sel">
+                  <img src="{% static 'image/phone3.jpg' %}"alt="...">
+                </a>
+              </li>
+              <li class="col-md-15 col-xs-15">
+                <a  class="sel">
+                  <img src="{% static 'image/phone1.jpg' %}"alt="...">
+                </a>
+              </li>
+              <li class="col-md-15 col-xs-15">
+                <a class="sel">
+                  <img src="{% static 'image/phone4.jpg' %}"alt="...">
+                </a>
+              </li>
+              <li class="col-md-15 col-xs-15">
+                <a  class="sel">
+                  <img src="{% static 'image/phone2.jpg' %}"alt="...">
+                </a>
+              </li>
+                 
+         </div>  
+       </div>
+
+
+        <div class="col-md-30 col-sm-30  col-xs-60" style="background-color:white; padding-top:10px; padding-right:0;">
+            <p><b><span class="product-name" id="product_name">小米3 16G 九成新</span></b></p>
+            <p>估价：<span class="product-price" id="product_price">￥800.00<span></p>
+            <p>新旧：<span class="product-newOrOld" id="product_newOrOld">九成新</span></p>
+            <p>标签：<span class="product-tag">南区</span><span class="product-tag">数码</span><span class="product-tag">交换或出售</span></p>
+            <p>主人：<a class="product-seller" id="product_seller" href="javascript:void(0)" style="color:#000;"><strong>灵犀依旧</strong></a></p>
+            <p>电话：<span class="product-sellerPhone" id="product_sellerPhone">15604301234</span><a class="qq_chat" href="javascript:void(0)" style="display: inline-block;border: 1px solid #000000;border-radius: 5px;color: #000000;margin-left: 10px">QQ交谈</a></p>
+            <p style="display:inline-block;color: #ffffff;background-color: orange;padding: 0 4px;border-radius: 5px;">详细描述</p>
+            <div id="product_detail">
+               风 吹干了你的泪眼
+                花 散落在我的心间
+                雪 遮住了你的尘缘
+                月 温情着我的期盼
+                
+                惊涛拍岸
+                是多么豪情的寒暄
+                烟花漫天
+                是最激情的呢喃
+                
+                骨子里的浪漫
+                从年少轻狂到地老天荒
+                用岁月无情的画卷
+                卷走了稚气的容颜
+                
+                风 吹干了你的泪眼
+                花 散落在我的心间
+                雪 遮住了你的尘缘
+                月 温情着我的期盼
+                
+                惊涛拍岸
+                是多么豪情的寒暄
+                烟花漫天
+                是最激情的呢喃
+                
+                骨子里的浪漫
+                从年少轻狂到地老天荒
+                用岁月无情的画卷
+                卷走了稚气的容颜
+                
+                骨子里的浪漫
+                从目光如炬到深情款款
+                用生命无常的变幻
+                幻化出素面的尊严
+            </div>
+            <p style="margin-top: 10px;position: relative;">
+            <a href="">
+            <span class="glyphicon glyphicon-heart" aria-hidden="true" style="position: relative;color: #ff0000;font-size: 20px;top: 4px;"></span>
+            <strong>&nbsp;收藏宝贝</strong>
+            </a>
+            </p>
+        </div>
+    </div>
+    <div class="row" style="margin-top:20px;">
+        <div class="col-md-13 col-sm-12 hidden-xs" style="background-color:white; padding:0; margin-bottom:20px;">
+            <p style="background-color: orange;color: #ffffff;padding: 3px 5px;font-size: 18px; ">猜你喜欢</p>
+            <img src="{% static 'image/other_phone.jpg' %}"  style="width: 100%; height:240px; padding:0 10px 10px 10px;">
+        </div>
+        <div class="col-md-2 col-sm-3"></div>
+        <div class="col-md-45 col-sm-45 " style="padding:0; background-color:white;">
+            <p style="background-color: orange;color: #ffffff;padding: 3px 5px;font-size: 18px;">留言</p>
+            <form>
+                <textarea placeholder="" class="text col-md-58 col-xs-56" style="border:1px solid orange; border-radius:5px; margin-left:15px; height:209px;" ></textarea><br>
+                <button type="button" class="btn " style="background-color: orange;color: white;padding: 1px 5px;border-radius: 3px;margin-top: 10px;">提交留言</button>
+            </form>
+        </div>
+    </div>
+
+</div>      
+
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script type="text/javascript" >  
+			$(function() {
+				  $(window).scroll(function() {
+					  var top = $(this).scrollTop();
+					  var flowSearch = $("#flowSearchForm");
+					  if (top < 36) {
+						  flowSearch.css("display", "none");
+					  } else {
+						  flowSearch.css("display", "block");
+					  }
+				  });
+			  });
+			
+			
+			setInterval(function transfer(){
+			 var width=document.documentElement.clientWidth || document.body.clientWidth;
+			 var oNAV= document.getElementById("NAV");
+			
+					  if (width<750) {
+						  oNAV.style.display="block";
+					  } else {
+						  oNAV.style.display="none";
+					  }
+			},10);
+//改变图片在移动端高度
+			setInterval(function (){
+             var width=document.documentElement.clientWidth || document.body.clientWidth;
+             var osel= document.getElementsByClassName("sel");
+             for(var i=0;i<osel.length;i++){
+                   if(width<750){
+                  osel[i].getElementsByTagName("img")[0].style.height="60px";
+                        }
+                  else{
+                  osel[i].getElementsByTagName("img")[0].style.height="117px";
+                   }
+                  }          
+			},10);
+//点击换图片
+      var otar=document.getElementById("tar"), 
+          oselect=document.getElementById("select"),
+          ali=oselect.getElementsByTagName("li");
+     for(var i=0;i<ali.length;i++) {
+      ali[i].addEventListener('click', function() {
+          var This=this.getElementsByTagName("img")[0];
+          otar.src=This.src;
+           
+      }, false);
+}
+</script>
+{% endblock body %}

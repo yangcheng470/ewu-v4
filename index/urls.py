@@ -7,7 +7,7 @@ from . import views
 urlpatterns=[
         url(r'^$',views.index,name='index'),
         url(r'^search/$',views.search,name='search'),
-        url(r'^product/',include('products.urls',namespace='product')),
+        url(r'^detail/', views.detail, name='detail'),
         url(r'^publish/$',views.publish,name='publish'),
         url(r'^publish/success/$',views.pub_success,name='pub_success'),
         url(r'^register/$',views.register,name='register'),

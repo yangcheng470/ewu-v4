@@ -10,6 +10,8 @@ def index(request):
 def search(request):
     return render(request, "search.html", {})
 
+def detail(request):
+    return render(request, "detail.html", {})
 
 def publish(request):
     return HttpResponse('Publish Page Here.')
