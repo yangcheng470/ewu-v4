@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block spec_css %}<link rel="stylesheet" type="text/css" href="{% static 'css/search.css' %}">{% endblock spec_css %}
+{% block title %}搜索结果{% endblock title %}
+{% block body %}
+<div class="container" >
+    <div class="row">
+         <ul class="nav nav-tabs headlabel"  id="schoolNav">
+         <li class="Title"><a href=""><strong>校区</strong></a></li>
+         <li><a href="javascript:void(0)">不限</a></li>
+         <li class="active"><a href="javascript:void(0)">南区</a></li>
+         <li><a href="javascript:void(0)">南岭</a></li>
+         <li><a href="javascript:void(0)">南湖</a></li>
+         <li><a href="javascript:void(0)">新民</a></li>
+         <li><a href="javascript:void(0)">和平</a></li>
+         <li><a href="javascript:void(0)">朝阳</a></li>
+         <li class="ac"><a>多选</a></li>
+        </ul>
+    </div>
+    <div class="row">
+         <ul class="nav nav-tabs headlabel "  id="kindNav">
+         <li class="Title"><a href=""><strong>类别</strong></a></li>
+         <li><a href="javascript:void(0)">不限</a></li>
+         <li><a href="javascript:void(0)">代步</a></li>
+         <li class="active"><a href="javascript:void(0)">数码</a></li>
+         <li><a href="javascript:void(0)">电器</a></li>
+         <li><a href="javascript:void(0)">文体</a></li>
+         <li><a href="javascript:void(0)">服饰</a></li>
+         <li><a href="javascript:void(0)">书刊</a></li>
+         <li><a href="javascript:void(0)">装饰</a></li>
+         <li style="opacity:0;  display:none; cursor:default;" id="blank"><a>空白</a></li>
+         <li><a href="javascript:void(0)">虚拟</a></li>
+         <li><a href="javascript:void(0)">日用</a></li>
+         <li><a href="javascript:void(0)">书刊</a></li>
+         <li><a href="javascript:void(0)">食品</a></li>
+         <li><a href="javascript:void(0)">其它</a></li>
+         <li  class="ac"><a>多选</a></li>
+        </ul>
+    </div>
+    <div class="row">
+         <ul class="nav nav-tabs headlabel " id="typeNav">
+         <li class="Title" ><a href=""><strong>类型</strong></a></li>
+         <li class="active"><a href="">不限</a></li>
+         <li><a href="javascript:void(0)">出售</a></li>
+         <li><a href="javascript:void(0)">交换</a></li>
+         <li><a href="javascript:void(0)">求购</a></li>
+
+         </ul>
+    </div>
+    <div class="row">
+         <ul class="nav nav-tabs" id="contNav" >
+         <li class="default"><a href="">最新</a></li>
+         <li class="dropdown">
+          <a href="#"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">价格<span style="color:orange;"class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">从高到低</a></li>
+            <li><a href="#">从低到高</a></li>
+          </ul>
+        </li>
+         </ul>
+    </div>
+
+    <div class="row">
+          <div class="col-xs-30 col-sm-20 col-md-12 thum">
+            <a href="#" class="thumbnail">
+										<img src="{% static 'image/phone3.jpg' %}" alt="...">
+            </a>
+                <div style="background:white;">
+                <span class="product-price" style="float: left">￥200</span>
+                <span class="product-tag" style="float:right;text-align: center">南区</span>
+                <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
+                </div>
+          </div>
+     </div>
+     <div class="row">                  
+                <div style="text-align: center" id="paging">
+                    <nav>
+                        <ul class="pagination">
+                            <li>
+                                <a href="#" aria-label="Previous">
+                                    <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+                                </a>
+                            </li>
+                            <li><a href="#"><span>1</span></a></li>
+                            <li><a href="#"><span>2</span></a></li>
+                            <li><a href="#"><span>3</span></a></li>
+                            <li><a href="#"><span>4</span></a></li>
+                            <li><a href="#"><span>5</span></a></li>
+                            <li>
+                                <a href="#" style="margin-right:0;" aria-label="Next">
+                                    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+               </div>
+        </div>
+</div>
+<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script type="text/javascript" >  
+			$(function() {
+				  $(window).scroll(function() {
+					  var top = $(this).scrollTop();
+					  var flowSearch = $("#flowSearchForm");
+					  if (top < 36) {
+						  flowSearch.css("display", "none");
+					  } else {
+						  flowSearch.css("display", "block");
+					  }
+				  });
+			  });
+			
+			
+			setInterval(function transfer(){
+			 var width=document.documentElement.clientWidth || document.body.clientWidth;
+			 var oNAV= document.getElementById("NAV");
+			
+					  if (width<750) {
+						  oNAV.style.display="block";
+					  } else {
+						  oNAV.style.display="none";
+					  }
+			},10); 
+			setInterval(function transfer(){
+			 var width=document.documentElement.clientWidth || document.body.clientWidth;
+			 var oblank= document.getElementById("blank");
+			
+					  if (width<376) {
+						  oblank.style.display="block";
+					  } else {
+						  oblank.style.display="none";
+					  }
+			},10);
+     
+          var aLis = $('#schoolNav li');
+		  for (i = 0; i < aLis.length-1; i++) {
+			  aLis[i].addEventListener('click', function() {
+				  for (var i = 0; i < aLis.length-1; i++) {
+					  aLis[i].className = '';
+				  }
+				  this.className = 'active';
+			  }, false);
+		  }
+          var aLik = $('#kindNav li');
+		  for (i = 0; i < aLik.length-1; i++) {
+			  aLik[i].addEventListener('click', function() {
+				  for (var i = 0; i < aLik.length-1; i++) {
+					  aLik[i].className = '';
+				  }
+				  this.className = 'active';
+			  }, false);
+		  }
+          var aLit = $('#typeNav li');
+		  for (i = 0; i < aLit.length; i++) {
+			  aLit[i].addEventListener('click', function() {
+				  for (var i = 0; i < aLit.length; i++) {
+					  aLit[i].className = '';
+				  }
+				  this.className = 'active';
+			  }, false);
+		  }
+</script>
+{% endblock body %}

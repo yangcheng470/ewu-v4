@@ -8,7 +8,7 @@ def index(request):
 
 # Search result page, keyword conveyed by GET method
 def search(request):
-    return HttpResponse('Search Page Here.')
+    return render(request, "search.html", {})
 
 
 def publish(request):
