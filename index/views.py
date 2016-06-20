@@ -16,6 +16,9 @@ def detail(request):
 def publish(request):
     return render(request, "publish.html", {})
 
+def messages(request):
+    return render(request, "msg.html", {})
+
 def account(request):
     return render(request, "account.html", {})
 
