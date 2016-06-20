@@ -22,6 +22,9 @@ def account(request):
 def ucenter(request):
     return render(request, "ucenter.html", {})
 
+def change_password(request):
+    return render(request, "change-password.html", {})
+
 def pub_success(request):
     return HttpResponse('Publish Success Page Here.')
 
