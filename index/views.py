@@ -14,7 +14,7 @@ def detail(request):
     return render(request, "detail.html", {})
 
 def publish(request):
-    return HttpResponse('Publish Page Here.')
+    return render(request, "publish.html", {})
 
 
 def pub_success(request):
