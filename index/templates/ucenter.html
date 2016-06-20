@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}个人中心{% endblock title %}
+
+{% block spec_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/ucenter.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/iconfont.css' %}">
+{% endblock spec_css %}
+
+{% block body %}
+<div class="container" >
+	<div class="row">
+        <div class="col-md-10 col-sm-20 menu_list hidden-xs">
+            <ul id="personal_data" >
+                <li class="col-xs-60 col-md-60 col-sm-60 " style="background-color:orange;">
+                   <a><span  style="color: white;">个人中心</span></a></li>
+                <li id="personal_information" class="col-xs-60 col-md-60 col-sm-60 ">
+                    <a><span>个人信息</span></a></li>
+                <li id="change_psw" class="col-xs-60 col-md-60 col-sm-60 ">
+					<a><span>修改密码</span></a> </li>
+                <li id="message" class="col-xs-60 col-md-60 col-sm-60 ">
+					<a><span>站内信</span></a> </li>
+                <li id="my_product" class="col-xs-60 col-md-60 col-sm-60 ">
+					<a><span>我的宝贝</span></a> </li>
+                <li id="my_collect" class="col-xs-60 col-md-60 col-sm-60 ">
+					<a><span>我的收藏</span></a></li>
+                <li id="user_exit" class="col-xs-60 col-md-60 col-sm-60 ">
+					<a><span>退出登录</span></a> </li>
+            </ul>
+        </div>
+        <div class="col-xs-60 col-md-10 col-sm-20 menu_list menu_list1" id="instead" style="display:none;">
+            <ul id="personal_data" >
+                <li id="personal_information" class="col-xs-60 col-md-60 col-sm-60 ">
+                 <img src="{% static 'image/personal_information.png' %}">
+                 <a href="personal_information_mobile.html">个人信息</a><span class="glyphicon glyphicon-chevron-right"  aria-hidden="true"></span></li>
+                <li id="change_psw" class="col-xs-60 col-md-60 col-sm-60 ">
+                 <img src="{% static 'image/psw.png' %}">
+					<a href="change_psw_mobile.html">修改密码</a><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></li>
+                <li id="message" class="col-xs-60 col-md-60 col-sm-60 ">
+                 <img src="{% static 'image/message.png' %}">
+                <a href="message_mobile.html">站内信</a><span class="glyphicon glyphicon-chevron-right " aria-hidden="true"></span></li>
+                <li id="my_product_moblie" class="col-xs-60 col-md-60 col-sm-60 ">
+                 <img src="{% static 'image/myproduct.png' %}">
+					<a href="my_product_mobile.html">我的宝贝</a><span class="glyphicon glyphicon-chevron-right " aria-hidden="true"></span></li>
+                <li id="my_collect_mobile" class="col-xs-60 col-md-60 col-sm-60 ">
+                 <img src="{% static 'image/mycollect.png' %}">
+					<a href="my_collect_mobile.html">我的收藏</a><span class="glyphicon glyphicon-chevron-right " aria-hidden="true"></span></li>
+                <li id="user_exit" class="col-xs-60 col-md-60 col-sm-60 ">
+                 <img src="{% static 'image/personal_information.png' %}">
+					<a href="user_exit_mobile.html">退出登录</a><span class="glyphicon glyphicon-chevron-right " aria-hidden="true"></span></li>
+            </ul>
+        </div>
+
+     <!-- 4:3 aspect ratio -->
+            <div class="col-md-40 col-sm-35 hidden-xs">
+            <div class="embed-responsive embed-responsive-4by3 ">
+              <iframe  class="embed-responsive-item col-sm-30" src="personal_information.html"></iframe>
+            </div>
+            </div>
+    </div>
+</div>
+
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script type="text/javascript" >  
+			$(function() {
+				  $(window).scroll(function() {
+					  var top = $(this).scrollTop();
+					  var flowSearch = $("#flowSearchForm");
+					  if (top < 36) {
+						  flowSearch.css("display", "none");
+					  } else {
+						  flowSearch.css("display", "block");
+					  }
+				  });
+			  });
+			
+			
+			setInterval(function transfer(){
+			 var width=document.documentElement.clientWidth || document.body.clientWidth;
+			 var oNAV= document.getElementById("NAV");
+			
+					  if (width<750) {
+						  oNAV.style.display="block";
+					  } else {
+						  oNAV.style.display="none";
+					  }
+			},10);
+			setInterval(function transfer(){
+			 var width=document.documentElement.clientWidth || document.body.clientWidth;
+			 var oinstead= document.getElementById("instead");
+			
+					  if (width<750) {
+						  oinstead.style.display="block";
+					  } else {
+						  oinstead.style.display="none";
+					  }
+			},10);
+
+var personal_data=document.getElementById("personal_data");
+var alis=personal_data.getElementsByTagName("li");
+var ifa= document.getElementsByTagName("iframe");
+    for(var i=0;i<alis.length;i++){
+           alis[i].addEventListener('click',function(){
+              ifa[0].src=this.id+".html"
+},false);
+/*      sTdc.addEventListener('mouseover', function() {
+          clearTimeout(timer);
+          oTdc.style.display = "block";
+      }, false);*/
+}
+
+
+</script>
+
+{% endblock body %}

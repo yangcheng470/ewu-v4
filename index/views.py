@@ -16,6 +16,8 @@ def detail(request):
 def publish(request):
     return render(request, "publish.html", {})
 
+def ucenter(request):
+    return render(request, "ucenter.html", {})
 
 def pub_success(request):
     return HttpResponse('Publish Success Page Here.')

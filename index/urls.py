@@ -12,7 +12,7 @@ urlpatterns=[
         url(r'^publish/success/$',views.pub_success,name='pub_success'),
         url(r'^register/$',views.register,name='register'),
         url(r'^register/success/$',views.reg_success,name='reg_success'),
-        url(r'^ucenter/',include('accounts.urls',namespace='accounts')),
+        url(r'^ucenter/', views.ucenter, name='ucenter'),
         url(r'^help/$',views.help,name='help'),
         url(r'^about/$',views.about,name='about'),
 ]
