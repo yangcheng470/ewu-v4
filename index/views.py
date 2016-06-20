@@ -16,6 +16,9 @@ def detail(request):
 def publish(request):
     return render(request, "publish.html", {})
 
+def account(request):
+    return render(request, "account.html", {})
+
 def ucenter(request):
     return render(request, "ucenter.html", {})
 
