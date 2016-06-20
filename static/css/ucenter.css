@@ -1,81 +1,93 @@
+
+
+
+
+
+
         body{
             font-family: "微软雅黑";
             background-color: #f5f5f5;
             margin-top:50px;
         }
+        #info p{
+             margin:0 auto; 
+             width:335px; 
+             padding-bottom:10px;
+             }
+		#contentNav{
+		border-bottom:1px solid orange;
+		}
+		
+		#contentNav li a{
+		background-color:orange;
+		border:1px solid orange;
+		color:white;
+		}
 
-        .menu_list ul{
-            margin: 0;
-            padding:0;
-            list-style: none;
-            float: left;
-            display：block;
+		.thumbnail{
+		margin-bottom:0;
+		padding:0;
+		}
+		.thum{
+		margin-top:10px;
+		padding:0 7px 0;
+		
+		}
+        .product-price{
+            font-weight: bold;
+            color:#F30;
         }
-        .menu_list li{
-            margin: 0;
-            padding: 0;
-            cursor: pointer;
-            display:block;
-            border:1px solid #eee;
-            background-color:white;
-
+        .product-tag{
+            color: white;
+            display: inline-block;
+            background-color: orange;
+            padding:0 2px;
+            border-radius: 2px;
+            text-align: center;
         }
-
-        .menu_list a{
-            float: left;
-            margin: 0;
-            padding:0 4px;
-            text-decoration: none;
-        }
-        .menu_list1 a{
-            float: left;
-           padding:0 4px;
-            text-decoration: none;
-            height:40px;
-            line-height:40px;
-            color:#000;
-                  
-        }
-.menu_list1 img{
-width:25px;
-float:left;
-display:block;
-margin-top:7px;
-margin-left:2px;
+       .product-info{
+font-size:small;
+overflow:hidden;
+white-space:nowrap;
+text-overflow:ellipsis;
 }
-.menu_list1 span{
-height:40px; 
-line-height:40px; 
-float:right; 
-margin-right:5px; 
-display:block;
-}
+		.pagination a{
+		width:44px;
+		height:35px;
+		margin:5px;
+		}
+		.pagination>li>a,.pagination>li>a:visited{
+		background-color:#ccc;
+		}
+        .pagination span:hover{
+		color:white;
+		}
+		.pagination span{
+		color:#999;
+		}
+		
+        .pagination>li>a:hover{
+		background-color:orange;
+      
+		}
 
-        .menu_list a span{
-            float: left;
-            display: block;
-            padding: 5px 30px;
-            color: #666;
-        }
-
-
-	.foot{
-		margin-top: 10px;
-		text-align: center;
-		vertical-align: middle;
-		border-radius: 2px;
-		background-color: #f5f5f5;
-	}
-	footer a:link {
-		color: #999999;
-	}
-	footer a:hover {
-		color: #999999;
-	}
-	footer a:visited {
-		color: #999999;
-		text-decoration: none;
-	}
-	footer a:active {
-		color: #999999;
-	}
+		.foot{
+			margin-top: 10px;
+			text-align: center;
+			vertical-align: middle;
+			border-radius: 2px;
+			background-color: #f5f5f5;
+		}
+		footer a:link {
+			color: #999999;
+		}
+		footer a:hover {
+			color: #999999;
+		}
+		footer a:visited {
+			color: #999999;
+			text-decoration: none;
+		}
+		footer a:active {
+			color: #999999;
+		}
