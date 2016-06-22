@@ -15,6 +15,9 @@ def detail(request):
 def publish(request):
     return render(request, "publish.html", {})
 
+def my_items(request):
+    return render(request, "my-items.html", {})
+
 def item_edit(request):
     return render(request, "item-edit.html", {})
 

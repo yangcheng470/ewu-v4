@@ -9,6 +9,7 @@ urlpatterns=[
         url(r'^search/$',views.search,name='search'),
         url(r'^detail/', views.detail, name='detail'),
         url(r'^publish/$',views.publish,name='publish'),
+        url(r'^my-items/$',views.my_items,name='my_items'),
         url(r'^item-edit/$',views.item_edit,name='item_edit'),
         url(r'^messages/$',views.messages,name='messages'),
         url(r'^ucenter/', views.ucenter, name='ucenter'),
