@@ -1,8 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from accounts.models import Account
 
 
 def index(request):
+    user_id = request.session.get('user_id', False)
+    try:
+        user = Account.objects.get(id=user_id)
+    except Account.DoesNotExist:
+        user = None
     return render(request, "index.html", {})
 
 # Search result page, keyword conveyed by GET method

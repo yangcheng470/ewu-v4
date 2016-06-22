@@ -9,19 +9,19 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-			<a class="navbar-brand"  href="{% url 'index:index' %}">Hi,吉大易物欢迎您</a>
+			<a class="navbar-brand"  href="{% url 'index' %}">Hi,吉大易物欢迎您</a>
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse  " id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right ">
             <li class="main_nav" style="z-index:1;"><a class="cd-signin" href="#0">登录</a></li>
             <li class="main_nav" style="z-index:1;"><a class="cd-signup" href="#0">注册</a></li>
-            <li><a href="#">站内信</a></li>
+						<li><a href="{% url 'messages' %}">站内信</a></li>
             <li class="dropdown" id="NAV" style="display:none;">
-              <a href="#" style="z-index:1;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">发布<span style="color:orange;" class="caret"></span></a>
+										<a href="{% url 'publish' %}" style="z-index:1;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">发布<span style="color:orange;" class="caret"></span></a>
               <ul class="dropdown-menu" >
-                <li><a href="#">求购宝贝</a></li>
-                <li><a href="#">转让宝贝</a></li>
+								<li><a href="{% url 'publish' %}">求购宝贝</a></li>
+								<li><a href="{% url 'publish' %}">转让宝贝</a></li>
               </ul>
             </li>
 
