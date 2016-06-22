@@ -5,7 +5,6 @@ from django.http import HttpResponse
 def index(request):
     return render(request, "index.html", {})
 
-
 # Search result page, keyword conveyed by GET method
 def search(request):
     return render(request, "search.html", {})
@@ -15,6 +14,9 @@ def detail(request):
 
 def publish(request):
     return render(request, "publish.html", {})
+
+def item_edit(request):
+    return render(request, "item-edit.html", {})
 
 def messages(request):
     return render(request, "msg.html", {})

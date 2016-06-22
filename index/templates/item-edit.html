@@ -1,0 +1,228 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title  %}编辑宝贝{% endblock title %}
+
+{% block spec_css %}
+    <style type="text/css">
+        body {
+            font-family: "微软雅黑";
+            background-color: #f5f5f5;
+            margin-top: 50px;
+        }
+
+        .foot {
+            margin-top: 10px;
+            text-align: center;
+            vertical-align: middle;
+            border-radius: 2px;
+            background-color: #f5f5f5;
+        }
+
+        footer a:link {
+            color: #999999;
+        }
+
+        footer a:hover {
+            color: #999999;
+        }
+
+        footer a:visited {
+            color: #999999;
+            text-decoration: none;
+        }
+
+        footer a:active {
+            color: #999999;
+        }
+
+        footer {
+            padding-top: 10px;
+            border-top: 1px #DDDDDD solid;
+        }
+
+        .bgcolor {
+            position: relative;
+            background-color: #FFFFFF;
+            color: #000000;
+            border: 1px solid #DDDDDD;
+            border-top:0;
+            padding-top:30px;
+        }
+
+        input,select,textarea {
+            border:1px solid orange !important;
+        }
+
+        input:focus,select:focus,textarea:focus {
+            box-shadow: 0 0 8px orange !important;
+        }
+
+    </style>
+{% endblock spec_css %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-sm-14 hidden-xs">
+                <p>
+                    <button type="button" class="btn btn-primary bgcolor"><span class="glyphicon glyphicon-pencil" aria-hidden="true" style="color:orange;"></span>&nbsp;填写基本信息</button>
+                </p>
+                <p>
+                    <button type="button" class="btn btn-primary bgcolor"><span class="glyphicon glyphicon-picture" aria-hidden="true" style="color:orange;"></span>&nbsp;上传宝贝图片</button>
+                </p>
+                <p>
+                    <button type="button" class="btn btn-primary bgcolor"><span class="glyphicon glyphicon-comment" aria-hidden="true" style="color:orange;"></span>&nbsp;宝贝详细描述</button>
+                </p>
+                <p>
+                    <button type="button" class="btn btn-primary bgcolor"><span class="glyphicon glyphicon-send" aria-hidden="true" style="color:orange;"></span>&nbsp;立即发布&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                </p>
+            </div>
+            <div class="col-md-50 col-sm-46 col-xs-60">
+                <div class="tab">
+                    <ul class="nav nav-tabs">
+                        <li role="presentation" class="active"><a href="javascript:void(0)">请编辑宝贝信息</a></li>
+                    </ul>
+                    <div class="tab-content bgcolor">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label for="baby_transfer_product_name" class="col-md-10 col-sm-20 col-xs-60 control-label">宝贝名称</label>
+                                <div class="col-md-30 col-sm-30 col-md-offset-5">
+                                    <input type="text" class="form-control" id="baby_transfer_product_name" name="baby_transfer_product_name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-10 col-sm-20 col-xs-60 control-label">宝贝类别</label>
+                                <div class="col-md-30 col-sm-30 col-md-offset-5">
+                                    <select class="form-control">
+                                        <option>----------请选择----------</option>
+                                        <option>鞋履</option>
+                                        <option>电子</option>
+                                        <option>代步</option>
+                                        <option>数码</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-10 col-sm-20 col-xs-60 control-label">交易类型</label>
+                                <div class="col-md-30 col-sm-30 col-md-offset-5">
+                                    <select class="form-control">
+                                        <option>----------请选择----------</option>
+                                        <option>出售</option>
+                                        <option>求购</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="baby_transfer_product_price" class="col-md-10 col-sm-20 col-xs-60 control-label">宝贝价格</label>
+                                <div class="col-md-30 col-sm-30 col-md-offset-5">
+                                    <input type="text" class="form-control" id="baby_transfer_product_price" name="baby_transfer_product_price">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-10 col-sm-20 col-xs-60 control-label">新旧程度</label>
+                                <div class="col-md-30 col-sm-30 col-md-offset-5">
+                                    <select class="form-control">
+                                        <option>----------请选择----------</option>
+                                        <option>八成新</option>
+                                        <option>九成新</option>
+                                        <option>全新</option>
+                                        <option>五成新</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="baby_transfer_product_seller_phone" class="col-md-10 col-sm-20 col-xs-60 control-label">电话</label>
+                                <div class="col-md-30 col-sm-30 col-md-offset-5">
+                                    <input type="tel" class="form-control" id="baby_transfer_product_seller_phone" name="baby_transfer_product_seller_phone">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="baby_transfer_product_seller_qq" class="col-md-10 col-sm-20 col-xs-60 control-label">QQ</label>
+                                <div class="col-md-30 col-sm-30 col-md-offset-5">
+                                    <input type="text" class="form-control" id="baby_transfer_product_seller_qq" name="baby_transfer_product_seller_qq">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-10 col-sm-20 col-xs-60 control-label">交易区域</label>
+                                <div class="col-md-30 col-sm-30 checkbox col-md-offset-5">
+                                    <label class="col-md-15 col-sm-20 col-xs-20"><input type="checkbox">南区</label>
+                                    <label class="col-md-15 col-sm-20 col-xs-20"><input type="checkbox">南岭</label>
+                                    <label class="col-md-15 col-sm-20 col-xs-20"><input type="checkbox">南湖</label>
+                                    <br/>
+                                    <label class="col-md-15 col-sm-20 col-xs-20"><input type="checkbox">新民</label>
+                                    <label class="col-md-15 col-sm-20 col-xs-20"><input type="checkbox">和平</label>
+                                    <label class="col-md-15 col-sm-20 col-xs-20"><input type="checkbox">朝阳</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-10 col-sm-20 col-xs-60 control-label">上传图片<p>
+                                  <small>（最多可上传5张照片）</small>
+                                </p></label>
+                                <div class="col-md-30 col-sm-30 col-md-offset-5">
+                                    <span class="glyphicon glyphicon-camera" aria-hidden="true" style="color: #ff6600;"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="baby_transfer_product_detail" class="col-md-10 col-sm-20 col-xs-60 control-label">详细描述</label>
+                                <div class="col-md-30 col-sm-30 col-md-offset-5">
+                                    <textarea cols="50" rows="10" class="form-control" id="baby_transfer_product_detail" name="baby_transfer_product_detail"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-warning col-md-10 col-md-offset-17 col-sm-10 col-sm-offset-17 col-xs-20 col-xs-offset-7">确认修改</button>
+                                <button type="button" class="btn btn-default col-md-10 col-md-offset-6 col-sm-10 col-sm-offset-6 col-xs-20  col-xs-offset-6">取消修改</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <footer class="foot" style="text-align: center; color:#999999; top:50px; position:relative;">
+                <div id="footer">
+                    <span class="copyright-text">
+                ©2016&nbsp;
+                <a href="http://www.jluewu.com" target="_blank">吉大易物网</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                <a href="http://www.miibeian.gov.cn/" target="_blank" rel="external nofollow">吉ICP备15002340</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+                <a href="help.php">帮助</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+                <a href="feedback.php">问题反馈</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+                <a href="help.php#qid-6">联系我们</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+                <a href="help.php#qid-1">关于</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+                <a href="#">友情链接</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+                <a href="#">站长统计</a>
+                </span>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $(window).scroll(function() {
+                var top = $(this).scrollTop();
+                var flowSearch = $("#flowSearchForm");
+                if (top < 36) {
+                    flowSearch.css("display", "none");
+                } else {
+                    flowSearch.css("display", "block");
+                }
+            });
+        });
+
+
+        setInterval(function transfer() {
+            var width = document.documentElement.clientWidth || document.body.clientWidth;
+            var oNAV = document.getElementById("NAV");
+
+            if (width < 750) {
+                oNAV.style.display = "block";
+            } else {
+                oNAV.style.display = "none";
+            }
+        }, 10);
+    </script>
+{% endblock body %}
