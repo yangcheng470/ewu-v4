@@ -14,7 +14,13 @@
   </head>
   
   <body>
-    {% block header %}{% include 'includes/header.html' %}{% endblock header %}
+    {% block header %}
+			{% if user %}
+				{% include 'includes/header_logined.html' %}
+			{% else %}
+				{% include 'includes/header.html' %}
+			{% endif %}
+		{% endblock header %}
     {% block right_bar %}{% include 'includes/right_bar.html' %}{% endblock right_bar %}
     {% block qrcode %}
     <div id="tdc">

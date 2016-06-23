@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load static %}
 {% block body %}
 <div class="container">
   <div class="row">
@@ -135,16 +136,18 @@
   </div>
 
   <div class="row">
+		{% for item in items %}
     <div class="col-xs-30 col-sm-20 col-md-12 thum">
-      <a href="#" class="thumbnail">
-        <img src="{% static 'image/product1.jpg' %}" alt="...">
+						<a href="{% url 'detail' %}?pid={{ item.id }}" class="thumbnail">
+						<img src="{% get_media_prefix %}{{ item.imgs }}" alt="...">
       </a>
       <div style="background:white;">
-       <span class="product-price" style="float: left">￥200</span>
-        <span class="product-tag" style="float:right;text-align: center">南区</span>
-        <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
+							<span class="product-price" style="float: left">￥{{ item.price }}</span>
+							<span class="product-tag" style="float:right;text-align: center">{{ item.get_campus_display }}</span>
+							<p class="product-info" style="clear: both">{{ item.name }}</p>
       </div>
     </div>
+		{% endfor %}
   </div>
         
   <div class="row">          

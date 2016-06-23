@@ -16,7 +16,8 @@ Including another URLconf
 from django.conf.urls import url
 from django.conf.urls import include
 from django.contrib import admin
-
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -24,3 +25,5 @@ urlpatterns = [
     # url(r'^product/',include('products.urls',namespace='products')),
     # url(r'^ucenter/',include('accounts.urls',namespace='accounts')),
 ]
+
+urlpatterns += static(settings.MEDIA_URL , document_root = settings.MEDIA_ROOT )

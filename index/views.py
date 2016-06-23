@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from accounts.models import Account
+from products.models import Product
 
 
 def index(request):
@@ -9,7 +10,8 @@ def index(request):
         user = Account.objects.get(id=user_id)
     except Account.DoesNotExist:
         user = None
-    return render(request, "index.html", {})
+    items = Product.objects.order_by('pub_date').filter(valid=True)
+    return render(request, "index.html", {'user': user, 'items': items })
 
 # Search result page, keyword conveyed by GET method
 def search(request):
