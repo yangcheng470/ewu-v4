@@ -55,8 +55,8 @@ class Product(models.Model):
     # This is function is to be done
     # status=models.CharField(max_length=1,default='S')  
 
-    # Most 5 imgs, file name split with ':'
-    imgs=models.CharField(max_length=200)  
+    small_imgs = models.ImageField(upload_to='small')
+    big_imgs = models.ImageField(upload_to='big')
 
     content=models.TextField()
 

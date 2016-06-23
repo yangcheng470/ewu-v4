@@ -1,0 +1,45 @@
+{% load staticfiles %}
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+			<a class="navbar-brand"  href="{% url 'index' %}">Hi,吉大易物欢迎您</a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse  " id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right ">
+            <li class="dropdown" >
+              <a href="#" style="z-index:1;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">你好，灵犀依旧<span style="color:orange;" class="caret"></span></a>
+              <ul class="dropdown-menu" >
+                <li><a href="#">我的宝贝</a></li>
+                <li><a href="#">我的收藏</a></li>
+                <li><a href="#">个人信息</a></li>
+                <li><a href="#">修改密码</a></li>
+              </ul>
+            </li>
+            <li  style="z-index:1;"><a  href="#0">站内信</a></li>
+            <li><a href="#">退出</a></li>
+            <li class="dropdown" id="NAV" style="display:none;">
+              <a href="#" style="z-index:1;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">发布<span style="color:orange;" class="caret"></span></a>
+              <ul class="dropdown-menu" >
+                <li><a href="#">求购宝贝</a></li>
+                <li><a href="#">转让宝贝</a></li>
+              </ul>
+            </li>
+
+        </ul>
+         <form class="navbar-form navbar-center input-group  " role="search" style="display:none;" id="flowSearchForm">
+                <div class="form-group">
+                    <input type="text" class="form-control "  placeholder="请输入宝贝名称或关键字" style="border:1px solid orange;width:230px"/>
+                    <button type="submit" class="btn" style="background-color:orange;"><span class="glyphicon glyphicon-search" aria-hidden="true" style="color: white;"></span></button>
+                </div>
+            </form>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav><!--导航结束-->

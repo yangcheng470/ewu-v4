@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.http import Http404
 from accounts.models import Account
 from products.models import Product
 
@@ -18,7 +19,18 @@ def search(request):
     return render(request, "search.html", {})
 
 def detail(request):
-    return render(request, "detail.html", {})
+    pid = request.GET.get('pid', False)
+    item = None
+    try:
+        item = Product.objects.get(id=pid)
+    except Product.DoesNotExist:
+        item = None
+    if item==None:
+        raise Http404('Wrong URL')
+    small_imgs = str(item.small_imgs).split(':')
+    big_imgs = str(item.big_imgs).split(':')
+    recommand_item = Product.objects.filter(category=item.category).order_by('pub_date')[0]
+    return render(request, "detail.html", {'item': item, 'small_imgs': small_imgs, 'big_imgs': big_imgs, 'recommand_item': recommand_item })
 
 def publish(request):
     return render(request, "publish.html", {})
