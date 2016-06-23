@@ -25,6 +25,22 @@ class Product(models.Model):
                               default='QT'
     )
 
+    CAMPUS_CHOICES = (
+            ('NQ', '南区'),
+            ('BQ', '北区'),
+            ('HP', '和平'),
+            ('CY', '朝阳'),
+            ('XM', '新民'),
+            ('NH', '南湖'),
+            ('NL', '南岭'),
+    )
+    campus = models.CharField(max_length=2,
+                              null=False,
+                              choices=CAMPUS_CHOICES,
+                              default='NQ'
+    )
+
+
     # Most 7 digits, with 2 decimals, for instance, 45.98
     price=models.DecimalField(max_digits=7,decimal_places=2,default=0) 
 
