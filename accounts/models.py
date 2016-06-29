@@ -12,7 +12,7 @@ class Account(models.Model):
             ('F','Female'),
     )
     sex=models.CharField(max_length=1,choices=SEX_CHOICES,default='M')
-    pwd=models.CharField(max_length=64,null=False)
+    pwd=models.CharField(max_length=128,null=False)
     salt=models.CharField(max_length=64,null=False)
     email=models.EmailField(null=False)
     email_verified=models.BooleanField(default=False)
