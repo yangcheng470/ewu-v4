@@ -85,16 +85,13 @@ $(function(){
   $("#btn-login").click(
     function(){
       if($("#account").val()=="" || $("#password").val()==""){
-    $('#login_info').html('<p>用户名和密码不能为空！</p>');
-    $('#login_info').removeAttr('hidden');
+	$('#login_info').html('<p>邮箱和密码不能为空！</p>');
+	$('#login_info').removeAttr('hidden');
         return false;
       }
       var account = $("#account").val();
       var password = $("#password").val();
-      var rememberme = false;
-      if($("#rememberme").prop("checked")==true){
-        rememberme = true;
-      }
+
       $("#btn-login").html("正在登陆");
       $("#btn-login").attr("disabled","disabled");
       var ajax = $.ajax({
@@ -103,7 +100,6 @@ $(function(){
         data: {
           account: account,
           password: password,
-          rememberme: rememberme
         }
       });
 
@@ -111,7 +107,8 @@ $(function(){
         if(msg=="true"){
           window.location.reload(true);
         }else{
-      $('#login_info').html('<p>用户名或密码错误！</p>');
+          $('#login_info').html('<p>邮箱或密码错误！</p>');
+	  $('#login_info').removeAttr('hidden');
           $("#password").val("");
           $("#btn-login").html("登录");
           $("#btn-login").removeAttr("disabled");
