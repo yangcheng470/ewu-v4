@@ -15,18 +15,18 @@
     <div class="collapse navbar-collapse  " id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right ">
             <li class="dropdown" >
-              <a href="#" style="z-index:1;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">你好，灵犀依旧<span style="color:orange;" class="caret"></span></a>
+						<a href="#" style="z-index:1;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">你好，{{ user.name }}<span style="color:orange;" class="caret"></span></a>
               <ul class="dropdown-menu" >
-                <li><a href="#">我的宝贝</a></li>
-                <li><a href="#">我的收藏</a></li>
-                <li><a href="#">个人信息</a></li>
-                <li><a href="#">修改密码</a></li>
+							  <li><a href="{% url 'my_items' %}">我的宝贝</a></li>
+                <!--<li><a href="#">我的收藏</a></li>-->
+								<li><a href="{% url 'account' %}">个人信息</a></li>
+								<li><a href="{% url 'change_password' %}">修改密码</a></li>
               </ul>
             </li>
-            <li  style="z-index:1;"><a  href="#0">站内信</a></li>
+						<li  style="z-index:1;"><a  href="{% url 'messages' %}">站内信</a></li>
 						<li><a href="{% url 'logout_service' %}">退出</a></li>
             <li class="dropdown" id="NAV" style="display:none;">
-              <a href="#" style="z-index:1;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">发布<span style="color:orange;" class="caret"></span></a>
+						    <a href="{% url 'publish' %}" style="z-index:1;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">发布<span style="color:orange;" class="caret"></span></a>
               <ul class="dropdown-menu" >
                 <li><a href="#">求购宝贝</a></li>
                 <li><a href="#">转让宝贝</a></li>
@@ -34,7 +34,7 @@
             </li>
 
         </ul>
-         <form class="navbar-form navbar-center input-group  " role="search" style="display:none;" id="flowSearchForm">
+				<form class="navbar-form navbar-center input-group  " role="search" style="display:none;" id="flowSearchForm" method="get" action="{% url 'search' %}">
                 <div class="form-group">
                     <input type="text" class="form-control "  placeholder="请输入宝贝名称或关键字" style="border:1px solid orange;width:230px"/>
                     <button type="submit" class="btn" style="background-color:orange;"><span class="glyphicon glyphicon-search" aria-hidden="true" style="color: white;"></span></button>

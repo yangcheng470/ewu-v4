@@ -34,31 +34,33 @@
         </div>
         <hr/>
           <div id="otherMethods" >
-          <p>其它登录方式</p>
-          <i class="icon iconfont"><a style="margin-left:56px;" href="">&#xe643;</a></i>
-          <i class="icon iconfont"><a href="">&#xe604;</a></i>
-          <i class="icon iconfont"><a href="">&#xe60b;</a></i>
+          <!--<p>其它登录方式</p>-->
+          <!--<i class="icon iconfont"><a style="margin-left:56px;" href="">&#xe643;</a></i>-->
+          <!--<i class="icon iconfont"><a href="">&#xe604;</a></i>-->
+          <!--<i class="icon iconfont"><a href="">&#xe60b;</a></i>-->
 
           </div>
     </div>
     <!-- 注册框 -->
     <div id="cd-signup" class="modal-body form-div ">
       <form class="cd-form ">
-        <div style="height:51px;">
-          <input type="text" class="input account col-xs-50 " placeholder="&nbsp;起个响亮的名字吧~" autofocus />
+        <div id="reg_info" style="height:30px;color:red;" class="text-center" hidden>
         </div>
         <div style="height:51px;">
-          <input type="email" class="input r-email col-xs-50" placeholder="&nbsp;邮箱" autofocus>
+          <input type="text" id="r_name" name="r_name" class="input account col-xs-50 " placeholder="&nbsp;起个响亮的名字吧~" autofocus />
         </div>
         <div style="height:51px;">
-          <input type="password" class="input password col-xs-50" placeholder="&nbsp;请输入密码" autofocus />
+          <input type="email" id="r_email" name="r_email" class="input r-email col-xs-50" placeholder="&nbsp;邮箱" >
         </div>
         <div style="height:51px;">
-          <input type="password" class="input password col-xs-50" placeholder="&nbsp;请再次输入密码" autofocus />
+          <input type="password" id="r_password" name="r_password" class="input password col-xs-50" placeholder="&nbsp;请输入密码" >
+        </div>
+        <div style="height:51px;">
+          <input type="password" id="r_password_again" class="input password col-xs-50" placeholder="&nbsp;请再次输入密码" >
         </div>
         <div class="checkbox">
           <label style="margin-left:55px;">
-            <input type="checkbox"  class="rememberme" value="remember-me" />已阅读并同意相关服务条款
+            <input type="checkbox" id="checkbox" class="rememberme" value="remember-me" />已阅读并同意相关服务条款
           </label>
 
         </div>

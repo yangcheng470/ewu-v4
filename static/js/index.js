@@ -1,9 +1,92 @@
 $(function(){
+    
+    // Register
+    $('#btn-register').click(
+        function(){
+            var r_name = $('#r_name').val();
+            var r_email = $('#r_email').val();
+            var r_password = $('#r_password').val();
+            var r_password_again = $('#r_password_again').val();
+
+            reg_info = $('#reg_info');
+            reg_info.attr('hidden', 'hidden');
+
+            // Start check
+            // Check user name
+            if (!r_name.match(/^.{2,15}$/)){
+                reg_info.html('<p>用户名错误(2-15个字符)</p>');
+                reg_info.removeAttr('hidden');
+                return false;
+            }
+            // Check email
+            if (!r_email.match(/^[a-zA-Z0-9.-_]{2,50}@[a-zA-Z0-9]{2,30}.[a-zA-Z0-9]{1,10}$/)){
+                reg_info.html('<p>邮箱格式错误</p>');
+                reg_info.removeAttr('hidden');
+                return false;
+            }
+            // Check password
+            if (!r_password.match(/^.{6,20}$/)){
+                reg_info.html('<p>密码长度应该是6-20位</p>');
+                reg_info.removeAttr('hidden');
+                $('#r_password').val('');
+                return false;
+            }
+            // Check password again
+            if (!(r_password_again==r_password)){
+                reg_info.html('<p>两次密码输入不匹配</p>');
+                reg_info.removeAttr('hidden');
+                $('#r_password').val('');
+                $('#r_password_again').val('');
+                return false;
+            }
+            // Check checkbox
+            if(!$("#checkbox").prop("checked")){
+                reg_info.html('<p>你需要同意相关协议</p>');
+                reg_info.removeAttr('hidden');
+                return false;
+            }
+            
+            // Start server side check
+      var ajax = $.ajax({
+        url: "/service/register/",
+        type: 'POST',
+        data: {
+            name: r_name,
+            email: r_email,
+            password: r_password,
+        }
+      });
+
+      ajax.done(function(msg){
+        if(msg=="true"){
+          $('#cd-signup').html('<h1 class="text-center" style="color:orange;">注册成功</h1>');
+          setTimeout('javascript:window.location.reload(true);', 3000);
+        }else if(msg=='registered')
+	{
+          reg_info.html('<p>该邮箱已经被注册，请更换邮箱或者直接登陆</p>');
+	  $('#r_email').val('');
+          reg_info.removeAttr('hidden');
+	}else{
+          alert(msg);
+          $("#btn-register").html("注册");
+          $("#btn-register").removeAttr("disabled");
+        }
+      });
+
+      ajax.fail(function(jqXHR,textStatus){
+        alert("Request failed :" + textStatus);
+        $("#btn-register").html("注册");
+        $("#btn-register").removeAttr("disabled");
+      });
+
+
+        });
+
   $("#btn-login").click(
     function(){
       if($("#account").val()=="" || $("#password").val()==""){
-	$('#login_info').html('<p>用户名和密码不能为空！</p>');
-	$('#login_info').removeAttr('hidden');
+    $('#login_info').html('<p>用户名和密码不能为空！</p>');
+    $('#login_info').removeAttr('hidden');
         return false;
       }
       var account = $("#account").val();
@@ -28,7 +111,7 @@ $(function(){
         if(msg=="true"){
           window.location.reload(true);
         }else{
-	  $('#login_info').html('<p>用户名或密码错误！</p>');
+      $('#login_info').html('<p>用户名或密码错误！</p>');
           $("#password").val("");
           $("#btn-login").html("登录");
           $("#btn-login").removeAttr("disabled");
@@ -111,7 +194,7 @@ setInterval(function transfer(){
           $close=$('#close');
 
 
-	
+    
       //弹出窗口
       $main_nav.on('click', function  start(event) {
 
@@ -148,8 +231,8 @@ setInterval(function transfer(){
          })*/
          var  aclose=document.getElementById("close"),
               form_modal = document.getElementsByClassName("cd-user-modal");
-			  aclose.addEventListener('click', function() {
-			  form_modal[0].className = 'cd-user-modal nav nav-tabs nav-justified';
+              aclose.addEventListener('click', function() {
+              form_modal[0].className = 'cd-user-modal nav nav-tabs nav-justified';
                }, false);
       //使用Esc键关闭弹出窗口
       $(document).keyup(function(event) {
