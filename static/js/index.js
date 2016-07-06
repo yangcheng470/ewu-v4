@@ -2,6 +2,8 @@ $(function(){
   $("#btn-login").click(
     function(){
       if($("#account").val()=="" || $("#password").val()==""){
+	$('#login_info').html('<p>用户名和密码不能为空！</p>');
+	$('#login_info').removeAttr('hidden');
         return false;
       }
       var account = $("#account").val();
@@ -10,7 +12,7 @@ $(function(){
       if($("#rememberme").prop("checked")==true){
         rememberme = true;
       }
-      $("#btn-login").html("登录中");
+      $("#btn-login").html("正在登陆");
       $("#btn-login").attr("disabled","disabled");
       var ajax = $.ajax({
         url: "/service/login/",
@@ -26,7 +28,7 @@ $(function(){
         if(msg=="true"){
           window.location.reload(true);
         }else{
-          alert(msg);
+	  $('#login_info').html('<p>用户名或密码错误！</p>');
           $("#password").val("");
           $("#btn-login").html("登录");
           $("#btn-login").removeAttr("disabled");

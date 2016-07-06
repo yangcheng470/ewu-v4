@@ -9,6 +9,11 @@
 {% endblock spec_css %}
 
 {% block body %}
+{% if not user %}
+<div class="container" >
+				<h1>你还未登陆，请先登陆</h1>
+</div>
+{% else %}
 <div class="container" >
 	<div class="row">
         <div class="col-md-10 col-sm-20 menu_list hidden-xs">
@@ -114,4 +119,5 @@ var ifa= document.getElementsByTagName("iframe");
 
 </script>
 
+{% endif %}
 {% endblock body %}

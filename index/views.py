@@ -15,6 +15,14 @@ formatter = logging.Formatter('[%(asctime)s]-%(levelname)s : %(message)s')
 handler.setFormatter(formatter)
 logger.addHandler(handler)
 
+
+def logout_service(request):
+    try:
+        del request.session['user_id']
+    except KeyError:
+        pass
+    return render(request, 'logout.html', {'request': request})
+
 # Close csrf validate temporarily
 @csrf_exempt
 def login_service(request):
@@ -84,7 +92,13 @@ def messages(request):
     return render(request, "msg.html", {})
 
 def account(request):
-    return render(request, "account.html", {})
+    user_id = request.session.get('user_id', False)
+    try:
+        user = Account.objects.get(id=user_id)
+    except Account.DoesNotExist:
+        user = None
+
+    return render(request, "account.html", {'user': user})
 
 def ucenter(request):
     return render(request, "ucenter.html", {})

@@ -15,7 +15,7 @@
   
   <body>
     {% block header %}
-			{% if user %}
+			{% if request.session.user_id %}
 				{% include 'includes/header_logined.html' %}
 			{% else %}
 				{% include 'includes/header.html' %}

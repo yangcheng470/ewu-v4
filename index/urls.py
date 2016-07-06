@@ -19,4 +19,5 @@ urlpatterns=[
         url(r'^about/$',views.about,name='about'),
         # Login about
         url(r'^service/login/$', views.login_service, name='login_service'),
+        url(r'^service/logout/$', views.logout_service, name='logout_service'),
 ]

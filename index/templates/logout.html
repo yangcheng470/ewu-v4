@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load static %}
+
+{% block title %}退出登陆{% endblock title %}
+
+{% block body %}
+
+	<div class="container">
+	  <div class="row">
+	    <h1 class="text-center">你已经退出登陆</h1>
+			<p class="text-center">系统将于 <span id="left_time">3</span> 秒后转直主页...</p>
+			<p>{{ request.session.logined }}</p>
+		</div>
+	</div>
+
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script type="text/javascript" >  
+			$(function() {
+				  $(window).scroll(function() {
+					  var top = $(this).scrollTop();
+					  var flowSearch = $("#flowSearchForm");
+					  if (top < 36) {
+						  flowSearch.css("display", "none");
+					  } else {
+						  flowSearch.css("display", "block");
+					  }
+				  });
+
+					setInterval("javascript:location.href='{% url 'index' %}'", 3000);
+			  });
+			
+			
+			setInterval(function transfer(){
+			 var width=document.documentElement.clientWidth || document.body.clientWidth;
+			 var oNAV= document.getElementById("NAV");
+			
+					  if (width<750) {
+						  oNAV.style.display="block";
+					  } else {
+						  oNAV.style.display="none";
+					  }
+			},10);
+//改变图片在移动端高度
+			setInterval(function (){
+             var width=document.documentElement.clientWidth || document.body.clientWidth;
+             var osel= document.getElementsByClassName("sel");
+             for(var i=0;i<osel.length;i++){
+                   if(width<750){
+                  osel[i].getElementsByTagName("img")[0].style.height="60px";
+                        }
+                  else{
+                  osel[i].getElementsByTagName("img")[0].style.height="117px";
+                   }
+                  }          
+			},10);
+//点击换图片
+      var otar=document.getElementById("tar"), 
+          oselect=document.getElementById("select"),
+          ali=oselect.getElementsByTagName("li");
+     for(var i=0;i<ali.length;i++) {
+      ali[i].addEventListener('click', function() {
+          var This=this.getElementsByTagName("img")[0];
+          otar.src=This.src;
+           
+      }, false);
+}
+</script>
+{% endblock body %}
