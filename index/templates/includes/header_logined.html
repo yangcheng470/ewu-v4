@@ -36,7 +36,7 @@
         </ul>
 				<form class="navbar-form navbar-center input-group  " role="search" style="display:none;" id="flowSearchForm" method="get" action="{% url 'search' %}">
                 <div class="form-group">
-                    <input type="text" class="form-control "  placeholder="请输入宝贝名称或关键字" style="border:1px solid orange;width:230px"/>
+								    <input type="text" name="keyword" value="{{ keyword }}" class="form-control "  placeholder="请输入宝贝名称或关键字" style="border:1px solid orange;width:230px"/>
                     <button type="submit" class="btn" style="background-color:orange;"><span class="glyphicon glyphicon-search" aria-hidden="true" style="color: white;"></span></button>
                 </div>
             </form>

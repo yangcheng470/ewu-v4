@@ -8,6 +8,7 @@ from products.models import Product
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.datastructures import MultiValueDictKeyError
 from .func import *
+from django.db.models import Q 
 
 logger = logging.getLogger(__name__)                                                 
 logger.setLevel(logging.INFO)
@@ -103,7 +104,30 @@ def index(request):
 
 # Search result page, keyword conveyed by GET method
 def search(request):
-    return render(request, "search.html", {})
+    # Get logined user for rendering header
+    user_id = request.session.get('user_id', False)
+    try:
+        user = Account.objects.get(id=user_id)
+    except Account.DoesNotExist:
+        user = None
+
+    keyword = ''
+    try:
+        keyword = request.GET['keyword']
+    except KeyError:
+        keyword = ''
+
+    if not keyword:
+        return render(request, "search.html", {'user': user, 'items': []} )
+    
+    # Search result exclude invalid products
+    result_list = Product.objects.filter(valid=True).filter(Q(name__icontains=keyword) or
+                                                            Q(owner__icontains==keyword) or
+                                                            Q(content__icontains=keyword)).order_by('pub_date')
+
+
+    return render(request, "search.html", {'user': user, 'items': result_list, 'keyword': keyword})
+
 
 def detail(request):
     pid = request.GET.get('pid', False)
