@@ -105,7 +105,7 @@
      
       </div>
     
-    
+			<!--Top pics display-->
       <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
       <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
       <span class="sr-only">上一页</span>
@@ -118,10 +118,10 @@
   </div>
   <div class="col-md-12 col-sm-12 hidden-xs " style="padding:0;">
       
-        <button class="btn col-md-25 col-sm-25" style="background-color: orange;color: white;float: left">转让</button>
-        <button class="btn col-md-25 col-sm-25" style="background-color: orange;color: white;float: right">求购</button>
+					<a href="{% url 'publish' %}" type="button" class="btn col-md-25 col-sm-25" style="background-color: orange;color: white;float: left">转让</a>
+					<a href="{% url 'publish' %}" type="button" class="btn col-md-25 col-sm-25" style="background-color: orange;color: white;float: right">求购</a>
         <div class="col-md-60 col-sm-60" style="height:236px; text-align:center; background-color: white; margin-top:10px;">
-          暂无公告
+								<p>暂无公告</p>
         </div>
   </div>
   </div>
@@ -144,7 +144,7 @@
       <div style="background:white;">
 							<span class="product-price" style="float: left">￥{{ item.price }}</span>
 							<span class="product-tag" style="float:right;text-align: center">{{ item.get_campus_display }}</span>
-							<p class="product-info" style="clear: both">{{ item.name }}</p>
+							<a href="{% url 'detail' %}?pid={{ item.id }}"> <p class="product-info" style="clear: both">{{ item.name }}</p></a>
       </div>
     </div>
 		{% endfor %}

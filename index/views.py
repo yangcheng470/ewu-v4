@@ -43,7 +43,7 @@ def reg_service(request):
 
         salt = generate_salt()
         encrypted_password = encrypt_pwd(password, salt)
-        user = Account(name=name, email=email, pwd=encrypted_password, salt=salt)
+        user = Account(name=name, email=email, pwd=encrypted_password, salt=salt, last_ip=request.META['REMOTE_ADDR'])
         user.save()
         request.session['user_id'] = user.id
         return HttpResponse('true')
@@ -79,7 +79,12 @@ def login_service(request):
         if not (encrypt_pwd(password, salt) == user.pwd):
             raise Account.DoesNotExist
 
+        # Save current ip to last_ip field
+        user.last_ip = request.META['REMOTE_ADDR']
+        user.save()
+
         request.session['user_id'] = user.id
+
         return HttpResponse('true')
 
     except (MultiValueDictKeyError,Account.DoesNotExist):

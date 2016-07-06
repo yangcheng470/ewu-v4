@@ -10,8 +10,9 @@ class Account(models.Model):
     SEX_CHOICES=(
             ('M','Male'),
             ('F','Female'),
+            ('U', 'Unknown'),
     )
-    sex=models.CharField(max_length=1,choices=SEX_CHOICES,default='M')
+    sex=models.CharField(max_length=1,choices=SEX_CHOICES,default='U')
     pwd=models.CharField(max_length=128,null=False)
     salt=models.CharField(max_length=64,null=False)
     email=models.EmailField(null=False)
