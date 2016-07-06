@@ -1,4 +1,47 @@
-  $(function() {
+$(function(){
+  $("#btn-login").click(
+    function(){
+      if($("#account").val()=="" || $("#password").val()==""){
+        return false;
+      }
+      var account = $("#account").val();
+      var password = $("#password").val();
+      var rememberme = false;
+      if($("#rememberme").prop("checked")==true){
+        rememberme = true;
+      }
+      $("#btn-login").html("登录中");
+      $("#btn-login").attr("disabled","disabled");
+      var ajax = $.ajax({
+        url: "/service/login/",
+        type: 'POST',
+        data: {
+          account: account,
+          password: password,
+          rememberme: rememberme
+        }
+      });
+
+      ajax.done(function(msg){
+        if(msg=="true"){
+          window.location.reload(true);
+        }else{
+          alert(msg);
+          $("#password").val("");
+          $("#btn-login").html("登录");
+          $("#btn-login").removeAttr("disabled");
+        }
+      });
+
+      ajax.fail(function(jqXHR,textStatus){
+        alert("Request failed :" + textStatus);
+        $("#btn-login").html("登录");
+        $("#btn-login").removeAttr("disabled");
+      });
+    }
+  );
+
+
       $(window).scroll(function() {
           var top = $(this).scrollTop();
           var flowSearch = $("#flowSearchForm");
@@ -8,7 +51,6 @@
               flowSearch.css("display", "block");
           }
       });
-  });
 
 
 setInterval(function transfer(){
@@ -167,6 +209,7 @@ setInterval(function transfer(){
               this.className = 'active';
           }, false);
       }
+ });
 
 /*      var $aLi1 = $("#personal_data li");
       for (i = 0; i < $aLi1.length; i++) {

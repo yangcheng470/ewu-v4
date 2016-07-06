@@ -5,17 +5,17 @@
   <div class="cd-user-modal-container "  >
     <p id="close"><img width="20" height="20" style="position:absolute; right:-10px;top:-10px; border-radius:2em; background-color:orange;" src="{% static 'image/close.png' %}" ></p>
     <ul class="cd-switcher ">
-      <li><a href="#0">登录</a></li>
-      <li><a href="#0">注册</a></li>
+      <li><a href="#">登录</a></li>
+      <li><a href="#">注册</a></li>
     </ul>
     <!-- 登录框-->
     <div id="cd-login" class="modal-body form-div ">
-      <form class="cd-form " >
+		<form class="cd-form ">
         <div style="height:51px;">
-          <input type="text" id="account" class="input col-xs-50 " placeholder="&nbsp;用户名&nbsp;/&nbsp;邮箱" required autofocus  />
+          <input type="text" id="account" class="input col-xs-50 " placeholder="&nbsp;用户名&nbsp;/&nbsp;邮箱" autofocus  />
         </div>
         <div style="height:51px;">
-          <input type="password"  id="password" class="input col-xs-50" placeholder="&nbsp;密码" required >
+          <input type="password"  id="password" class="input col-xs-50" placeholder="&nbsp;密码" >
         </div>
         <div class="checkbox">
           <label style="margin:0 80px 0 55px;" ><input type="checkbox" id="rememberme" value="remember-me">记住我</label>
@@ -26,7 +26,7 @@
           <div class="clo-md-10 col-sm-10 col-xs-10"></div>
           <div class="clo-md-40 col-sm-40 col-xs-40" style=" top:12px; position:relative;">
             
-            <input type="button" value="登录" id="btn-login" class="btn btn-primary btn-block" />
+					<button id="btn-login" class="btn btn-primary btn-block">登陆</button>
             
           </div>
         </div>
@@ -43,16 +43,16 @@
     <div id="cd-signup" class="modal-body form-div ">
       <form class="cd-form ">
         <div style="height:51px;">
-          <input type="text" class="input account col-xs-50 " placeholder="&nbsp;起个响亮的名字吧~" required autofocus />
+          <input type="text" class="input account col-xs-50 " placeholder="&nbsp;起个响亮的名字吧~" autofocus />
         </div>
         <div style="height:51px;">
-          <input type="email" class="input r-email col-xs-50" placeholder="&nbsp;邮箱" required autofocus>
+          <input type="email" class="input r-email col-xs-50" placeholder="&nbsp;邮箱" autofocus>
         </div>
         <div style="height:51px;">
-          <input type="password" class="input password col-xs-50" placeholder="&nbsp;请输入密码" required autofocus />
+          <input type="password" class="input password col-xs-50" placeholder="&nbsp;请输入密码" autofocus />
         </div>
         <div style="height:51px;">
-          <input type="password" class="input password col-xs-50" placeholder="&nbsp;请再次输入密码" required autofocus />
+          <input type="password" class="input password col-xs-50" placeholder="&nbsp;请再次输入密码" autofocus />
         </div>
         <div class="checkbox">
           <label style="margin-left:55px;">

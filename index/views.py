@@ -1,9 +1,48 @@
+import logging
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import Http404
 from accounts.models import Account
 from products.models import Product
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.datastructures import MultiValueDictKeyError
+from .func import *
 
+logger = logging.getLogger(__name__)                                                 
+logger.setLevel(logging.INFO)
+handler = logging.FileHandler('ewu.log')
+formatter = logging.Formatter('[%(asctime)s]-%(levelname)s : %(message)s')
+handler.setFormatter(formatter)
+logger.addHandler(handler)
+
+# Close csrf validate temporarily
+@csrf_exempt
+def login_service(request):
+    if request.method == 'GET':
+        raise Http404('Wrong URL')
+
+    try:
+        email = request.POST['account']
+        password = request.POST['password']
+        # Validate account and password's length
+        if not email or not password:
+            raise MultiValueDictKeyError
+
+        # If not exist, Account.DoesNotExist will be raised
+        user = Account.objects.get(email=email)
+
+        salt = user.salt
+        # If password is wrong
+        if not (encrypt_pwd(password, salt) == user.pwd):
+            raise Account.DoesNotExist
+
+        request.session['user_id'] = user.id
+        return HttpResponse('true')
+
+    except (MultiValueDictKeyError,Account.DoesNotExist):
+        return HttpResponse('false')
+
+    
 
 def index(request):
     user_id = request.session.get('user_id', False)
@@ -12,7 +51,7 @@ def index(request):
     except Account.DoesNotExist:
         user = None
     items = Product.objects.order_by('pub_date').filter(valid=True)
-    return render(request, "index.html", {'user': user, 'items': items })
+    return render(request, "index.html", {'user': user, 'items': items, 'request': request })
 
 # Search result page, keyword conveyed by GET method
 def search(request):
