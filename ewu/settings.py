@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'products',
     'comments',
     'index',
+    'notice',
 ]
 
 MIDDLEWARE_CLASSES = [
