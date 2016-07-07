@@ -1,3 +1,6 @@
 *.pyc
 __pycache__
 ewu.log
+
+# Pycharm temp dir
+.idea/
