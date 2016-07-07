@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.http import Http404
 from accounts.models import Account
 from products.models import Product
+from notice.models import Notice
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.datastructures import MultiValueDictKeyError
 from .func import *
@@ -138,8 +139,16 @@ def index(request):
         user = Account.objects.get(id=user_id)
     except Account.DoesNotExist:
         user = None
+
     items = Product.objects.order_by('pub_date').filter(valid=True)
-    return render(request, "index.html", {'user': user, 'items': items, 'request': request })
+
+    # Get notice
+    notice = None
+    try:
+        notice = Notice.objects.order_by('-pub_date')[0]
+    except:
+        notice = None
+    return render(request, "index.html", {'user': user, 'items': items, 'request': request, 'notice': notice} )
 
 # Search result page, keyword conveyed by GET method
 def search(request):
