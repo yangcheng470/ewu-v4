@@ -18,6 +18,45 @@ handler.setFormatter(formatter)
 logger.addHandler(handler)
 
 
+
+# Close csrf validate temporarily
+@csrf_exempt
+def change_pwd_service(request):
+    if request.method == 'GET':
+        raise Http404('Wrong url')
+
+    user = None
+    try:
+        user = Account.objects.get(id=request.session['user_id'])
+    except Account.DoesNotExist:
+        user = None
+
+    if not user:
+        return HttpResponse('false')
+
+    try:
+        old_pwd = request.POST['old_pwd']
+        new_pwd = request.POST['new_pwd']
+
+        salt = user.salt
+
+        # If password is not correct
+        if not encrypt_pwd(old_pwd, salt) == user.pwd:
+            return HttpResponse('false')
+
+        # If new password is not suitable
+        if not re.match(r'^.{6,20}$', new_pwd):
+            return HttpResponse('false')
+
+        # Save new password
+        user.pwd = encrypt_pwd(new_pwd, salt)
+        user.save()
+
+    except:
+        return HttpResponse('false')
+
+    return HttpResponse('true')
+
 # Close csrf validate temporarily
 @csrf_exempt
 def reg_service(request):
@@ -168,7 +207,14 @@ def ucenter(request):
     return render(request, "ucenter.html", {})
 
 def change_password(request):
-    return render(request, "change-password.html", {})
+    # Get logined user for rendering header
+    user_id = request.session.get('user_id', False)
+    try:
+        user = Account.objects.get(id=user_id)
+    except Account.DoesNotExist:
+        user = None
+
+    return render(request, "change-password.html", {'user': user} )
 
 def pub_success(request):
     return HttpResponse('Publish Success Page Here.')
