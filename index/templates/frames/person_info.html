@@ -26,11 +26,12 @@ padding: 3px 6px;
 
 </style>
 <body>
+				{% if user %}
            <div class="content_information" id="personal_information">
-                <p>用户名：<span id="user_name">灵犀依旧</span></p>
-                <p>性别：<span id="user_sex">帅哥</span></p>
-                <p>邮箱：<span id="user_mail">12345678@qq.com</span></p>
-                <p>校区：<span id="user_place">南区</span></p>
+								<p>用户：<span id="user_name">{{ user.name }}</span></p>
+								<p>性别：<span id="user_sex">{{ user.sex }}</span></p>
+								<p>邮箱：<span id="user_mail">{{ user.email }}</span></p>
+								<p>校区：<span id="user_place">南区</span></p>
                 <p>学院：<span id="user_institute">计算机科学与技术学院</span></p>
                 <p>入学年份：<span id="user_grade">2013</span></p>
                 <p>手机号：<span id="user_phone">15612345678</span></p>
@@ -39,5 +40,8 @@ padding: 3px 6px;
             </div>
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
+		{% else %}
+					<div><h2>请先登陆</h2></div>
+		{% endif %}
 </body>
 </html>

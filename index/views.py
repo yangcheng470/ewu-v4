@@ -19,6 +19,107 @@ handler.setFormatter(formatter)
 logger.addHandler(handler)
 
 
+def person_info(request):
+    user = None
+    try:
+        user = Account.objects.get(id=request.session['user_id'])
+    except (Account.DoesNotExist, KeyError):
+        user = None
+
+    return render(request, 'frames/person_info.html', {'user': user})
+
+
+def change_password(request):
+    user = None
+    try:
+        user = Account.objects.get(id=request.session['user_id'])
+    except (Account.DoesNotExist, KeyError):
+        user = None
+
+    return render(request, 'frames/change_password.html', {'user': user})
+
+
+def messages(request):
+    user = None
+    try:
+        user = Account.objects.get(id=request.session['user_id'])
+    except (Account.DoesNotExist, KeyError):
+        user = None
+
+    return render(request, 'frames/messages.html', {'user': user})
+
+
+def my_items(request):
+    user = None
+    try:
+        user = Account.objects.get(id=request.session['user_id'])
+    except (Account.DoesNotExist, KeyError):
+        user = None
+
+    return render(request, 'frames/my_items.html', {'user': user})
+
+
+def logout(request):
+    user = None
+    try:
+        user = Account.objects.get(id=request.session['user_id'])
+    except (Account.DoesNotExist, KeyError):
+        user = None
+
+    return render(request, 'frames/logout.html', {'user': user})
+
+
+# Mobile
+
+def mobile_person_info(request):
+    user = None
+    try:
+        user = Account.objects.get(id=request.session['user_id'])
+    except (Account.DoesNotExist, KeyError):
+        user = None
+
+    return render(request, 'frames/mobile/person_info.html', {'user': user})
+
+
+def mobile_change_password(request):
+    user = None
+    try:
+        user = Account.objects.get(id=request.session['user_id'])
+    except (Account.DoesNotExist, KeyError):
+        user = None
+
+    return render(request, 'frames/mobile/change_password.html', {'user': user})
+
+
+def mobile_messages(request):
+    user = None
+    try:
+        user = Account.objects.get(id=request.session['user_id'])
+    except (Account.DoesNotExist, KeyError):
+        user = None
+
+    return render(request, 'frames/mobile/messages.html', {'user': user})
+
+
+def mobile_my_items(request):
+    user = None
+    try:
+        user = Account.objects.get(id=request.session['user_id'])
+    except (Account.DoesNotExist, KeyError):
+        user = None
+
+    return render(request, 'frames/mobile/my_items.html', {'user': user})
+
+
+def mobile_logout(request):
+    user = None
+    try:
+        user = Account.objects.get(id=request.session['user_id'])
+    except (Account.DoesNotExist, KeyError):
+        user = None
+
+    return render(request, 'frames/mobile/logout.html', {'user': user})
+
 
 # Close csrf validate temporarily
 @csrf_exempt
@@ -97,7 +198,7 @@ def logout_service(request):
         del request.session['user_id']
     except KeyError:
         pass
-    return render(request, 'logout.html', {'request': request})
+    return HttpResponse('true')
 
 # Close csrf validate temporarily
 @csrf_exempt
@@ -194,36 +295,23 @@ def detail(request):
 def publish(request):
     return render(request, "publish.html", {})
 
-def my_items(request):
-    return render(request, "my-items.html", {})
 
 def item_edit(request):
     return render(request, "item-edit.html", {})
 
-def messages(request):
-    return render(request, "msg.html", {})
 
-def account(request):
+def account(request, frame):
     user_id = request.session.get('user_id', False)
     try:
         user = Account.objects.get(id=user_id)
     except Account.DoesNotExist:
         user = None
 
-    return render(request, "account.html", {'user': user})
+    return render(request, "account.html", {'user': user, 'frame_url':frame})
 
 def ucenter(request):
     return render(request, "ucenter.html", {})
 
-def change_password(request):
-    # Get logined user for rendering header
-    user_id = request.session.get('user_id', False)
-    try:
-        user = Account.objects.get(id=user_id)
-    except Account.DoesNotExist:
-        user = None
-
-    return render(request, "change-password.html", {'user': user} )
 
 def pub_success(request):
     return HttpResponse('Publish Success Page Here.')

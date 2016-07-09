@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 
-{% block title %}站内信{% endblock title %}
 
 {% block spec_css %}
 <style type="text/css">
@@ -61,6 +60,7 @@ color:#999;
 
 {% block body %}
        <div class="content_information" id="message" >
+							 <h5 id="back"><a href="{% url 'account' %}"  >个人中心</a>>站内信</h5>
           <div class="col-md-30 col-xs-60 right" >
                <img width="100px" src="{% static 'image/phone2_s.jpg' %}">
                <div class="col-xs-47 message">

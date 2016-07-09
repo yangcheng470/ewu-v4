@@ -17,14 +17,14 @@
             <li class="dropdown" >
 						<a href="#" style="z-index:1;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">你好，{{ user.name }}<span style="color:orange;" class="caret"></span></a>
               <ul class="dropdown-menu" >
-							  <li><a href="{% url 'my_items' %}">我的宝贝</a></li>
+							  <li><a href="{% url 'account' 'my-items'  %}">我的宝贝</a></li>
                 <!--<li><a href="#">我的收藏</a></li>-->
-								<li><a href="{% url 'account' %}">个人信息</a></li>
-								<li><a href="{% url 'change_password' %}">修改密码</a></li>
+								<li><a href="{% url 'account' 'person_info' %}">个人信息</a></li>
+								<li><a href="{% url 'account' 'change-password' %}">修改密码</a></li>
               </ul>
             </li>
-						<li  style="z-index:1;"><a  href="{% url 'messages' %}">站内信</a></li>
-						<li><a href="{% url 'logout_service' %}">退出</a></li>
+						<li  style="z-index:1;"><a  href="{% url 'account' 'messages' %}">站内信</a></li>
+						<li><a href="{% url 'account' 'logout' %}">退出</a></li>
             <li class="dropdown" id="NAV" style="display:none;">
 						    <a href="{% url 'publish' %}" style="z-index:1;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">发布<span style="color:orange;" class="caret"></span></a>
               <ul class="dropdown-menu" >
