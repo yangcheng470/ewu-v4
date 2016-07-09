@@ -28,8 +28,8 @@
             <li class="dropdown" id="NAV" style="display:none;">
 						    <a href="{% url 'publish' %}" style="z-index:1;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">发布<span style="color:orange;" class="caret"></span></a>
               <ul class="dropdown-menu" >
-							  <li><a href="{% url 'publish' %}">求购宝贝</a></li>
-								<li><a href="{% url 'publish' %}">转让宝贝</a></li>
+							  <li><a href="{% url 'publish' %}?action=want">求购宝贝</a></li>
+								<li><a href="{% url 'publish' %}?action=sell">转让宝贝</a></li>
               </ul>
             </li>
 

@@ -293,7 +293,16 @@ def detail(request):
     return render(request, "detail.html", {'item': item, 'small_imgs': small_imgs, 'big_imgs': big_imgs, 'recommand_item': recommand_item })
 
 def publish(request):
-    return render(request, "publish.html", {})
+    action = ''
+    try:
+        action = request.GET['action']
+    except KeyError:
+        action = ''
+
+    if action=='want':
+        return render(request, "publish.html", {'is_want':True})
+    else:
+        return render(request, "publish.html", {'is_want':False})
 
 
 def item_edit(request):

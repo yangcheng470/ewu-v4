@@ -1,7 +1,7 @@
 {% load staticfiles %}
 <div id="rightbar" class=" col-md-3 col-sm-5 hidden-xs" style="margin-left:10px;"><!--右侧边栏-->
   <div class="rightBarChild  ">
-					<a href="{% url 'publish' %}">
+					<a href="{% url 'publish' %}?action=sell">
     <img class="rbcImage" src="{% static 'image/右侧边栏图标/发布.png' %}" onmouseover="this.src="{% static 'image/右侧边栏图标/发布(1).png' %}" onmouseout="this.src="{% static 'image/右侧边栏图标/发布.png' %}"" />
     <p>
       <b>发布</b>
