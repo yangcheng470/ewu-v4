@@ -264,35 +264,45 @@ $(function() {
         var oTdc = document.getElementById("tdc");
         var timer = null;
 
-        sTdc.addEventListener('mouseover',
-        function() {
-            clearTimeout(timer);
-            oTdc.style.display = "block";
-        },
-        false);
-        oTdc.addEventListener('mouseover',
-        function() {
-            clearTimeout(timer);
-            oTdc.style.display = "block";
-        },
-        false);
+	if(sTdc){
+		sTdc.addEventListener('mouseover',
+		function() {
+		    clearTimeout(timer);
+		    oTdc.style.display = "block";
+		},
+		false);
+	}
 
-        sTdc.addEventListener('mouseout',
-        function() {
-            timer = setTimeout(function() {
-                oTdc.style.display = "none";
-            },
-            500);
-        },
-        false);
-        oTdc.addEventListener('mouseout',
-        function() {
-            timer = setTimeout(function() {
-                oTdc.style.display = "none";
-            },
-            500);
-        },
-        false);
+	if(oTdc){
+		oTdc.addEventListener('mouseover',
+		function() {
+		    clearTimeout(timer);
+		    oTdc.style.display = "block";
+		},
+		false);
+	}
+
+	if(sTdc){
+		sTdc.addEventListener('mouseout',
+		function() {
+		    timer = setTimeout(function() {
+			oTdc.style.display = "none";
+		    },
+		    500);
+		},
+		false);
+	}
+
+	if(oTdc){
+		oTdc.addEventListener('mouseout',
+		function() {
+		    timer = setTimeout(function() {
+			oTdc.style.display = "none";
+		    },
+		    500);
+		},
+		false);
+	}
 
         var aLi = $('#contentNav li');
         for (i = 0; i < aLi.length; i++) {
