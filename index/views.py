@@ -19,6 +19,9 @@ handler.setFormatter(formatter)
 logger.addHandler(handler)
 
 
+def sign_complete(request):
+    return render(request, 'sign_complete.html', {})
+
 def person_info(request):
     user = None
     try:
@@ -279,6 +282,13 @@ def search(request):
 
 
 def detail(request):
+    # Get logined user for rendering header
+    user_id = request.session.get('user_id', False)
+    try:
+        user = Account.objects.get(id=user_id)
+    except Account.DoesNotExist:
+        user = None
+
     pid = request.GET.get('pid', False)
     item = None
     try:
@@ -290,9 +300,17 @@ def detail(request):
     small_imgs = str(item.small_imgs).split(':')
     big_imgs = str(item.big_imgs).split(':')
     recommand_item = Product.objects.filter(category=item.category).order_by('pub_date')[0]
-    return render(request, "detail.html", {'item': item, 'small_imgs': small_imgs, 'big_imgs': big_imgs, 'recommand_item': recommand_item })
+    render_dic = {
+            'user': user,
+            'item': item,
+            'small_imgs': small_imgs,
+            'big_imgs': big_imgs,
+            'recommand_item': recommand_item,
+    }
+    return render(request, "detail.html", render_dic )
 
 def publish(request):
+    # Get action to detect either want or sell
     action = ''
     try:
         action = request.GET['action']

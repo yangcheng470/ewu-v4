@@ -14,11 +14,15 @@ urlpatterns=[
         url(r'^account/(?P<frame>.*)/$', views.account, name='account'),
         url(r'^help/$',views.help,name='help'),
         url(r'^about/$',views.about,name='about'),
-        # Login about
+
+        # Account service about
         url(r'^service/login/$', views.login_service, name='login_service'),
         url(r'^service/logout/$', views.logout_service, name='logout_service'),
         url(r'^service/register/$', views.reg_service, name='reg_service'),
         url(r'^service/change-password/$', views.change_pwd_service, name='change_pwd_service'),
+
+        # Sign up complete
+        url(r'^sign_complete/$', views.sign_complete, name='sign_complete'),
 
         # Account frames
         url(r'^frames/person_info/$', views.person_info, name='person_info'),
