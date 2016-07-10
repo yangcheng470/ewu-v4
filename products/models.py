@@ -25,9 +25,15 @@ class Product(models.Model):
                               default='QT'
     )
 
+    PURPOSE_CHOICES = (
+            ('1', '出售'),
+            ('2', '交换'),
+            ('3', '求购'),
+    )
+    purpose = models.CharField(max_length=1, choices=PURPOSE_CHOICES, default='1')
+
     CAMPUS_CHOICES = (
             ('NQ', '南区'),
-            ('BQ', '北区'),
             ('HP', '和平'),
             ('CY', '朝阳'),
             ('XM', '新民'),
