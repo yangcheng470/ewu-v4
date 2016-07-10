@@ -12,6 +12,8 @@ from django.utils.datastructures import MultiValueDictKeyError
 from .func import *
 from django.db.models import Q 
 from django.utils import timezone
+from django.core.mail import send_mail
+from django.template import loader
 
 logger = logging.getLogger(__name__)                                                 
 logger.setLevel(logging.INFO)
@@ -22,7 +24,13 @@ logger.addHandler(handler)
 
 
 def find_password(request):
-    return render(request, 'find_password.html', {})
+    user = None
+    try:
+        user = Account.objects.get(id=request.session['user_id'])
+    except (Account.DoesNotExist, KeyError):
+        user = None
+
+    return render(request, 'find_password.html', {'user': user})
 
 
 @csrf_exempt
@@ -56,11 +64,23 @@ def find_password_service(request):
     except FindPassword.DoesNotExist:
         find_password_obj = FindPassword(account=user, date_time=timezone.now(),valid=True, key=key, email=email)
     find_password_obj.save()
+    
+    # Construct a find_password url
+    url = "http://www.jluewu.com/service/reset_password/?key=" + key
+
+    # Start render mail template
+    mail = loader.render_to_string('find_password_mail.html', {'url': url})
+    send_mail('吉大易物-找回密码','','admin', [email], fail_silently=True, html_message=mail)
     return HttpResponse('true')
 
 
 def sign_complete(request):
-    return render(request, 'sign_complete.html', {})
+    user = None
+    try:
+        user = Account.objects.get(id=request.session['user_id'])
+    except (Account.DoesNotExist, KeyError):
+        user = None
+    return render(request, 'sign_complete.html', {'user': user} )
 
 def person_info(request):
     user = None
