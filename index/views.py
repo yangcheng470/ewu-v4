@@ -359,7 +359,25 @@ def index(request):
     except Account.DoesNotExist:
         user = None
 
-    items = Product.objects.order_by('pub_date').filter(valid=True)
+    category = 'new'
+    try:
+        category = request.GET['category']
+        if not category in ['new', 'hot', 'change', 'want']:
+            category = 'new'
+    except KeyError:
+        category = 'new'
+
+    items = None
+    if category == 'new':
+        items = Product.objects.order_by('-pub_date')
+    if category == 'hot':
+        items = Product.objects.order_by('-visitors')
+    if category == 'change':
+        items = Product.objects.filter(purpose='2').order_by('-pub_date')
+    if category == 'want':
+        items = Product.objects.filter(purpose='3').order_by('-pub_date')
+
+    items = items.filter(valid=True)
 
     # Get notice
     notice = None
@@ -367,7 +385,7 @@ def index(request):
         notice = Notice.objects.order_by('-pub_date')[0]
     except:
         notice = None
-    return render(request, "index.html", {'user': user, 'items': items, 'request': request, 'notice': notice} )
+    return render(request, "index.html", {'user': user, 'items': items, 'request': request, 'notice': notice, 'category':category})
 
 # Search result page, keyword conveyed by GET method
 def search(request):

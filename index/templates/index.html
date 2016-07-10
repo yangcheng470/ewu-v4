@@ -129,10 +129,10 @@
   
   <div class="row">
      <ul class="nav nav-tabs" id="contentNav" class="col-md-60 col-sm-60  col-xs-60">
-          <li role="presentation" class="active"><a href="javascript:void (0)">新品上架</a></li>
-          <li role="presentation" class=""><a href="javascript:void (0)">热门宝贝</a></li>
-          <li role="presentation" class=""><a href="javascript:void (0)">交换专区</a></li>
-          <li role="presentation" class=""><a href="javascript:void (0)">求购信息</a></li>     
+						 <li role="presentation" class="{% if category == 'new' or not category %}active{% endif %}"><a href="{% url 'index' %}?category=new">新品上架</a></li>
+						 <li role="presentation" class="{% if category == 'hot' %}active{% endif %}"><a href="{% url 'index' %}?category=hot">热门宝贝</a></li>
+						 <li role="presentation" class="{% if category == 'change' %}active{% endif %}"><a href="{% url 'index' %}?category=change">交换专区</a></li>
+						 <li role="presentation" class="{% if category == 'want' %}active{% endif %}"><a href="{% url 'index' %}?category=want">求购信息</a></li>     
      </ul>
   </div>
 
