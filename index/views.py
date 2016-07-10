@@ -47,7 +47,14 @@ def find_password_service(request):
         return HttpResponse('false')
 
     key = generate_salt()
-    find_password_obj = FindPassword(account=user, date_time=timezone.now(),valid=True, key=key)
+    try:
+        find_password_obj = FindPassword.objects.get(account=user)
+        find_password_obj.email = email
+        find_password_obj.date_time = timezone.now()
+        find_password_obj.valid = True
+        find_password_obj.key = key
+    except FindPassword.DoesNotExist:
+        find_password_obj = FindPassword(account=user, date_time=timezone.now(),valid=True, key=key, email=email)
     find_password_obj.save()
     return HttpResponse('true')
 
