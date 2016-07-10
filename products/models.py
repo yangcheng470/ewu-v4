@@ -57,12 +57,8 @@ class Product(models.Model):
                                   default=0.0)     
     owner=models.ForeignKey('accounts.Account')
 
-    # S for sale, E for exchange
-    # This is function is to be done
-    # status=models.CharField(max_length=1,default='S')  
-
-    small_imgs = models.ImageField(upload_to='small')
-    big_imgs = models.ImageField(upload_to='big')
+    small_imgs = models.ImageField(upload_to='small', default='small/default.png')
+    big_imgs = models.ImageField(upload_to='big', default='big/default.png')
 
     content=models.TextField()
 
