@@ -15,6 +15,7 @@ urlpatterns=[
         url(r'^help/$',views.help,name='help'),
         url(r'^about/$',views.about,name='about'),
         url(r'^find_password/$',views.find_password, name='find_password'),
+        url(r'^reset_password/$', views.reset_password, name='reset_password'),
 
         # Account service about
         url(r'^service/login/$', views.login_service, name='login_service'),
@@ -22,6 +23,7 @@ urlpatterns=[
         url(r'^service/register/$', views.reg_service, name='reg_service'),
         url(r'^service/change-password/$', views.change_pwd_service, name='change_pwd_service'),
         url(r'^service/find_password/$', views.find_password_service, name='find_password_service'),
+        url(r'^service/reset_password/$', views.reset_password_service, name='reset_password_service'),
 
         # Sign up complete
         url(r'^sign_complete/$', views.sign_complete, name='sign_complete'),

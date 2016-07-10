@@ -1,5 +1,7 @@
 import logging
 import re
+import datetime
+import pytz
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import Http404
@@ -23,6 +25,60 @@ handler.setFormatter(formatter)
 logger.addHandler(handler)
 
 
+@csrf_exempt
+def reset_password_service(request):
+    key = None
+    password = None
+    try:
+        key = request.POST['key']
+        password = request.POST['password']
+    except KeyError:
+        return HttpResponse('false')
+
+    try:
+        find_password_obj = FindPassword.objects.get(key=key)
+        account = find_password_obj.account
+
+        salt = generate_salt()
+        account.pwd = encrypt_pwd(password, salt)
+        account.salt = salt
+        account.save()
+        find_password_obj.valid = False
+        find_password_obj.save()
+        return HttpResponse('true')
+    except:
+        return HttpResponse('false')
+
+
+def reset_password(request):
+    key = None
+    try:
+        key = request.GET['key']
+    except KeyError:
+        key = None
+    
+    email = None
+    date_time = None
+    try:
+        find_password_obj = FindPassword.objects.get(key=key)
+        email = find_password_obj.email
+        date_time = find_password_obj.date_time
+        is_link_valid = find_password_obj.valid
+
+        # Reset link is valid within 30 mins      
+        now = datetime.datetime.utcnow().replace(tzinfo=pytz.utc)
+        if (now - date_time).seconds>1800:
+            find_password_obj.valid = False
+            key = None
+        if not is_link_valid:
+            key = None
+
+    except FindPassword.DoesNotExist:
+        key = None
+
+    return render(request, 'reset_password.html', {'key': key})
+
+
 def find_password(request):
     user = None
     try:
@@ -35,7 +91,6 @@ def find_password(request):
 
 @csrf_exempt
 def find_password_service(request):
-    logger.info('asdasd')
     email = ''
     try:
         email = request.POST['email']
@@ -66,11 +121,11 @@ def find_password_service(request):
     find_password_obj.save()
     
     # Construct a find_password url
-    url = "http://www.jluewu.com/service/reset_password/?key=" + key
+    url = "http://127.0.0.1:8000/reset_password/?key=" + key
 
     # Start render mail template
     mail = loader.render_to_string('find_password_mail.html', {'url': url})
-    send_mail('吉大易物-找回密码','','admin', [email], fail_silently=True, html_message=mail)
+    send_mail('吉大易物-找回密码','','admin', [email],  html_message=mail)
     return HttpResponse('true')
 
 
