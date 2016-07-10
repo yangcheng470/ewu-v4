@@ -6,10 +6,12 @@ from django.http import Http404
 from accounts.models import Account
 from products.models import Product
 from notice.models import Notice
+from find_password.models import FindPassword
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.datastructures import MultiValueDictKeyError
 from .func import *
 from django.db.models import Q 
+from django.utils import timezone
 
 logger = logging.getLogger(__name__)                                                 
 logger.setLevel(logging.INFO)
@@ -17,6 +19,37 @@ handler = logging.FileHandler('ewu.log')
 formatter = logging.Formatter('[%(asctime)s]-%(levelname)s : %(message)s')
 handler.setFormatter(formatter)
 logger.addHandler(handler)
+
+
+def find_password(request):
+    return render(request, 'find_password.html', {})
+
+
+@csrf_exempt
+def find_password_service(request):
+    logger.info('asdasd')
+    email = ''
+    try:
+        email = request.POST['email']
+    except:
+        email = ''
+
+    if not re.match(r'^[a-zA-Z0-9.-_]{2,50}@[a-zA-Z0-9]{2,30}.[a-zA-Z0-9]{1,10}$', email):
+        return HttpResponse('false')
+
+    user = None
+    try:
+        user = Account.objects.get(email=email)
+    except Account.DoesNotExist:
+        user = None
+
+    if not user:
+        return HttpResponse('false')
+
+    key = generate_salt()
+    find_password_obj = FindPassword(account=user, date_time=timezone.now(),valid=True, key=key)
+    find_password_obj.save()
+    return HttpResponse('true')
 
 
 def sign_complete(request):

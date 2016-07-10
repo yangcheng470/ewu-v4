@@ -6,7 +6,6 @@ def generate_salt():
     chars = 'abcdefghijklmnopqrstuvwxyz'
     chars += '0123456789'
     chars += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    chars += '~!@#$%^&*()_+'
     salt = ''
     for i in range(0, 64):
         index = random.randint(0, len(chars)-1)
