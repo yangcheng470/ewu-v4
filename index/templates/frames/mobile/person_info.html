@@ -26,7 +26,7 @@ padding: 3px 6px;
 {% endblock spec_css %}
 {% block body %}
 				{% if user %}
-				<h5 id="back"><a href="{% url 'account' %}"  >个人中心</a>>个人信息</h5>
+				<h5 id="back"><a href="{% url 'account' '' %}"  >个人中心</a>>个人信息</h5>
            <div class="content_information" id="personal_information">
 								<p>用户：<span id="user_name">{{ user.name }}</span></p>
 								<p>性别：<span id="user_sex">{{ user.sex }}</span></p>
