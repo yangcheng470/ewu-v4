@@ -13,3 +13,4 @@ This is the version 4.0 of [jluewu](http://www.jluewu.com). All codes(including 
 - accounts
 - comments
 - products
+- find_password

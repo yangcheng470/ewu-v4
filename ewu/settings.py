@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'comments',
     'index',
     'notice',
+    'find_password',
 ]
 
 MIDDLEWARE_CLASSES = [
