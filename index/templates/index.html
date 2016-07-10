@@ -15,22 +15,22 @@
 				<div><h4 id="leftlabel"><span class="glyphicon glyphicon-home" aria-hidden="true" style="color: #2aabd2; margin-left:-20px;"></span>校区</h4></a></div>
         </div>
         <div class="col-md-50 col-sm-50 col-xs-10 lab"> 
-        <p><a  href="javascript:void (0)">南区</a></p>
+								<p><a  href="{% url 'search' %}?campus=NQ">南区</a></p>
         </div>
         <div class="col-md-50 col-sm-50 col-xs-10  lab"> 
-        <p><a href="javascript:void (0)">南岭</a></p>
+								<p><a href="{% url 'search' %}?campus=NL">南岭</a></p>
         </div>
         <div class="col-md-50 col-sm-50 col-xs-10  lab"> 
-        <p><a href="javascript:void (0)">南湖</a></p>
+								<p><a href="{% url 'search' %}?campus=NH">南湖</a></p>
         </div>
         <div class="col-md-50 col-sm-50 col-xs-10 lab"> 
-        <p><a href="javascript:void (0)">新民</a></p>
+								<p><a href="{% url 'search' %}?campus=XM">新民</a></p>
         </div>
         <div class="col-md-50 col-sm-50 col-xs-10 lab"> 
-        <p><a href="javascript:void (0)">朝阳</a></p>
+								<p><a href="{% url 'search' %}?campus=CY">朝阳</a></p>
         </div>
         <div class="col-md-50 col-sm-50 col-xs-10 lab"> 
-        <p><a href="javascript:void (0)">和平</a></p>
+								<p><a href="{% url 'search' %}?campus=HP">和平</a></p>
          </div>                      
         
       </div> 
@@ -40,42 +40,42 @@
 				<div><h4><span class="glyphicon glyphicon-tasks" aria-hidden="true" style="color: #ff6600;"></span>类别</h4></div>
       </div>
       <div class="col-md-60 col-sm-60 col-xs-10 lab">
-      <p><a href="javascript:void (0)">代步</a></p>
+							<p><a href="{% url 'search' %}?category=DB">代步</a></p>
       </div>
       <div class="col-md-60 col-sm-60 col-xs-10  lab">
-      <p><a href="javascript:void (0)"> 数码</a></p>
+							<p><a href="{% url 'search' %}?category=SM"> 数码</a></p>
       </div>
       <div class="col-md-60 col-sm-60 col-xs-10  lab">
-      <p><a href="javascript:void (0)">装饰</a></p> 
+							<p><a href="{% url 'search' %}?category=ZS">装饰</a></p> 
       </div>
       <div class="col-md-60 col-sm-60 col-xs-10  lab">
-      <p><a href="javascript:void (0)"> 鞋履</a></p>
+							<p><a href="{% url 'search' %}?category=XL"> 鞋履</a></p>
       </div>
       <div class="col-md-60 col-sm-60 col-xs-10 lab">             
-      <p><a href="javascript:void (0)">电器</a></p>
+							<p><a href="{% url 'search' %}?category=DQ">电器</a></p>
       </div>
       <div class="col-md-60 col-sm-60 col-xs-10  lab">
-      <p><a href="javascript:void (0)"> 虚拟</a></p>
+							<p><a href="{% url 'search' %}?category=XN"> 虚拟</a></p>
       </div>
     </div>
     <div id="basedOnSort" class="col-md-20 col-sm-20 col-xs-60" style="margin-top:27px;  padding:0; ">
       <div class="col-md-60 col-sm-60 col-xs-10  lab">
-      <p><a href="javascript:void (0)">文体</a></p>
+							<p><a href="{% url 'search' %}?category=WT">文体</a></p>
       </div>
       <div class="col-md-60 col-sm-60 col-xs-10  lab">
-      <p><a href="javascript:void (0)"> 日用</a></p>
+							<p><a href="{% url 'search' %}?category=RY"> 日用</a></p>
       </div>
       <div class="col-md-60 col-sm-60 col-xs-10  lab">
-      <p><a href="javascript:void (0)">服饰</a></p>
+							<p><a href="{% url 'search' %}?category=FS">服饰</a></p>
       </div>
       <div class="col-md-60 col-sm-60 col-xs-10  lab"> 
-      <p><a href="javascript:void (0)"> 食品</a></p>
+							<p><a href="{% url 'search' %}?category=SP"> 食品</a></p>
       </div>
       <div class="col-md-60 col-sm-60 col-xs-10  lab">
-      <p><a href="javascript:void (0)">书刊</a></p>
+							<p><a href="{% url 'search' %}?category=SK">书刊</a></p>
       </div>
       <div class="col-md-60 col-sm-60 col-xs-10  lab">
-      <p><a href="javascript:void (0)"> 其他</a></p>
+							<p><a href="{% url 'search' %}?category=QT"> 其他</a></p>
       </div>      
      </div>           
     </div>           
@@ -174,5 +174,6 @@
         </nav>
       </div>
   </div>
+
 </div>
 {% endblock body %}
