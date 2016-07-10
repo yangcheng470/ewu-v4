@@ -115,6 +115,11 @@ text-decoration:none;
 		padding:0 7px 0;
 		
 		}
+	.thumbnail>img, .thumbnail a>img {
+
+	 height:230px;
+
+	}
         .product-price{
             font-weight: bold;
             color:#F30;
@@ -137,7 +142,13 @@ text-decoration:none;
           width:100%;
           height:280px;
        }
+       .lab{
 
+         padding:0 3px;
+
+         margin:1px 0 1px 0;
+
+        }
 
        .panel-body p{
         padding-bottom:5px;
