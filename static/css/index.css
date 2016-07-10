@@ -353,6 +353,9 @@ background-color:orange;
     vertical-align: middle;
     border-radius: 2px;
     background-color: #f5f5f5;
+    background-color:white;
+    padding-top:30px;
+    padding-bottom:30px;
 }
 footer a:link {
     color: #999999;

@@ -1,7 +1,7 @@
         body{
             font-family: "微软雅黑";
             background-color: #f5f5f5;
-            margin-top:50px;
+            margin-top:0;
         }
 
 		.thumbnail{
@@ -42,23 +42,3 @@
             text-align: center;
             margin: 0 3px;
         }
-	.foot{
-		margin-top: 10px;
-		text-align: center;
-		vertical-align: middle;
-		border-radius: 2px;
-		background-color: #f5f5f5;
-	}
-	footer a:link {
-		color: #999999;
-	}
-	footer a:hover {
-		color: #999999;
-	}
-	footer a:visited {
-		color: #999999;
-		text-decoration: none;
-	}
-	footer a:active {
-		color: #999999;
-	}

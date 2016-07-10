@@ -58,8 +58,7 @@ $(function() {
 
         ajax.done(function(msg) {
             if (msg == "true") {
-                $('#cd-signup').html('<h1 class="text-center" style="color:orange;">注册成功</h1>');
-                setTimeout('javascript:window.location.reload(true);', 3000);
+		    window.location.href="/sign_complete/";
             } else if (msg == 'registered') {
                 reg_info.html('<p>该邮箱已经被注册，请更换邮箱或者直接登陆</p>');
                 $('#r_email').val('');
@@ -158,8 +157,9 @@ $(function() {
         var ocdusermodalcontainer = document.getElementsByClassName("cd-user-modal-container");
 
         if (!ocdusermodalcontainer) return false;
+        if (!ocdusermodalcontainer[0]) return false;
 
-        if (width < 754) {
+        if (width < 754){
             ocdusermodalcontainer[0].style.maxWidth = "340px";
         } else {
             ocdusermodalcontainer[0].style.maxWidth = "480px";

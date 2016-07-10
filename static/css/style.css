@@ -113,26 +113,6 @@ li {
   float: left;
 }
 
-#footer a:link {
-  color: #999999;
-}
-
-#footer a:hover {
-  color: #999999;
-}
-
-#footer a:visited {
-  color: #999999;
-  text-decoration: none;
-}
-
-#footer a:active {
-  color: #999999;
-}
-
-#footer a {
-  color: #999999;
-}
 
 #tdc {
   height: 100px;
