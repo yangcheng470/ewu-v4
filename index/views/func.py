@@ -1,7 +1,17 @@
 #!/usr/bin/env python
 import hashlib
 import random
+import logging
 from products.models import Product
+
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+handler = logging.FileHandler('ewu.log')
+formatter = logging.Formatter('[%(asctime)s]-%(levelname)s : %(message)s')
+handler.setFormatter(formatter)
+logger.addHandler(handler)
+
 
 def generate_salt():
     chars = 'abcdefghijklmnopqrstuvwxyz'

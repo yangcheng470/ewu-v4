@@ -1,4 +1,3 @@
-import logging
 import re
 import datetime
 import pytz
@@ -16,13 +15,6 @@ from django.db.models import Q
 from django.utils import timezone
 from django.core.mail import send_mail
 from django.template import loader
-
-logger = logging.getLogger(__name__)                                                 
-logger.setLevel(logging.INFO)
-handler = logging.FileHandler('ewu.log')
-formatter = logging.Formatter('[%(asctime)s]-%(levelname)s : %(message)s')
-handler.setFormatter(formatter)
-logger.addHandler(handler)
 
 
 def reset_password(request):
@@ -132,10 +124,6 @@ def index(request):
         else:
             start_page = page - 2
             end_page = page + 2 if page + 2 <= max_page_num else max_page_num
-
-    logger.info('start: ' + str(start_page))
-    logger.info('end: ' + str(end_page))
-    logger.info('max: ' + str(max_page_num))
 
     render_dic = {
             'user': user,
