@@ -21,7 +21,7 @@ def person_info(request):
     user = None
     try:
         user = Account.objects.get(id=request.session['user_id'])
-    except (Account.DoesNotExist, KeyError):
+    except:
         user = None
 
     return render(request, 'frames/person_info.html', {'user': user})
@@ -31,7 +31,7 @@ def change_password(request):
     user = None
     try:
         user = Account.objects.get(id=request.session['user_id'])
-    except (Account.DoesNotExist, KeyError):
+    except:
         user = None
 
     return render(request, 'frames/change_password.html', {'user': user})
@@ -41,7 +41,7 @@ def messages(request):
     user = None
     try:
         user = Account.objects.get(id=request.session['user_id'])
-    except (Account.DoesNotExist, KeyError):
+    except:
         user = None
 
     return render(request, 'frames/messages.html', {'user': user})
@@ -51,7 +51,7 @@ def my_items(request):
     user = None
     try:
         user = Account.objects.get(id=request.session['user_id'])
-    except (Account.DoesNotExist, KeyError):
+    except:
         user = None
 
     return render(request, 'frames/my_items.html', {'user': user})
@@ -61,7 +61,7 @@ def logout(request):
     user = None
     try:
         user = Account.objects.get(id=request.session['user_id'])
-    except (Account.DoesNotExist, KeyError):
+    except:
         user = None
 
     return render(request, 'frames/logout.html', {'user': user})

@@ -40,7 +40,7 @@ def reset_password(request):
         if not is_link_valid:
             key = None
 
-    except FindPassword.DoesNotExist:
+    except:
         key = None
 
     return render(request, 'reset_password.html', {'key': key})
@@ -50,7 +50,7 @@ def find_password(request):
     user = None
     try:
         user = Account.objects.get(id=request.session['user_id'])
-    except (Account.DoesNotExist, KeyError):
+    except:
         user = None
 
     return render(request, 'find_password.html', {'user': user})
@@ -61,18 +61,9 @@ def sign_complete(request):
     user = None
     try:
         user = Account.objects.get(id=request.session['user_id'])
-    except (Account.DoesNotExist, KeyError):
+    except:
         user = None
     return render(request, 'sign_complete.html', {'user': user} )
-
-
-
-
-
-
-
-
-# Mobile
 
 
 # Close csrf validate temporarily
@@ -82,7 +73,7 @@ def index(request):
     user_id = request.session.get('user_id', False)
     try:
         user = Account.objects.get(id=user_id)
-    except Account.DoesNotExist:
+    except:
         user = None
 
     # Get notice
@@ -97,7 +88,7 @@ def index(request):
         category = request.GET['category']
         if not category in ['new', 'hot', 'change', 'want']:
             category = 'new'
-    except KeyError:
+    except:
         category = 'new'
 
     page = 1
@@ -143,7 +134,7 @@ def search(request):
     user_id = request.session.get('user_id', False)
     try:
         user = Account.objects.get(id=user_id)
-    except Account.DoesNotExist:
+    except:
         user = None
 
     keyword = ''
@@ -169,14 +160,14 @@ def detail(request):
     user_id = request.session.get('user_id', False)
     try:
         user = Account.objects.get(id=user_id)
-    except Account.DoesNotExist:
+    except:
         user = None
 
     pid = request.GET.get('pid', False)
     item = None
     try:
         item = Product.objects.get(id=pid)
-    except Product.DoesNotExist:
+    except:
         item = None
     if item==None:
         raise Http404('Wrong URL')
@@ -214,7 +205,7 @@ def account(request, frame):
     user_id = request.session.get('user_id', False)
     try:
         user = Account.objects.get(id=user_id)
-    except Account.DoesNotExist:
+    except:
         user = None
 
     return render(request, "account.html", {'user': user, 'frame_url':frame})
@@ -240,7 +231,7 @@ def about(request):
     user_id = request.session.get('user_id', False)
     try:
         user = Account.objects.get(id=user_id)
-    except Account.DoesNotExist:
+    except:
         user = None
 
     label = request.GET.get('label', 'help')

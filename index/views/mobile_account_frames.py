@@ -21,7 +21,7 @@ def mobile_person_info(request):
     user = None
     try:
         user = Account.objects.get(id=request.session['user_id'])
-    except (Account.DoesNotExist, KeyError):
+    except:
         user = None
 
     return render(request, 'frames/mobile/person_info.html', {'user': user})
@@ -31,7 +31,7 @@ def mobile_change_password(request):
     user = None
     try:
         user = Account.objects.get(id=request.session['user_id'])
-    except (Account.DoesNotExist, KeyError):
+    except:
         user = None
 
     return render(request, 'frames/mobile/change_password.html', {'user': user})
@@ -41,7 +41,7 @@ def mobile_messages(request):
     user = None
     try:
         user = Account.objects.get(id=request.session['user_id'])
-    except (Account.DoesNotExist, KeyError):
+    except:
         user = None
 
     return render(request, 'frames/mobile/messages.html', {'user': user})
@@ -51,7 +51,7 @@ def mobile_my_items(request):
     user = None
     try:
         user = Account.objects.get(id=request.session['user_id'])
-    except (Account.DoesNotExist, KeyError):
+    except:
         user = None
 
     return render(request, 'frames/mobile/my_items.html', {'user': user})
@@ -61,7 +61,7 @@ def mobile_logout(request):
     user = None
     try:
         user = Account.objects.get(id=request.session['user_id'])
-    except (Account.DoesNotExist, KeyError):
+    except:
         user = None
 
     return render(request, 'frames/mobile/logout.html', {'user': user})

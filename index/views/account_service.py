@@ -57,7 +57,7 @@ def login_service(request):
 
         return HttpResponse('true')
 
-    except (MultiValueDictKeyError,Account.DoesNotExist):
+    except:
         return HttpResponse('false')
 
     
@@ -88,7 +88,7 @@ def reg_service(request):
             # Or continue
             if Account.objects.get(email=email):
                 return HttpResponse('registered')
-        except Account.DoesNotExist:
+        except:
             pass
 
         salt = generate_salt()
@@ -97,7 +97,7 @@ def reg_service(request):
         user.save()
         request.session['user_id'] = user.id
         return HttpResponse('true')
-    except MultiValueDictKeyError:
+    except:
         return HttpResponse('false')
         
 
@@ -110,7 +110,7 @@ def change_pwd_service(request):
     user = None
     try:
         user = Account.objects.get(id=request.session['user_id'])
-    except Account.DoesNotExist:
+    except:
         user = None
 
     if not user:
@@ -154,7 +154,7 @@ def find_password_service(request):
     user = None
     try:
         user = Account.objects.get(email=email)
-    except Account.DoesNotExist:
+    except:
         user = None
 
     if not user:
@@ -167,7 +167,7 @@ def find_password_service(request):
         find_password_obj.date_time = timezone.now()
         find_password_obj.valid = True
         find_password_obj.key = key
-    except FindPassword.DoesNotExist:
+    except:
         find_password_obj = FindPassword(account=user, date_time=timezone.now(),valid=True, key=key, email=email)
     find_password_obj.save()
     
