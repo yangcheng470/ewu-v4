@@ -522,7 +522,7 @@ def about(request):
         user = None
 
     label = request.GET.get('label', 'help')
-    if not label in ['help', 'about', 'contact', 'recruit', 'cooperation', 'friendly_contact']:
+    if not label in ['help', 'about', 'contact', 'recruit', 'cooperation', 'feedback']:
         label = 'help'
 
     return render(request, 'about.html', {'user': user, 'label': label} )
