@@ -54,7 +54,12 @@ def my_items(request):
     except:
         user = None
 
-    return render(request, 'frames/my_items.html', {'user': user})
+    try:
+        items = Product.objects.filter(owner=user).filter(deleted=False).order_by('-pub_date')
+    except:
+        items = None
+
+    return render(request, 'frames/my_items.html', {'user': user, 'items': items} )
 
 
 def logout(request):

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load static %}
 
 {% block header %}{% endblock header %}
 {% block qrcode %}{% endblock qrcode %}
@@ -77,19 +78,29 @@ text-align:center;
 margin-top:10px;
 }
 
+.row{
+				margin-left: 0;
+				margin-right: 0;
+}
+.detail{
+				background-color: white;
+}
+
 </style>
 {% endblock spec_css %}
 
 {% block body %}
 <div>
             <div class="content_information" id="my_product">
+							{% for item in items %}
                <div class="div">
                   <div class="row product" style="margin-top:10px; position:relative;">
                        <div class="col-md-30 col-xs-50">
 
-                           <img src="{% static 'image/product2.png' %}" >
-                           <p>全新亚马逊kindle <wbr>4GB <wbr>白色 <wbr>中奖所得 <wbr>有兴趣与我联系</p>
-                           <p class="product-price">$200</p>
+															 <img src="{% get_media_prefix %}{{ item.small_imgs }}" >
+															 <p>{{ item.name }}</p>
+															 <p>{{ item.content }}</p>
+															 <p class="product-price">￥{{ item.price }}</p>
                        </div>                
                        <div class="dropdown col-xs-10" style="margin-top:30px;">
                           
@@ -103,9 +114,9 @@ margin-top:10px;
                             <div class="col-md-60" style="text-align: center">状态</div>
                             </div>
                             <li class="dropdown">
-                              <a href="#" style="z-index:1;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">等待买主<span  class="caret"></span></a>
+																		<a href="#" style="z-index:1;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ item.get_status_display }}<span  class="caret"></span></a>
                               <ul class="dropdown-menu">
-                                <li><a href="#">已出售</a></li>
+																			<li><a href="#">{% if item.status == 'sale' %}售出{% else %}在售{% endif %}</a></li>
               
                               </ul>
                             </li>
@@ -115,7 +126,7 @@ margin-top:10px;
                        <div class="row">
                        <div class="col-xs-17" style="text-align: center">发布时间</div>
                        </div>
-                       <div class="col-xs-30" style=" padding-right:0; margin-top: 10px"><span class="upload_date">2016-05-07</span><br><span class="upload_time">09:45</span>
+											 <div class="col-xs-30" style=" padding-right:0; margin-top: 10px"><span class="upload_date">{{ item.pub_date.date }}</span><br><span class="upload_time">{{ item.pub_date.time }}</span>
                        </div>
                        <div class="col-xs-30 " style=" padding-right:0;">
                             <div style="margin-top: 10px;">
@@ -125,355 +136,10 @@ margin-top:10px;
                        </div>
                     </div>
                   </div>
-               </div>
-               <div class="div">
-                  <div class="row product" style="margin-top:10px; position:relative;">
-                       <div class="col-md-30 col-xs-50">
-
-                           <img src="{% static 'image/product2.png' %}" >
-                           <p>全新亚马逊kindle <wbr>4GB <wbr>白色 <wbr>中奖所得 <wbr>有兴趣与我联系</p>
-                           <p class="product-price">$200</p>
-                       </div>                
-                       <div class="dropdown col-xs-10" style="margin-top:30px;">
-                          
-                              <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-                   
-                        </div>
-                  </div>
-                  <div class="row detail" style="display:none;">
-                       <div class=" col-xs-20">
-                            <div class="row">
-                            <div class="col-md-60" style="text-align: center">状态</div>
-                            </div>
-                            <li class="dropdown">
-                              <a href="#" style="z-index:1;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">等待买主<span  class="caret"></span></a>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">已出售</a></li>
-              
-                              </ul>
-                            </li>
-
-                        </div>
-                    <div class=" col-xs-40">
-                       <div class="row">
-                       <div class="col-xs-17" style="text-align: center">发布时间</div>
-                       </div>
-                       <div class="col-xs-30" style=" padding-right:0; margin-top: 10px"><span class="upload_date">2016-05-07</span><br><span class="upload_time">09:45</span>
-                       </div>
-                       <div class="col-xs-30 " style=" padding-right:0;">
-                            <div style="margin-top: 10px;">
-                                <a href="javascript:void(0)">编辑</a><br>
-                                <a href="javascript:void(0)">删除</a>
-                            </div>
-                       </div>
-                    </div>
-                  </div>
-               </div>
-               <div class="div">
-                  <div class="row product" style="margin-top:10px; position:relative;">
-                       <div class="col-md-30 col-xs-50">
-
-                           <img src="{% static 'image/product2.png' %}" >
-                           <p>全新亚马逊kindle <wbr>4GB <wbr>白色 <wbr>中奖所得 <wbr>有兴趣与我联系</p>
-                           <p class="product-price">$200</p>
-                       </div>                
-                       <div class="dropdown col-xs-10" style="margin-top:30px;">
-                          
-                              <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-                   
-                        </div>
-                  </div>
-                  <div class="row detail" style="display:none;">
-                       <div class=" col-xs-20">
-                            <div class="row">
-                            <div class="col-md-60" style="text-align: center">状态</div>
-                            </div>
-                            <li class="dropdown">
-                              <a href="#" style="z-index:1;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">等待买主<span  class="caret"></span></a>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">已出售</a></li>
-              
-                              </ul>
-                            </li>
-
-                        </div>
-                    <div class=" col-xs-40">
-                       <div class="row">
-                       <div class="col-xs-17" style="text-align: center">发布时间</div>
-                       </div>
-                       <div class="col-xs-30" style=" padding-right:0; margin-top: 10px"><span class="upload_date">2016-05-07</span><br><span class="upload_time">09:45</span>
-                       </div>
-                       <div class="col-xs-30 " style=" padding-right:0;">
-                            <div style="margin-top: 10px;">
-                                <a href="javascript:void(0)">编辑</a><br>
-                                <a href="javascript:void(0)">删除</a>
-                            </div>
-                       </div>
-                    </div>
-                  </div>
-               </div>
-               <div class="div">
-                  <div class="row product" style="margin-top:10px; position:relative;">
-                       <div class="col-md-30 col-xs-50">
-
-                           <img src="{% static 'image/product2.png' %}" >
-                           <p>全新亚马逊kindle <wbr>4GB <wbr>白色 <wbr>中奖所得 <wbr>有兴趣与我联系</p>
-                           <p class="product-price">$200</p>
-                       </div>                
-                       <div class="dropdown col-xs-10" style="margin-top:30px;">
-                          
-                              <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-                   
-                        </div>
-                  </div>
-                  <div class="row detail" style="display:none;">
-                       <div class=" col-xs-20">
-                            <div class="row">
-                            <div class="col-md-60" style="text-align: center">状态</div>
-                            </div>
-                            <li class="dropdown">
-                              <a href="#" style="z-index:1;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">等待买主<span  class="caret"></span></a>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">已出售</a></li>
-              
-                              </ul>
-                            </li>
-
-                        </div>
-                    <div class=" col-xs-40">
-                       <div class="row">
-                       <div class="col-xs-17" style="text-align: center">发布时间</div>
-                       </div>
-                       <div class="col-xs-30" style=" padding-right:0; margin-top: 10px"><span class="upload_date">2016-05-07</span><br><span class="upload_time">09:45</span>
-                       </div>
-                       <div class="col-xs-30 " style=" padding-right:0;">
-                            <div style="margin-top: 10px;">
-                                <a href="javascript:void(0)">编辑</a><br>
-                                <a href="javascript:void(0)">删除</a>
-                            </div>
-                       </div>
-                    </div>
-                  </div>
-               </div>
-               <div class="div">
-                  <div class="row product" style="margin-top:10px; position:relative;">
-                       <div class="col-md-30 col-xs-50">
-
-                           <img src="{% static 'image/product2.png' %}" >
-                           <p>全新亚马逊kindle <wbr>4GB <wbr>白色 <wbr>中奖所得 <wbr>有兴趣与我联系</p>
-                           <p class="product-price">$200</p>
-                       </div>                
-                       <div class="dropdown col-xs-10" style="margin-top:30px;">
-                          
-                              <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-                   
-                        </div>
-                  </div>
-                  <div class="row detail" style="display:none;">
-                       <div class=" col-xs-20">
-                            <div class="row">
-                            <div class="col-md-60" style="text-align: center">状态</div>
-                            </div>
-                            <li class="dropdown">
-                              <a href="#" style="z-index:1;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">等待买主<span  class="caret"></span></a>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">已出售</a></li>
-              
-                              </ul>
-                            </li>
-
-                        </div>
-                    <div class=" col-xs-40">
-                       <div class="row">
-                       <div class="col-xs-17" style="text-align: center">发布时间</div>
-                       </div>
-                       <div class="col-xs-30" style=" padding-right:0; margin-top: 10px"><span class="upload_date">2016-05-07</span><br><span class="upload_time">09:45</span>
-                       </div>
-                       <div class="col-xs-30 " style=" padding-right:0;">
-                            <div style="margin-top: 10px;">
-                                <a href="javascript:void(0)">编辑</a><br>
-                                <a href="javascript:void(0)">删除</a>
-                            </div>
-                       </div>
-                    </div>
-                  </div>
-               </div>
-               <div class="div">
-                  <div class="row product" style="margin-top:10px; position:relative;">
-                       <div class="col-md-30 col-xs-50">
-
-                           <img src="{% static 'image/product2.png' %}" >
-                           <p>全新亚马逊kindle <wbr>4GB <wbr>白色 <wbr>中奖所得 <wbr>有兴趣与我联系</p>
-                           <p class="product-price">$200</p>
-                       </div>                
-                       <div class="dropdown col-xs-10" style="margin-top:30px;">
-                          
-                              <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-                   
-                        </div>
-                  </div>
-                  <div class="row detail" style="display:none;">
-                       <div class=" col-xs-20">
-                            <div class="row">
-                            <div class="col-md-60" style="text-align: center">状态</div>
-                            </div>
-                            <li class="dropdown">
-                              <a href="#" style="z-index:1;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">等待买主<span  class="caret"></span></a>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">已出售</a></li>
-              
-                              </ul>
-                            </li>
-
-                        </div>
-                    <div class=" col-xs-40">
-                       <div class="row">
-                       <div class="col-xs-17" style="text-align: center">发布时间</div>
-                       </div>
-                       <div class="col-xs-30" style=" padding-right:0; margin-top: 10px"><span class="upload_date">2016-05-07</span><br><span class="upload_time">09:45</span>
-                       </div>
-                       <div class="col-xs-30 " style=" padding-right:0;">
-                            <div style="margin-top: 10px;">
-                                <a href="javascript:void(0)">编辑</a><br>
-                                <a href="javascript:void(0)">删除</a>
-                            </div>
-                       </div>
-                    </div>
-                  </div>
-               </div>
-               <div class="div">
-                  <div class="row product" style="margin-top:10px; position:relative;">
-                       <div class="col-md-30 col-xs-50">
-
-                           <img src="{% static 'image/product2.png' %}" >
-                           <p>全新亚马逊kindle <wbr>4GB <wbr>白色 <wbr>中奖所得 <wbr>有兴趣与我联系</p>
-                           <p class="product-price">$200</p>
-                       </div>                
-                       <div class="dropdown col-xs-10" style="margin-top:30px;">
-                          
-                              <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-                   
-                        </div>
-                  </div>
-                  <div class="row detail" style="display:none;">
-                       <div class=" col-xs-20">
-                            <div class="row">
-                            <div class="col-md-60" style="text-align: center">状态</div>
-                            </div>
-                            <li class="dropdown">
-                              <a href="#" style="z-index:1;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">等待买主<span  class="caret"></span></a>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">已出售</a></li>
-              
-                              </ul>
-                            </li>
-
-                        </div>
-                    <div class=" col-xs-40">
-                       <div class="row">
-                       <div class="col-xs-17" style="text-align: center">发布时间</div>
-                       </div>
-                       <div class="col-xs-30" style=" padding-right:0; margin-top: 10px"><span class="upload_date">2016-05-07</span><br><span class="upload_time">09:45</span>
-                       </div>
-                       <div class="col-xs-30 " style=" padding-right:0;">
-                            <div style="margin-top: 10px;">
-                                <a href="javascript:void(0)">编辑</a><br>
-                                <a href="javascript:void(0)">删除</a>
-                            </div>
-                       </div>
-                    </div>
-                  </div>
-               </div>
-               <div class="div">
-                  <div class="row product" style="margin-top:10px; position:relative;">
-                       <div class="col-md-30 col-xs-50">
-
-                           <img src="{% static 'image/product2.png' %}" >
-                           <p>全新亚马逊kindle <wbr>4GB <wbr>白色 <wbr>中奖所得 <wbr>有兴趣与我联系</p>
-                           <p class="product-price">$200</p>
-                       </div>                
-                       <div class="dropdown col-xs-10" style="margin-top:30px;">
-                          
-                              <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-                   
-                        </div>
-                  </div>
-                  <div class="row detail" style="display:none;">
-                       <div class=" col-xs-20">
-                            <div class="row">
-                            <div class="col-md-60" style="text-align: center">状态</div>
-                            </div>
-                            <li class="dropdown">
-                              <a href="#" style="z-index:1;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">等待买主<span  class="caret"></span></a>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">已出售</a></li>
-              
-                              </ul>
-                            </li>
-
-                        </div>
-                    <div class=" col-xs-40">
-                       <div class="row">
-                       <div class="col-xs-17" style="text-align: center">发布时间</div>
-                       </div>
-                       <div class="col-xs-30" style=" padding-right:0; margin-top: 10px"><span class="upload_date">2016-05-07</span><br><span class="upload_time">09:45</span>
-                       </div>
-                       <div class="col-xs-30 " style=" padding-right:0;">
-                            <div style="margin-top: 10px;">
-                                <a href="javascript:void(0)">编辑</a><br>
-                                <a href="javascript:void(0)">删除</a>
-                            </div>
-                       </div>
-                    </div>
-                  </div>
-               </div>
-               <div class="div">
-                  <div class="row product" style="margin-top:10px; position:relative;">
-                       <div class="col-md-30 col-xs-50">
-
-                           <img src="{% static 'image/product2.png' %}" >
-                           <p>全新亚马逊kindle <wbr>4GB <wbr>白色 <wbr>中奖所得 <wbr>有兴趣与我联系</p>
-                           <p class="product-price">$200</p>
-                       </div>                
-                       <div class="dropdown col-xs-10" style="margin-top:30px;">
-                          
-                              <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-                   
-                        </div>
-                  </div>
-                  <div class="row detail" style="display:none;">
-                       <div class=" col-xs-20">
-                            <div class="row">
-                            <div class="col-md-60" style="text-align: center">状态</div>
-                            </div>
-                            <li class="dropdown">
-                              <a href="#" style="z-index:1;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">等待买主<span  class="caret"></span></a>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">已出售</a></li>
-              
-                              </ul>
-                            </li>
-
-                        </div>
-                    <div class=" col-xs-40">
-                       <div class="row">
-                       <div class="col-xs-17" style="text-align: center">发布时间</div>
-                       </div>
-                       <div class="col-xs-30" style=" padding-right:0; margin-top: 10px"><span class="upload_date">2016-05-07</span><br><span class="upload_time">09:45</span>
-                       </div>
-                       <div class="col-xs-30 " style=" padding-right:0;">
-                            <div style="margin-top: 10px;">
-                                <a href="javascript:void(0)">编辑</a><br>
-                                <a href="javascript:void(0)">删除</a>
-                            </div>
-                       </div>
-                    </div>
-                  </div>
+									{% endfor %}
                </div>
          </div>
                
-    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
     <script type="text/javascript">
       var  Odiv=document.getElementsByClassName("div");
       
@@ -495,41 +161,7 @@ margin-top:10px;
          },false) 
        
 
-       }
-/*       var  Odiv=document.getElementsByClassName("div");
-        var  num=0;
-     for(var i=0;i<Odiv.length;i++){
-        var    Ospan=Odiv[i].getElementsByTagName("span")[0];
-               Ospan.addEventListener("click",function(){
-                   
-                var Odetail=this.parentNode.parentNode.parentNode.parentNode.getElementsByClassName("detail")[0];
-      
-     Odetail.style.display="block"
-          
-  
-      
-         },false) 
-       
-
-       }    
-        var  Odiv=document.getElementsByClassName("div");
-        var  num=0;
-     for(var i=0;i<Odiv.length;i++){
-        var    Ospan=Odiv[i].getElementsByTagName("span")[0];
-               Ospan.addEventListener("click",function(){
-                   
-                var Odetail=this.parentNode.parentNode.parentNode.parentNode.getElementsByClassName("detail")[0];
-       
-
-          
-      
-               
-     Odetail.style.display="none"
-    
-         },false) 
-       
-
-       }*/
+}
  
     </script>
 </div>
