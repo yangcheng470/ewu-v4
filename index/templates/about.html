@@ -1,0 +1,180 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load static %}
+
+{% block title %}其他{% endblock title %}
+
+{% block spec_css %}
+<script>
+//切换标签页面
+	window.onload=function(){
+		var others=document.getElementsByClassName("others");
+		moreother=document.getElementsByClassName("more_other")[0],
+		oli=moreother.getElementsByTagName("li"),
+		oa=moreother.getElementsByTagName("a");
+		for(var i=0;i<oli.length;i++){
+		 oli[i].addEventListener("click",function(){
+			 var That=this.title;
+			 T=document.getElementById(That);
+			 for(var i=0;i<oli.length;i++){
+			 oli[i].style.backgroundColor="white";
+			 oa[i].style.color="#777";
+					}
+			 for(var j=0;j<others.length;j++){
+			  others[j].style.display="none";
+			   }
+			 T.style.display="block";
+			 this.style.backgroundColor="orange";
+			 this.getElementsByTagName("a")[0].style.color="white";
+		  },false)
+	   }
+	}
+
+</script>
+
+<style type="text/css">
+body{
+		font-family: "微软雅黑";
+		background-color: #f5f5f5;
+		padding-top:50px;
+}
+.more_other{
+width:150px;
+}
+.more_other li{
+display:block;
+float:left;
+list-style:none;
+background-color:white;
+margin-bottom:5px;
+height:30px;
+line-height:30px;
+width:150px;
+}
+.more_other li a{
+text-decoration:none;
+color:#777;
+display:block;
+margin:0 auto;
+width:70px;
+cursor: default;
+}
+
+.others{
+height:500px;
+background-color:white;
+margin-bottom:30px;
+color:#777;
+padding-top:10px;
+display:none;
+}
+.others h3{
+display:block;
+margin:0 auto;
+word-spacing:normal;
+width:100px;
+color:black;
+padding-bottom:20px;
+}
+.ever_wrap{
+width:300px;
+margin:0 auto;
+}
+#help{
+display:block;
+}
+#contact li{
+list-style:none;
+}
+.row{
+				margin-left: 0;
+				margin-right: 0;
+}
+</style>
+{% endblock spec_css %}
+
+
+{% block body %}
+<div class="row">
+        <div class="hidden-xs col-md-10 col-sm-12 col-md-offset-5 more_other">
+            <ul>
+                <li title="help"  class="col-xs-60 col-md-60 col-sm-60 " style="background-color:orange;">
+                    <a style="color:white;"><span>>帮助</span></a></li>
+                <li title="about" class="col-xs-60 col-md-60 col-sm-60 ">
+					<a><span>>关于</span></a> </li>
+                <li title="contact" class="col-xs-60 col-md-60 col-sm-60 ">
+					<a><span>>联系我们</span></a> </li>
+                <li title="recruit" class="col-xs-60 col-md-60 col-sm-60 ">
+                    <a><span>>招贤纳士</span></a></li>
+                <li title="cooperation" class="col-xs-60 col-md-60 col-sm-60 ">
+					<a><span>>业务合作</span></a> </li>
+                <li title="feedback" class="col-xs-60 col-md-60 col-sm-60 ">
+					<a><span>>问题反馈</span></a> </li>
+            </ul>
+        </div>
+        <div class="col-md-40 col-sm-40 col-xs-60 col-xs-offset-5 col-md-offset-5 col-sm-offset-8 ">
+            <div id="help" class="others col-md-40 col-sm-40 col-xs-50">
+                 <h3>帮助</h3>
+                 <div class="ever_wrap">
+                     <h4>Q1 如何进行交易？</h4>
+                     <ol>
+                        <li>找到中意的物品，利用留言功能或者下方联系啊方式询问更详细的内容</li>
+                        <li>找到主人，直接当面交易</li>
+                        <li></li>
+                     </ol>
+                     <h4>Q2 如何进行以物易物？</h4>
+                     <ol>
+                        <li>找到中意的物品，利用留言功能或者下方联系啊方式询问更详细的内容</li>
+                        <li>找到主人，直接当面交易</li>
+                        <li></li>
+                     </ol>
+                     <h4>Q3 图片上传失败的原因？</h4>
+                     <ol>
+                        <li>你没登陆</li>
+                        <li>你的图片太大了</li>
+                        <li>你的图片格式不支持</li>
+                        <li>图片上传太多</li>
+                        <li>系统出现位置BUG，请联系后台维护人员</li>
+                     </ol>
+                </div>
+            </div>
+            <div id="about" class="others col-md-40 col-sm-40 col-xs-50">
+                 <h3>关于</h3>
+                 <div class="ever_wrap">
+                 </div>
+            </div>
+            <div id="contact" class="others col-md-40 col-sm-40 col-xs-50">
+                <h3>联系我们</h3>
+                <div class="ever_wrap">
+                <p>如果让有任何问题请联系我们，联系方式：</p>
+                   <ul>
+                    <li>QQ群463514269</li>
+                    <li>support@newnius.com</li>
+                    <li>inner.roe.deer@gmail.com</li>
+                    <li>470957988@qq.com</li>
+                   </ul>
+                </div>
+            </div>
+            <div id="recruit" class="others col-md-40 col-sm-40 col-xs-50">
+                <h3>招贤纳士</h3>
+                <div class="ever_wrap">
+                  <p>我们招下一代的前端和后台开发</p>
+                </div>
+            </div>
+            <div id="cooperation" class="others col-md-40 col-sm-40 col-xs-50">
+                <h3>业务合作</h3>
+                <div class="ever_wrap">
+                  <p>我们欢迎学校各社团与我们合作</p>
+                </div>
+            </div>
+            <div id="feedback" class="others col-md-40 col-sm-40 col-xs-50">            
+                <h3>问题反馈</h3>
+                <div class="ever_wrap">
+                 <a href=""></a>
+                 <a href=""></a>
+                 <a href=""></a>
+                </div>
+            </div>
+       </div>
+</div>
+{% endblock body %}

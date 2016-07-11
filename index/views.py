@@ -512,9 +512,17 @@ def register(request):
 def reg_success(request):
     return HttpResponse('Register Success Page Here.')
 
-def help(request):
-    return HttpResponse('Help Page Here.')
-
 
 def about(request):
-    return HttpResponse('About Page Here.')
+    # Get logined user for rendering header
+    user_id = request.session.get('user_id', False)
+    try:
+        user = Account.objects.get(id=user_id)
+    except Account.DoesNotExist:
+        user = None
+
+    label = request.GET.get('label', 'help')
+    if not label in ['help', 'about', 'contact', 'recruit', 'cooperation', 'friendly_contact']:
+        label = 'help'
+
+    return render(request, 'about.html', {'user': user, 'label': label} )

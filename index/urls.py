@@ -12,7 +12,6 @@ urlpatterns=[
         url(r'^item-edit/$',views.item_edit,name='item_edit'),
         url(r'^ucenter/', views.ucenter, name='ucenter'),
         url(r'^account/(?P<frame>.*)/$', views.account, name='account'),
-        url(r'^help/$',views.help,name='help'),
         url(r'^about/$',views.about,name='about'),
         url(r'^find_password/$',views.find_password, name='find_password'),
         url(r'^reset_password/$', views.reset_password, name='reset_password'),
