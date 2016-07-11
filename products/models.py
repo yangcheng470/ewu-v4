@@ -64,6 +64,8 @@ class Product(models.Model):
     )
     status = models.CharField(max_length=4, choices=STATUS_CHOICES, default='sale')
 
+    deleted = models.BooleanField(default=False)
+
     small_imgs = models.ImageField(upload_to='small', default='small/default.png')
     big_imgs = models.ImageField(upload_to='big', default='big/default.png')
 
