@@ -57,6 +57,12 @@ class Product(models.Model):
                                   default=0.0)     
     owner=models.ForeignKey('accounts.Account')
 
+    STATUS_CHOICES = (
+            ('on_sell', '在售中'),
+            ('sold_out', '已售出'),
+    )
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='on_sell')
+
     small_imgs = models.ImageField(upload_to='small', default='small/default.png')
     big_imgs = models.ImageField(upload_to='big', default='big/default.png')
 
