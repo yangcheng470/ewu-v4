@@ -23,6 +23,8 @@ class Account(models.Model):
     last_ip=models.GenericIPAddressField(null=True)
     visitors=models.PositiveIntegerField(default=0)
 
+    valid = models.BooleanField(default=True)
+
     CAMPUS_CHOICES=(
             ('NQ','南区'),
             ('NL','南岭'),

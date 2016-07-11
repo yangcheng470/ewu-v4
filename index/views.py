@@ -334,6 +334,9 @@ def login_service(request):
         # If not exist, Account.DoesNotExist will be raised
         user = Account.objects.get(email=email)
 
+        if not user.valid:
+            raise Account.DoesNotExist
+
         salt = user.salt
         # If password is wrong
         if not (encrypt_pwd(password, salt) == user.pwd):

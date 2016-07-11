@@ -121,7 +121,6 @@
 					<a href="{% url 'publish' %}?action=sell" type="button" class="btn col-md-25 col-sm-25" style="background-color: orange;color: white;float: left">转让</a>
 					<a href="{% url 'publish' %}?action=want" type="button" class="btn col-md-25 col-sm-25" style="background-color: orange;color: white;float: right">求购</a>
         <div class="col-md-60 col-sm-60" style="height:236px; text-align:center; background-color: white; margin-top:10px;">
-								<p>{{ notice.title }}({{ notice.pub_date }})</p>
 								<p>{% autoescape off %}{{ notice.content }}{% endautoescape %}</p>
         </div>
   </div>
