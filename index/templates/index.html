@@ -155,18 +155,18 @@
        <div style="text-align: center" id="paging">
         <nav>
           <ul class="pagination">
-            <li>
-              <a href="#" aria-label="Previous">
+					  <li style="visibility:{% if current_page != 1 %}visible{% else %}hidden{% endif %};">
+								<a href="{% url 'index' %}?page={{ current_page|add:"-1" }}&category={{ category }}" aria-label="Previous">
                 <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
               </a>
             </li>
-            <li><a href="#"><span>1</span></a></li>
-            <li><a href="#"><span>2</span></a></li>
-            <li><a href="#"><span>3</span></a></li>
-            <li><a href="#"><span>4</span></a></li>
-            <li><a href="#"><span>5</span></a></li>
-            <li>
-              <a href="#" style="margin-right:0;"aria-label="Next">
+
+						{% for page in page_range %}
+						<li {% if page == current_page %}class="active"{% endif %}><a href="{% url 'index' %}?page={{ page }}&category={{ category }}"><span>{{ page }}</span></a></li>
+						{% endfor %}
+
+					  <li style="visibility:{% if current_page != max_page %}visible{% else %}hidden{% endif %};">
+								<a href="{% url 'index' %}?page={{ current_page|add:"1" }}&category={{ category }}" style="margin-right:0;"aria-label="Next">
                 <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
               </a>
             </li>

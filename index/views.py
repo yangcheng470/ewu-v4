@@ -359,6 +359,13 @@ def index(request):
     except Account.DoesNotExist:
         user = None
 
+    # Get notice
+    notice = None
+    try:
+        notice = Notice.objects.order_by('-pub_date')[0]
+    except:
+        notice = None
+
     category = 'new'
     try:
         category = request.GET['category']
@@ -367,25 +374,46 @@ def index(request):
     except KeyError:
         category = 'new'
 
-    items = None
-    if category == 'new':
-        items = Product.objects.order_by('-pub_date')
-    if category == 'hot':
-        items = Product.objects.order_by('-visitors')
-    if category == 'change':
-        items = Product.objects.filter(purpose='2').order_by('-pub_date')
-    if category == 'want':
-        items = Product.objects.filter(purpose='3').order_by('-pub_date')
-
-    items = items.filter(valid=True)
-
-    # Get notice
-    notice = None
+    page = 1
+    max_page_num = max_page(category)
+    max_page_num = max_page_num if max_page_num != 0 else 1
     try:
-        notice = Notice.objects.order_by('-pub_date')[0]
+        page = request.GET['page']
+        page = int(page)
+        page = page if page >= 1 else 1
+        page = page if page <= max_page_num else max_page_num
     except:
-        notice = None
-    return render(request, "index.html", {'user': user, 'items': items, 'request': request, 'notice': notice, 'category':category})
+        page = 1
+
+    items = page_items(category, page)
+
+
+    if max_page_num <= 5:
+        start_page = 1
+        end_page = max_page_num
+    else:
+        if page <= 3:
+            start_page = 1
+            end_page = 5
+        else:
+            start_page = page - 2
+            end_page = page + 2 if page + 2 <= max_page_num else max_page_num
+
+    logger.info('start: ' + str(start_page))
+    logger.info('end: ' + str(end_page))
+    logger.info('max: ' + str(max_page_num))
+
+    render_dic = {
+            'user': user,
+            'items': items,
+            'request': request,
+            'notice': notice,
+            'category': category,
+            'current_page': page,
+            'page_range': range(start_page, end_page+1),
+            'max_page': max_page_num,
+    }
+    return render(request, "index.html", render_dic )
 
 # Search result page, keyword conveyed by GET method
 def search(request):

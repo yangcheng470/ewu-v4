@@ -72,7 +72,7 @@ def page_items(category='new', page=1):
     if max_items(category) < page*20:
         end = max_items(category) + 1
     else:
-        end = page * 20 + 1
+        end = page * 20
     page_list = page_list[begin:end]
 
     return page_list
