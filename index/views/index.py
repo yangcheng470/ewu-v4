@@ -68,7 +68,6 @@ def sign_complete(request):
 
 # Close csrf validate temporarily
 @csrf_exempt
-
 def index(request):
     user_id = request.session.get('user_id', False)
     try:
@@ -211,7 +210,24 @@ def account(request, frame):
     return render(request, "account.html", {'user': user, 'frame_url':frame})
 
 def ucenter(request):
-    return render(request, "ucenter.html", {})
+    user_id = request.session.get('user_id', False)
+    try:
+        user = Account.objects.get(id=user_id)
+    except Account.DoesNotExist:
+        user = None
+
+    account_id = request.GET.get('uid', False)
+    try:
+        account = Account.objects.get(id=account_id)
+    except:
+        account = None
+
+    try:
+        items = Product.objects.filter(owner=account).filter(valid=True).order_by('-pub_date')
+    except:
+        items = None
+
+    return render(request, "ucenter.html", {'user': user, 'account': account, 'items':items} )
 
 
 def pub_success(request):

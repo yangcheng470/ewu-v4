@@ -1,256 +1,144 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load static %}
 
 {% block title %}用户信息{% endblock title %}
-{% block spec_css %}<link rel="stylesheet" type="text/css" href="{% static 'css/detail.css' %}">{% endblock spec_css %}
+{% block spec_css %}
+    <style type="text/css">
+body{
+		font-family: "微软雅黑";
+		background-color: #f5f5f5;
+}
+#info p{
+		 margin:0 auto; 
+		 width:335px; 
+		 padding-bottom:10px;
+		 }
+		#contentNav{
+		border-bottom:1px solid orange;
+		}
+		
+		#contentNav li a{
+		background-color:orange;
+		border:1px solid orange;
+		color:white;
+		}
+		#contentNav li a:hover{
+		background-color:orange;
+		border:1px solid orange;
+		color:white;
+		}
+
+		.thumbnail{
+		margin-bottom:0;
+		padding:0;
+		}
+		.thum{
+		margin-top:10px;
+		padding:0 7px 0;
+		
+		}
+        .product-price{
+            font-weight: bold;
+            color:#F30;
+        }
+        .product-tag{
+            color: white;
+            display: inline-block;
+            background-color: orange;
+            padding:0 2px;
+            border-radius: 2px;
+            text-align: center;
+        }
+       .product-info{
+font-size:small;
+overflow:hidden;
+white-space:nowrap;
+text-overflow:ellipsis;
+}
+		.pagination a{
+		width:44px;
+		height:35px;
+		margin:5px;
+		}
+		.pagination>li>a,.pagination>li>a:visited{
+		background-color:#ccc;
+		}
+        .pagination span:hover{
+		color:white;
+		}
+		.pagination span{
+		color:#999;
+		}
+		
+        .pagination>li>a:hover{
+		background-color:orange;
+      
+		}
+
+
+    </style>
+		{% endblock spec_css %}
 
 {% block body %}
 <div class="container">
+				{% if account %}
         <div class="row" id="info">
-           <h4 style="text-align:center;">完美世界618</h4>
-             <p>
-                <span>帅哥</span> |
-                <span>南区</span> |
-                <span>计算机科学与技术学院</span> |
-                <span>本科（2012级）</span>
+					<h4 style="text-align:center;">{{ account.name }}</h4>
+             <p class="text-center">
+						 <span>{{ account.get_sex_display }}</span> |
+						 <span>{{ account.get_campus_display }}</span> 
             </p>
         </div>
         <div class="row">
                <ul class="nav nav-tabs " id="contentNav" class="col-md-60 col-sm-60  col-xs-60">
                     <li role="presentation">
-                     <a href="">他发布的宝贝</a>
+                     <a href="#">他发布的宝贝</a>
                     </li>
                </ul>
         </div>
 
        <div class="row">
+					{% for item in items %}
           <div class="col-xs-30 col-sm-20 col-md-12 thum">
-            <a href="#" class="thumbnail">
-              <img src="{% static 'image/phone3.jpg' %}" alt="...">
+							<a href="{% url 'detail' %}?pid={{ item.id }}" class="thumbnail">
+							<img src="{% get_media_prefix %}{{ item.small_imgs }}" alt="...">
             </a>
                 <div style="background:white;">
-                <span class="product-price" style="float: left">￥200</span>
-                <span class="product-tag" style="float:right;text-align: center">南区</span>
-                <p class="product-info" style="clear: both">这是一只小猫咪……喵这是一只小猫咪…这是一只小猫咪…</p>
+												<span class="product-price" style="float: left">￥{{ item.price }}</span>
+												<span class="product-tag" style="float:right;text-align: center">{{ item.get_campus_display }}</span>
+												<p class="product-info" style="clear: both">{{ item.title }}</p>
                 </div>
           </div>
-          <div class="col-xs-30 col-sm-20 col-md-12 thum">
-            <a href="#" class="thumbnail">
-              <img src="{% static 'image/phone3.jpg' %}" alt="...">
-            </a>
-                <div style="background:white;">
-                <span class="product-price" style="float: left">￥200</span>
-                <span class="product-tag" style="float:right;text-align: center">南区</span>
-                <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
-                </div>
-          </div>
-          <div class="col-xs-30 col-sm-20 col-md-12 thum">
-            <a href="#" class="thumbnail">
-              <img src="{% static 'image/phone3.jpg' %}" alt="...">
-            </a>
-                <div style="background:white;">
-                <span class="product-price" style="float: left">￥200</span>
-                <span class="product-tag" style="float:right;text-align: center">南区</span>
-                <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
-                </div>
-          </div>
-          <div class="col-xs-30 col-sm-20 col-md-12 thum">
-            <a href="#" class="thumbnail">
-              <img src="{% static 'image/phone3.jpg' %}" alt="...">
-            </a>
-                <div style="background:white;">
-                <span class="product-price" style="float: left">￥200</span>
-                <span class="product-tag" style="float:right;text-align: center">南区</span>
-                <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
-                </div>
-          </div>
-          <div class="col-xs-30 col-sm-20 col-md-12 thum">
-            <a href="#" class="thumbnail">
-              <img src="{% static 'image/phone3.jpg' %}" alt="...">
-            </a>
-                <div style="background:white;">
-                <span class="product-price" style="float: left">￥200</span>
-                <span class="product-tag" style="float:right;text-align: center">南区</span>
-                <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
-                </div>
-          </div>
-          <div class="col-xs-30 col-sm-20 col-md-12 thum">
-            <a href="#" class="thumbnail">
-              <img src="{% static 'image/phone3.jpg' %}" alt="...">
-            </a>
-                <div style="background:white;">
-                <span class="product-price" style="float: left">￥200</span>
-                <span class="product-tag" style="float:right;text-align: center">南区</span>
-                <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
-                </div>
-          </div>
-          <div class="col-xs-30 col-sm-20 col-md-12 thum">
-            <a href="#" class="thumbnail">
-              <img src="{% static 'image/phone3.jpg' %}" alt="...">
-            </a>
-                <div style="background:white;">
-                <span class="product-price" style="float: left">￥200</span>
-                <span class="product-tag" style="float:right;text-align: center">南区</span>
-                <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
-                </div>
-          </div>
-          <div class="col-xs-30 col-sm-20 col-md-12 thum">
-            <a href="#" class="thumbnail">
-              <img src="{% static 'image/phone3.jpg' %}" alt="...">
-            </a>
-                <div style="background:white;">
-                <span class="product-price" style="float: left">￥200</span>
-                <span class="product-tag" style="float:right;text-align: center">南区</span>
-                <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
-                </div>
-          </div>
-          <div class="col-xs-30 col-sm-20 col-md-12 thum">
-            <a href="#" class="thumbnail">
-              <img src="{% static 'image/phone3.jpg' %}" alt="...">
-            </a>
-                <div style="background:white;">
-                <span class="product-price" style="float: left">￥200</span>
-                <span class="product-tag" style="float:right;text-align: center">南区</span>
-                <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
-                </div>
-          </div>
-          <div class="col-xs-30 col-sm-20 col-md-12 thum">
-            <a href="#" class="thumbnail">
-              <img src="{% static 'image/phone3.jpg' %}" alt="...">
-            </a>
-                <div style="background:white;">
-                <span class="product-price" style="float: left">￥200</span>
-                <span class="product-tag" style="float:right;text-align: center">南区</span>
-                <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
-                </div>
-          </div>
-         <div class="col-xs-30 col-sm-20 col-md-12 thum">
-            <a href="#" class="thumbnail">
-              <img src="{% static 'image/phone3.jpg' %}" alt="...">
-            </a>
-                <div style="background:white;">
-                <span class="product-price" style="float: left">￥200</span>
-                <span class="product-tag" style="float:right;text-align: center">南区</span>
-                <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
-                </div>
-          </div>
-          <div class="col-xs-30 col-sm-20 col-md-12 thum">
-            <a href="#" class="thumbnail">
-              <img src="{% static 'image/phone3.jpg' %}" alt="...">
-            </a>
-                <div style="background:white;">
-                <span class="product-price" style="float: left">￥200</span>
-                <span class="product-tag" style="float:right;text-align: center">南区</span>
-                <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
-                </div>
-          </div>
-          <div class="col-xs-30 col-sm-20 col-md-12 thum">
-            <a href="#" class="thumbnail">
-              <img src="{% static 'image/phone3.jpg' %}" alt="...">
-            </a>
-                <div style="background:white;">
-                <span class="product-price" style="float: left">￥200</span>
-                <span class="product-tag" style="float:right;text-align: center">南区</span>
-                <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
-                </div>
-          </div>
-          <div class="col-xs-30 col-sm-20 col-md-12 thum">
-            <a href="#" class="thumbnail">
-              <img src="{% static 'image/phone3.jpg' %}" alt="...">
-            </a>
-                <div style="background:white;">
-                <span class="product-price" style="float: left">￥200</span>
-                <span class="product-tag" style="float:right;text-align: center">南区</span>
-                <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
-                </div>
-          </div>
-          <div class="col-xs-30 col-sm-20 col-md-12 thum">
-            <a href="#" class="thumbnail">
-              <img src="{% static 'image/phone3.jpg' %}" alt="...">
-            </a>
-                <div style="background:white;">
-                <span class="product-price" style="float: left">￥200</span>
-                <span class="product-tag" style="float:right;text-align: center">南区</span>
-                <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
-                </div>
-          </div>
-          <div class="col-xs-30 col-sm-20 col-md-12 thum">
-            <a href="#" class="thumbnail">
-              <img src="{% static 'image/phone3.jpg' %}" alt="...">
-            </a>
-                <div style="background:white;">
-                <span class="product-price" style="float: left">￥200</span>
-                <span class="product-tag" style="float:right;text-align: center">南区</span>
-                <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
-                </div>
-          </div>
-          <div class="col-xs-30 col-sm-20 col-md-12 thum">
-            <a href="#" class="thumbnail">
-              <img src="{% static 'image/phone3.jpg' %}" alt="...">
-            </a>
-                <div style="background:white;">
-                <span class="product-price" style="float: left">￥200</span>
-                <span class="product-tag" style="float:right;text-align: center">南区</span>
-                <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
-                </div>
-          </div>
-          <div class="col-xs-30 col-sm-20 col-md-12 thum">
-            <a href="#" class="thumbnail">
-              <img src="{% static 'image/phone3.jpg' %}" alt="...">
-            </a>
-                <div style="background:white;">
-                <span class="product-price" style="float: left">￥200</span>
-                <span class="product-tag" style="float:right;text-align: center">南区</span>
-                <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
-                </div>
-          </div>
-          <div class="col-xs-30 col-sm-20 col-md-12 thum">
-            <a href="#" class="thumbnail">
-              <img src="{% static 'image/phone3.jpg' %}" alt="...">
-            </a>
-                <div style="background:white;">
-                <span class="product-price" style="float: left">￥200</span>
-                <span class="product-tag" style="float:right;text-align: center">南区</span>
-                <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
-                </div>
-          </div>
-          <div class="col-xs-30 col-sm-20 col-md-12 thum">
-            <a href="#" class="thumbnail">
-              <img src="{% static 'image/phone3.jpg' %}" alt="...">
-            </a>
-                <div style="background:white;">
-                <span class="product-price" style="float: left">￥200</span>
-                <span class="product-tag" style="float:right;text-align: center">南区</span>
-                <p class="product-info" style="clear: both">这是一只小猫咪……喵</p>
-                </div>
-          </div>
+					{% endfor %}
         </div>
-     <div class="row">                  
-                <div style="text-align: center" id="paging">
-                    <nav>
-                        <ul class="pagination">
-                            <li>
-                                <a href="#" aria-label="Previous">
-                                    <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
-                                </a>
-                            </li>
-                            <li><a href="#"><span>1</span></a></li>
-                            <li><a href="#"><span>2</span></a></li>
-                            <li><a href="#"><span>3</span></a></li>
-                            <li><a href="#"><span>4</span></a></li>
-                            <li><a href="#"><span>5</span></a></li>
-                            <li>
-                                <a href="#" style="margin-right:0;" aria-label="Next">
-                                    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
+				{% else %}
+				<h2 class="text-center">页面无效</h2>
+				{% endif %}
+     <!--<div class="row">                  -->
+                <!--<div style="text-align: center" id="paging">-->
+                    <!--<nav>-->
+                        <!--<ul class="pagination">-->
+                            <!--<li>-->
+                                <!--<a href="#" aria-label="Previous">-->
+                                    <!--<span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>-->
+                                <!--</a>-->
+                            <!--</li>-->
+                            <!--<li><a href="#"><span>1</span></a></li>-->
+                            <!--<li><a href="#"><span>2</span></a></li>-->
+                            <!--<li><a href="#"><span>3</span></a></li>-->
+                            <!--<li><a href="#"><span>4</span></a></li>-->
+                            <!--<li><a href="#"><span>5</span></a></li>-->
+                            <!--<li>-->
+                                <!--<a href="#" style="margin-right:0;" aria-label="Next">-->
+                                    <!--<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>-->
+                                <!--</a>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                    <!--</nav>-->
+                <!--</div>-->
+            <!--</div>-->
 </div>
-    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/indexSearchResult.js' %}" ></script>
 
 {% endblock body %}
