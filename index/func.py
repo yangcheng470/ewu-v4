@@ -60,13 +60,13 @@ def page_items(category='new', page=1):
     
     page_list = []
     if category == 'new':
-        page_list = Product.objects.filter(valid=True).order_by('-pub_date')
+        page_list = Product.objects.filter(valid=True).order_by('status','-pub_date')
     elif category == 'hot':
-        page_list = Product.objects.filter(valid=True).order_by('-visitors')
+        page_list = Product.objects.filter(valid=True).order_by('status','-visitors')
     elif category == 'change':
-        page_list = Product.objects.filter(valid=True).filter(purpose='2').order_by('-visitors')
+        page_list = Product.objects.filter(valid=True).filter(purpose='2').order_by('status','-visitors')
     else:
-        page_list = Product.objects.filter(valid=True).filter(purpose='3').order_by('-visitors')
+        page_list = Product.objects.filter(valid=True).filter(purpose='3').order_by('status','-visitors')
 
     begin = (page-1)*20
     if max_items(category) < page*20:

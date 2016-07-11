@@ -57,6 +57,7 @@ class Product(models.Model):
                                   default=0.0)     
     owner=models.ForeignKey('accounts.Account')
 
+    # This field has magnitude sale < sold
     STATUS_CHOICES = (
             ('sale', '在售'),
             ('sold', '已售'),
