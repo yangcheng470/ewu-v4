@@ -2,41 +2,98 @@
 {% load staticfiles %}
 {% load static %}
 
-{% block spec_css %}<link rel="stylesheet" type="text/css" href="{% static 'css/search.css' %}">{% endblock spec_css %}
-{% block title %}搜索结果{% endblock title %}
+{% block spec_css %}
+    <style type="text/css">
+
+		.headlabel{
+		background-color:white;
+		border-left:1px solid #ddd;
+		border-right:1px solid #ddd;
+		
+		}
+
+		.headlabel li>a{
+		color:#333;
+		}
+		.headlabel li.active a:link{
+		background-color:orange;
+		color:white;
+		}
+		.headlabel li.active a:visited{
+		background-color:orange;
+		color:white;
+		}
+		.headlabel li.active a:hover{
+		background-color:orange;
+		color:white;
+		}
+        .headlabel li.ac a{
+		border:1px solid orange;
+        
+		}
+       dlabel li.Title a:hover{
+		background-color:white;
+		border:1px solid white;
+		}
+		.nav>li>a {
+		padding:2px 2px;
+        margin:5px 2px;
+		}
+		#contNav{
+		border-bottom:1px solid orange;
+        margin-top:10px;
+		}
+		
+		li.default a{
+		background-color:orange;
+		border:1px solid orange;
+		color:white;
+		}
+		li.default a:hover{
+		background-color:orange;
+		border:1px solid orange;
+		color:white;
+		}
+        
+
+    </style>
+		{% endblock spec_css %}
+
+		{% block title %}[{{ keyword }}]搜索结果{% endblock title %}
 {% block body %}
 <div class="container" >
+
     <div class="row">
          <ul class="nav nav-tabs headlabel"  id="schoolNav">
          <li class="Title"><a href=""><strong>校区</strong></a></li>
-         <li><a href="javascript:void(0)">不限</a></li>
-         <li class="active"><a href="javascript:void(0)">南区</a></li>
-         <li><a href="javascript:void(0)">南岭</a></li>
-         <li><a href="javascript:void(0)">南湖</a></li>
-         <li><a href="javascript:void(0)">新民</a></li>
-         <li><a href="javascript:void(0)">和平</a></li>
-         <li><a href="javascript:void(0)">朝阳</a></li>
-         <li class="ac"><a>多选</a></li>
+         <li id="all"><a href="javascript:void(0)">不限</a></li>
+         <li id="NQ" class="active"><a href="javascript:void(0)">南区</a></li>
+         <li id="NL" class=""><a href="javascript:void(0)">南岭</a></li>
+         <li id="NH" class=""><a href="javascript:void(0)">南湖</a></li>
+         <li id="XM" class=""><a href="javascript:void(0)">新民</a></li>
+         <li id="HP" class=""><a href="javascript:void(0)">和平</a></li>
+         <li id="CY" class=""><a href="javascript:void(0)">朝阳</a></li>
+         
         </ul>
     </div>
     <div class="row">
          <ul class="nav nav-tabs headlabel "  id="kindNav">
          <li class="Title"><a href=""><strong>类别</strong></a></li>
-         <li><a href="javascript:void(0)">不限</a></li>
-         <li><a href="javascript:void(0)">代步</a></li>
-         <li class="active"><a href="javascript:void(0)">数码</a></li>
-         <li><a href="javascript:void(0)">电器</a></li>
-         <li><a href="javascript:void(0)">文体</a></li>
-         <li><a href="javascript:void(0)">服饰</a></li>
-         <li><a href="javascript:void(0)">书刊</a></li>
-         <li><a href="javascript:void(0)">装饰</a></li>
+         <li id="c_all"><a href="javascript:void(0)">不限</a></li>
+         <li id="c_DB"><a href="javascript:void(0)">代步</a></li>
+         <li id="c_SM" class="active"><a href="javascript:void(0)">数码</a></li>
+         <li id="c_DQ"><a href="javascript:void(0)">电器</a></li>
+         <li id="c_WT"><a href="javascript:void(0)">文体</a></li>
+         <li id="c_FS"><a href="javascript:void(0)">服饰</a></li>
+         <li id="c_SK"><a href="javascript:void(0)">书刊</a></li>
+         <li id="c_ZS"><a href="javascript:void(0)">装饰</a></li>
          <li style="opacity:0;  display:none; cursor:default;" id="blank"><a>空白</a></li>
-         <li><a href="javascript:void(0)">虚拟</a></li>
-         <li><a href="javascript:void(0)">日用</a></li>
-         <li><a href="javascript:void(0)">书刊</a></li>
-         <li><a href="javascript:void(0)">食品</a></li>
-         <li><a href="javascript:void(0)">其它</a></li>
-         <li  class="ac"><a>多选</a></li>
+         <li id="c_XN"><a href="javascript:void(0)">虚拟</a></li>
+         <li id="c_RY"><a href="javascript:void(0)">日用</a></li>
+         <li id="c_SK"><a href="javascript:void(0)">书刊</a></li>
+         <li id="c_SP"><a href="javascript:void(0)">食品</a></li>
+         <li id="c_QT"><a href="javascript:void(0)">其它</a></li>
+         
         </ul>
     </div>
     <div class="row">
@@ -49,23 +106,11 @@
 
          </ul>
     </div>
-    <div class="row">
-         <ul class="nav nav-tabs" id="contNav" >
-         <li class="default"><a href="">最新</a></li>
-         <li class="dropdown">
-          <a href="#"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">价格<span style="color:orange;"class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">从高到低</a></li>
-            <li><a href="#">从低到高</a></li>
-          </ul>
-        </li>
-         </ul>
-    </div>
 
-    <div class="row">
+    <div id="items" class="row">
 				{% if items %}
 						{% for item in items %}
-						<div class="col-xs-30 col-sm-20 col-md-12 thum">
+						<div class="col-xs-30 col-sm-20 col-md-12 thum {{ item.campus }} c_{{ item.category }} sale item">
 										<a href="{% url 'detail' %}?pid={{ item.id }}" class="thumbnail">
 										<img src="{% get_media_prefix %}{{ item.small_imgs }}" alt="...">
 							      </a>
@@ -81,91 +126,133 @@
 		    {% endif %}
 						
      </div>
-     <div class="row">                  
-                <div style="text-align: center" id="paging">
-                    <nav>
-                        <ul class="pagination">
-                            <li>
-                                <a href="#" aria-label="Previous">
-                                    <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
-                                </a>
-                            </li>
-                            <li><a href="#"><span>1</span></a></li>
-                            <li><a href="#"><span>2</span></a></li>
-                            <li><a href="#"><span>3</span></a></li>
-                            <li><a href="#"><span>4</span></a></li>
-                            <li><a href="#"><span>5</span></a></li>
-                            <li>
-                                <a href="#" style="margin-right:0;" aria-label="Next">
-                                    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-               </div>
-        </div>
+     <!--<div class="row">                  -->
+                <!--<div style="text-align: center" id="paging">-->
+                    <!--<nav>-->
+                        <!--<ul class="pagination">-->
+                            <!--<li>-->
+                                <!--<a href="#" aria-label="Previous">-->
+                                    <!--<span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>-->
+                                <!--</a>-->
+                            <!--</li>-->
+                            <!--<li><a href="#"><span>1</span></a></li>-->
+                            <!--<li><a href="#"><span>2</span></a></li>-->
+                            <!--<li><a href="#"><span>3</span></a></li>-->
+                            <!--<li><a href="#"><span>4</span></a></li>-->
+                            <!--<li><a href="#"><span>5</span></a></li>-->
+                            <!--<li>-->
+                                <!--<a href="#" style="margin-right:0;" aria-label="Next">-->
+                                    <!--<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>-->
+                                <!--</a>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                    <!--</nav>-->
+               <!--</div>-->
+        <!--</div>-->
 </div>
-        <script>  
-			$(function() {
-				  $(window).scroll(function() {
-					  var top = $(this).scrollTop();
-					  var flowSearch = $("#flowSearchForm");
-					  if (top < 36) {
-						  flowSearch.css("display", "none");
-					  } else {
-						  flowSearch.css("display", "block");
-					  }
-				  });
-			  });
+<script type="text/javascript" >  
+window.onload=function(){
+var aLis = $('#schoolNav li');
+var aLik = $('#kindNav li');
+var aLit = $('#typeNav li');
+var all_items = $('#items .item');
+
+// Campus about
+// All
+aLis[1].addEventListener('click', function() {
+				items = new Array()
+				for(i=0;i!=all_items.length;++i)
+				{
+								if(all_items[i].style.display="block"){
+												items.push(all_items[i]);
+								}
+				}
+				this.className = "active";
+				for(i=2;i<aLis.length;++i){
+							aLis[i].className="";
+				}
+			  for(var i=0; i!=items.length; ++i){
+						items[i].style.display="block";
+				}
+})
+
+// 6 campuses
+for (i = 2; i < aLis.length; i++) {
+   aLis[i].addEventListener('click', function() {
+				items = new Array()
+				for(i=0;i!=all_items.length;++i)
+				{
+								if(all_items[i].style.display="block"){
+												items.push(all_items[i]);
+								}
+				}
+	  	if(this.className==""){ 
+		     this.className="active";
+		  }else{this.className="";}
+      aLis[1].className="";
+
+			var active_campus = new Array();
+			for(var j=1;j!=aLis.length;++j){
+							if(aLis[j].className=="active"){
+									active_campus[aLis[j].id] = 1;
+							} else{
+											active_campus[aLis[j].id] = 0;
+							}
+			}
 			
-			
-			setInterval(function transfer(){
-			 var width=document.documentElement.clientWidth || document.body.clientWidth;
-			 var oNAV= document.getElementById("NAV");
-			
-					  if (width<750) {
-						  oNAV.style.display="block";
-					  } else {
-						  oNAV.style.display="none";
-					  }
-			},10); 
-			setInterval(function transfer(){
-			 var width=document.documentElement.clientWidth || document.body.clientWidth;
-			 var oblank= document.getElementById("blank");
-			
-					  if (width<376) {
-						  oblank.style.display="block";
-					  } else {
-						  oblank.style.display="none";
-					  }
-			},10);
-     
-          var aLis = $('#schoolNav li');
-		  for (i = 0; i < aLis.length-1; i++) {
-			  aLis[i].addEventListener('click', function() {
-				  for (var i = 0; i < aLis.length-1; i++) {
-					  aLis[i].className = '';
-				  }
-				  this.className = 'active';
-			  }, false);
+			for(var i=0; i!=items.length; ++i){
+				// If all
+				if(active_campus['all']==1){
+						items[i].style.display="block";
+						continue;
+				}
+
+				 var campus = items[i].classList[4];
+				 if(active_campus[campus]==1){
+						items[i].style.display="block";
+				 }else{
+						items[i].style.display="none";
+				 }
+			}
+
+  }, false);
+ 
+}
+aLis[1].addEventListener('click', function(){
+          this.className="active";
+		  for (var i = 2; i < aLis.length; i++) {
+			  aLis[i].className ="";
 		  }
-          var aLik = $('#kindNav li');
-		  for (i = 0; i < aLik.length-1; i++) {
-			  aLik[i].addEventListener('click', function() {
-				  for (var i = 0; i < aLik.length-1; i++) {
-					  aLik[i].className = '';
-				  }
-				  this.className = 'active';
-			  }, false);
+},false);
+
+
+// Category about
+for (i = 2; i < aLik.length; i++) {
+   aLik[i].addEventListener('click', function() {
+		if(this.className=="")
+		  { 
+		   this.className="active";
 		  }
-          var aLit = $('#typeNav li');
-		  for (i = 0; i < aLit.length; i++) {
-			  aLit[i].addEventListener('click', function() {
-				  for (var i = 0; i < aLit.length; i++) {
-					  aLit[i].className = '';
-				  }
-				  this.className = 'active';
-			  }, false);
+		else{this.className="";}
+         aLik[1].className="";
+  }, false);
+ 
+}
+aLik[1].addEventListener('click', function(){
+          this.className="active";
+		  for (var i = 2; i < aLik.length; i++) {
+			  aLik[i].className ="";
 		  }
+},false);
+ for (i = 1; i < aLit.length; i++) {
+	  aLit[i].addEventListener('click', function() {
+		  for (var i = 0; i < aLit.length; i++) {
+			  aLit[i].className = '';
+		  }
+		  this.className = 'active';
+	  }, false);
+  }
+}
+
 </script>
 {% endblock body %}

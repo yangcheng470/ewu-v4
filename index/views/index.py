@@ -142,14 +142,10 @@ def search(request):
     except KeyError:
         keyword = ''
 
-    if not keyword:
-        return render(request, "search.html", {'user': user, 'items': []} )
-    
     # Search result exclude invalid products
-    result_list = Product.objects.filter(valid=True).filter(Q(name__icontains=keyword) or
-                                                            Q(owner__icontains==keyword) or
+    result_list = Product.objects.filter(valid=True).filter(deleted=False).filter(Q(name__icontains=keyword) |
+                                                            Q(owner__name__icontains=keyword) |
                                                             Q(content__icontains=keyword)).order_by('pub_date')
-
 
     return render(request, "search.html", {'user': user, 'items': result_list, 'keyword': keyword})
 
