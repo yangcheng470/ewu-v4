@@ -19,6 +19,10 @@ urlpatterns=[
 
         # Comment service
         url(r'^service/comment/$', index.comment_service, name='comment_service'),
+        # Publish service
+        url(r'^service/publish/sale/$', index.publish_sale_service, name='publish_sale_service'),
+        url(r'^service/publish/want/$', index.publish_want_service, name='publish_want_service'),
+
 
         # Account service about
         url(r'^service/login/$', account_service.login_service, name='login_service'),

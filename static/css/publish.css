@@ -16,15 +16,16 @@ ul{
 .form-control{
   border:1px solid orange;
 }
-#ask_baby_product_class{
-  height:34px;
-border:1px solid orange;
-border-radius:3px;
-}
-#ask_baby_product_newOrOld{
+#ask_baby_product_class,
+#s_purpose,
+#s_ask_baby_product_class,
+#s_campus,
+#ask_baby_product_newOrOld,
+#w_campus{
 height:34px;
 border:1px solid orange;
 border-radius:3px;
+background-color: white;
 }
 #uploadPic{
 display:none;

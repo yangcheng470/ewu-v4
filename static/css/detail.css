@@ -25,7 +25,6 @@
 		}
       div#product_detail{
             height: 170px;
-            overflow: scroll;
             overflow-x: hidden;
         }
         .product-price{

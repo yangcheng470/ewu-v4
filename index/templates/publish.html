@@ -25,6 +25,7 @@
           <div id="baby_transfer_div" class="div" style="display:block;">
              
             <form class="form-horizontal">
+							<div id="err_info" class="text-center" style="color: red;" hidden></div>
               <div class="form-group">
                 <label for="baby_transfer_product_name" class="col-sm-10  control-label">宝贝名称</label>
                 <div class="col-sm-30">
@@ -32,14 +33,31 @@
                 </div>
               </div>
               <div class="form-group">
+                <label class="col-sm-10 control-label">转让形式</label>
+                <div class="col-sm-30 ">
+                  <select name="s_purpose" class="col-sm-60 col-xs-60" id="s_purpose">
+                    <option value="1">出售</option>
+                    <option value="2">交换</option>
+                  </select>
+
+                </div>
+							</div>
+              <div class="form-group">
                 <label class="col-sm-10 control-label">宝贝类别</label>
                 <div class="col-sm-30 ">
-
-                  <select name="ask_baby_product_class"  class="col-sm-60 col-xs-60"id="ask_baby_product_class">
-                    <option>数码</option>
-                    <option>电子</option>
-                    <option>代步</option>
-                    <option>鞋履</option>
+                  <select name="ask_baby_product_class"  class="col-sm-60 col-xs-60"id="s_ask_baby_product_class">
+                    <option value="DB">代步</option>
+                    <option value="SM">数码</option>
+                    <option value="DQ">电器</option>
+                    <option value="WT">文体</option>
+                    <option value="FS">服饰</option>
+                    <option value="XL">鞋履</option>
+                    <option value="ZS">装饰</option>
+                    <option value="XN">虚拟</option>
+                    <option value="RY">日用</option>
+                    <option value="SK">书刊</option>
+                    <option value="SP">食品</option>
+                    <option value="QT">其它</option>
                   </select>
 
                 </div>
@@ -47,7 +65,7 @@
               <div class="form-group">
                 <label for="baby_transfer_product_price" class="col-sm-10   control-label">期望价格</label>
                 <div class="col-sm-30  ">
-                  <input type="number" class="form-control" id="baby_transfer_product_price" name="baby_transfer_product_price">
+                  <input type="text" class="form-control" id="baby_transfer_product_price" name="baby_transfer_product_price">
                 </div>
               </div>
               <div class="form-group">
@@ -55,11 +73,10 @@
                 <div class="col-sm-30 ">
 
                   <select name="ask_baby_product_newOrOld" class="col-sm-60 col-xs-60" id="ask_baby_product_newOrOld">
-                    <option>九成新</option>
-                    <option>八成新</option>
-                    <option>七成新</option>
-                    <option>六成新</option>
-
+                    <option value="9">九成新</option>
+                    <option value="8">八成新</option>
+                    <option value="7">七成新</option>
+                    <option value="6">六成新</option>
                   </select>
 
                 </div>
@@ -78,13 +95,15 @@
               </div>
               <div class="form-group">
                 <label class="col-sm-10  control-label">交易区域</label>
-                <div class="col-sm-30   checkbox">
-                  <label><input type="checkbox">南区</label>
-                  <label><input type="checkbox">南岭</label>
-                  <label><input type="checkbox">南湖</label>
-                  <label><input type="checkbox">新民</label>
-                  <label><input type="checkbox">和平</label>
-                  <label><input type="checkbox">朝阳</label>
+                <div class="col-sm-30">
+                  <select name="s_campus" class="col-sm-60 col-xs-60" id="s_campus">
+                    <option value="NQ">南区</option>
+                    <option value="NL">南岭</option>
+                    <option value="NH">南湖</option>
+                    <option value="HP">和平</option>
+                    <option value="XM">新民</option>
+                    <option value="CY">朝阳</option>
+                  </select>
                 </div>
               </div>
               <div class="form-group">
@@ -92,7 +111,7 @@
                 <label class="col-sm-10 control-label">上传图片</label>
                 <div class="col-md-30  ">
 								<img id="uploadpicture"  src="{% static 'image/upfile.png' %}">
-                  <input id="uploadPic" class="col-sm-10" type="file" name=""  accept="image/jpeg, image/gif">
+                  <input id="uploadPic" class="col-sm-10" type="file" name="uploadPic" multiple="multiple" accept="image/jpeg, image/gif" hidden>
                 </div>
               </div>
               <div class="form-group">
@@ -103,8 +122,8 @@
                 </div>
               </div>
                 
-               <button type="submit" class="btn">立即发布</button>
             </form>
+               <button id="s_submit" type="submit" class="btn">立即发布</button>
           </div>
           <div id="ask_baby_div" class="div" style="display:none;">
             <form class="form-horizontal">
@@ -118,10 +137,18 @@
                 <label for="ask_baby_product_class" class="col-sm-10   control-label">宝贝类别</label>
                 <div class="col-sm-30  ">
                   <select name="ask_baby_product_class"  class="col-sm-60 col-xs-60"id="ask_baby_product_class">
-                    <option>数码</option>
-                    <option>电子</option>
-                    <option>代步</option>
-                    <option>鞋履</option>
+                    <option value="DB">代步</option>
+                    <option value="SM">数码</option>
+                    <option value="DQ">电器</option>
+                    <option value="WT">文体</option>
+                    <option value="FS">服饰</option>
+                    <option value="XL">鞋履</option>
+                    <option value="ZS">装饰</option>
+                    <option value="XN">虚拟</option>
+                    <option value="RY">日用</option>
+                    <option value="SK">书刊</option>
+                    <option value="SP">食品</option>
+                    <option value="QT">其它</option>
                   </select>
                 </div>
               </div>
@@ -145,13 +172,15 @@
               </div>
               <div class="form-group">
                 <label class="col-sm-10 control-label">交易区域</label>
-                <div class="col-sm-30 checkbox">
-                  <label><input type="checkbox">南区</label>
-                  <label><input type="checkbox">南岭</label>
-                  <label><input type="checkbox">南湖</label>
-                  <label><input type="checkbox">新民</label>
-                  <label><input type="checkbox">和平</label>
-                  <label><input type="checkbox">朝阳</label>
+                <div class="col-sm-30">
+                  <select name="w_campus" class="col-sm-60 col-xs-60" id="w_campus">
+                    <option value="NQ">南区</option>
+                    <option value="NL">南岭</option>
+                    <option value="NH">南湖</option>
+                    <option value="HP">和平</option>
+                    <option value="XM">新民</option>
+                    <option value="CY">朝阳</option>
+                  </select>
                 </div>
               </div>
               <div class="form-group">
@@ -160,7 +189,7 @@
                   <textarea cols="40" rows="10" class="form-control" id="ask_baby_product_detail" name="ask_baby_product_detail"></textarea>
                 </div>
               </div>
-              <button type="submit" class="btn">立即发布</button>
+              <button id="w_submit" type="submit" class="btn">立即发布</button>
             </form>
           </div>
         </div>
@@ -171,6 +200,98 @@
 </div>
     <script>  
 			$(function() {
+				
+							$('#s_submit').click(function(){
+											var name = $('#baby_transfer_product_name').val();
+											var purpose = $('#s_purpose').val();
+											var category = $('#ask_baby_product_class').val();
+											var price = $('#baby_transfer_product_price').val();
+											var condition = $('#ask_baby_product_newOrOld').val();
+											var phone = $('#baby_transfer_product_seller_phone').val();
+											var qq = $('#baby_transfer_product_seller_qq').val();
+											var campus = $('#s_campus').val();
+											var content = $('#baby_transfer_product_detail').val();
+
+											var err_info = $('#err_info');
+
+											err_info.attr('hidden', 'hidden');
+											// Check validation
+											if(!name.match(/^.{2,30}$/)){
+															err_info.html('<p>宝贝名字不合法,应该是2-30个字符</p>');
+															err_info.removeAttr('hidden');
+															return false;
+											}
+
+											if(!price.match(/^[0-9.]{1,10}$/)){
+															err_info.html('<p>价格不合法</p>');
+															err_info.removeAttr('hidden');
+															return false;
+											}
+
+											if(!content.match(/^.{2,200}$/)){
+															err_info.html('<p>详细描述内容不合法，应该是2-200个字符</p>');
+															err_info.removeAttr('hidden');
+															return false;
+											}
+
+											var files = $('#uploadPic').get(0).files;
+											if(files.length>4){
+															err_info.html('<p>图片太多，最多上传4张</p>');
+															err_info.removeAttr('hidden');
+															return false;
+											}
+
+											if(files.length==0){
+															err_info.html('<p>至少要上传一张图片吧,同学</p>');
+															err_info.removeAttr('hidden');
+															return false;
+											}
+
+											var formData = new FormData();
+
+											// Insert files
+											for(var i=0, file; file=files[i];++i){
+															formData.append(file.name, file);
+											}
+											formData.append('name', name);
+											formData.append('purpose', purpose);
+											formData.append('category', category);
+											formData.append('price', price);
+											formData.append('condition', condition);
+											formData.append('phone', phone);
+											formData.append('qq', qq);
+											formData.append('campus', campus);
+											formData.append('content', content);
+
+											var ajax = $.ajax({
+															url: '/service/publish/sale/',
+															type: 'POST',
+															data: formData,
+														  cache: false,
+															processData: false,
+															contentType: false,
+											});
+
+											ajax.done(function(msg){
+															if(msg=='true'){
+																			alert('Success');
+															}else{
+																			alert(msg);
+																			err_info.html('<p>上传失败，可能是由于文件格式不正确。请确认上传的是图片</p>');
+																			err_info.removeAttr('hidden');
+																			return false;
+															}
+											});
+
+											ajax.fail(function(msg){
+																			err_info.html('<p>上传失败，可能是由于文件格式不正确。请确认上传的是图片</p>');
+																			err_info.removeAttr('hidden');
+																			return false;
+											});
+
+							});
+
+
 							$('#uploadpicture').click(function(){
 											$('#uploadPic').click();
 							});

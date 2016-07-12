@@ -1,6 +1,8 @@
 import re
 import datetime
 import pytz
+import time
+from hashlib import md5
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import Http404
@@ -16,7 +18,88 @@ from django.db.models import Q
 from django.utils import timezone
 from django.core.mail import send_mail
 from django.template import loader
+from django.conf import settings
 
+
+# To be improve, such a large function is stupid
+# Close csrf validate temporarily
+@csrf_exempt
+def publish_sale_service(request):
+    user = None
+    try:
+        user = Account.objects.get(id=request.session['user_id'])
+    except:
+        user = None
+    if not user:
+        return HttpResponse('false')
+
+    name = request.POST.get('name', '')
+    purpose = request.POST.get('purpose', '')
+    category = request.POST.get('category', '')
+    price = request.POST.get('price', 0)
+    condition = request.POST.get('condition', '')
+    phone = request.POST.get('phone', '')
+    qq = request.POST.get('qq', '')
+    campus = request.POST.get('campus', '')
+    content = request.POST.get('content', '')
+    files = request.FILES
+    file_list = list(request.FILES.keys())
+
+    fail = False
+    if not re.match(r'^.{2,30}$', name):
+        fail = True
+    if not purpose in ['1', '2']:
+        fail = True
+    if not category in ['DB', 'SM', 'DQ', 'WT', 'FS', 'XL', 'ZS', 'XN', 'RY', 'SK', 'SP', 'QT']:
+        fail = True
+    if not re.match(r'^[0-9.]{1,10}$', price):
+        fail = True
+    if not re.match(r'^[0-9]$', condition):
+        fail = True
+    if not campus in ['NQ','NL','NH','XM','CY','HP']:
+        fail = True
+    if not re.match(r'^.{2,200}$', content):
+        fail = True
+    if len(file_list)<0 or len(file_list)>4:
+        fail = True
+    valid_suffix = ['jpg', 'png', 'bmp', 'jpeg']
+    for key, val in files.items():
+        if not val.name.split('.')[-1].lower() in valid_suffix:
+            fail = True
+            break
+    if fail:
+        return HttpResponse('false')
+
+    # Build file names and write files to hard disk
+    big_imgs = ''
+    small_imgs = ''
+    for key, file in files.items():
+        suffix = file.name.split('.')[-1]
+        file_name = file.name + str(time.time())
+        file_name = md5(file_name.encode()).hexdigest() + '.' + suffix
+        big_imgs += 'big/big_' + file_name + ';'
+        small_imgs += 'small/small_' + file_name + ';'
+        with open('media/big/big_' + file_name, 'wb+') as destination:
+            for chunk in file.chunks():
+                destination.write(chunk)
+        with open('media/small/small_' + file_name, 'wb+') as destination:
+            for chunk in file.chunks():
+                destination.write(chunk)
+
+    
+    product = Product(name=name, purpose=purpose, category=category, price=price,
+                      condition=condition, phone=phone, qq=qq, campus=campus,
+                      content=content, big_imgs=big_imgs, small_imgs=small_imgs,
+                      owner=user)
+    product.save()
+
+    return HttpResponse('true')
+
+
+# Close csrf validate temporarily
+@csrf_exempt
+def publish_want_service(request):
+    return HttpResponse('true')
 
 # Close csrf validate temporarily
 @csrf_exempt
@@ -228,17 +311,30 @@ def detail(request):
     return render(request, "detail.html", render_dict )
 
 def publish(request):
+    user_id = request.session.get('user_id', False)
+    try:
+        user = Account.objects.get(id=user_id)
+    except:
+        user = None
+
     # Get action to detect either want or sell
     action = ''
+    is_want = False
     try:
         action = request.GET['action']
+        if action == 'want':
+            is_want = True
+        else:
+            is_want = False
     except KeyError:
-        action = ''
+        is_want = False
 
-    if action=='want':
-        return render(request, "publish.html", {'is_want':True})
-    else:
-        return render(request, "publish.html", {'is_want':False})
+
+    render_dict = {
+            'user': user,
+            'is_want': is_want,
+    }
+    return render(request, "publish.html", render_dict)
 
 
 def item_edit(request):
