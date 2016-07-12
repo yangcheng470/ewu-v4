@@ -147,7 +147,24 @@ def search(request):
                                                             Q(owner__name__icontains=keyword) |
                                                             Q(content__icontains=keyword)).order_by('pub_date')
 
-    return render(request, "search.html", {'user': user, 'items': result_list, 'keyword': keyword})
+    campus = request.GET.get('campus', False)
+    category = request.GET.get('category', False)
+
+    if not campus in ['NQ','NL','NH','XM','CY','HP']:
+        campus = 'all'
+
+    if not category in ['DB', 'SM', 'DQ', 'WT', 'FS', 'XL', 'ZS', 'XN', 'RY', 'SK', 'SP', 'QT']:
+        category = 'all'
+
+    render_dict = {
+            'user': user,
+            'items': result_list,
+            'keyword': keyword,
+            'campus': campus,
+            'category': category,
+    }
+
+    return render(request, "search.html", render_dict)
 
 
 def detail(request):

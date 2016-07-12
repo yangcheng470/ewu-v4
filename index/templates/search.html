@@ -67,7 +67,7 @@
          <ul class="nav nav-tabs headlabel"  id="schoolNav">
          <li class="Title"><a href=""><strong>校区</strong></a></li>
          <li id="all"><a href="javascript:void(0)">不限</a></li>
-         <li id="NQ" class="active"><a href="javascript:void(0)">南区</a></li>
+         <li id="NQ" class=""><a href="javascript:void(0)">南区</a></li>
          <li id="NL" class=""><a href="javascript:void(0)">南岭</a></li>
          <li id="NH" class=""><a href="javascript:void(0)">南湖</a></li>
          <li id="XM" class=""><a href="javascript:void(0)">新民</a></li>
@@ -81,11 +81,11 @@
          <li class="Title"><a href=""><strong>类别</strong></a></li>
          <li id="c_all"><a href="javascript:void(0)">不限</a></li>
          <li id="c_DB"><a href="javascript:void(0)">代步</a></li>
-         <li id="c_SM" class="active"><a href="javascript:void(0)">数码</a></li>
+         <li id="c_SM"><a href="javascript:void(0)">数码</a></li>
          <li id="c_DQ"><a href="javascript:void(0)">电器</a></li>
          <li id="c_WT"><a href="javascript:void(0)">文体</a></li>
          <li id="c_FS"><a href="javascript:void(0)">服饰</a></li>
-         <li id="c_SK"><a href="javascript:void(0)">书刊</a></li>
+         <li id="c_XL"><a href="javascript:void(0)">鞋履</a></li>
          <li id="c_ZS"><a href="javascript:void(0)">装饰</a></li>
          <li style="opacity:0;  display:none; cursor:default;" id="blank"><a>空白</a></li>
          <li id="c_XN"><a href="javascript:void(0)">虚拟</a></li>
@@ -99,7 +99,7 @@
     <div class="row">
          <ul class="nav nav-tabs headlabel " id="typeNav">
          <li class="Title" ><a href=""><strong>类型</strong></a></li>
-         <li id="t_all" class="active"><a href="javascript:void(0)">不限</a></li>
+         <li id="t_all"><a href="javascript:void(0)">不限</a></li>
          <li id="t_1"><a href="javascript:void(0)">出售</a></li>
          <li id="t_2"><a href="javascript:void(0)">交换</a></li>
          <li id="t_3"><a href="javascript:void(0)">求购</a></li>
@@ -171,96 +171,100 @@ for(i=1;i!=aLik.length;++i)
 for(i=1;i!=aLit.length;++i)
 		active_type[aLit[i].id] = 0;
 
-active_campus['all'] = 1;
-active_category['c_all'] = 1;
+{% if campus %}active_campus['{{ campus }}'] = 1;{% else %} active_campus['all'] = 1;{% endif %}
+{% if category %}active_category['c_{{ category }}'] = 1;{% else %} active_category['c_all'] = 1;{% endif %}
 active_type['t_all'] = 1
+
+
+// Hide or display items by active_* status
+function display_active(){
+	if(active_campus['all']==1){
+		aLis[1].className = "active";
+		for(i=2;i!=aLis.length;++i){
+			active_campus[aLis[i].id] = 1;
+			aLis[i].className = '';
+		}
+
+	}else{
+		aLis[1].className = '';
+		for(i=2;i!=aLis.length;++i){
+			if(active_campus[aLis[i].id]==1)
+					aLis[i].className = 'active';
+		}
+	}
+
+	if(active_category['c_all']==1){
+		aLik[1].className = "active";
+		for(i=2;i!=aLik.length;++i){
+			active_category[aLik[i].id] = 1;
+			aLik[i].className = '';
+		}
+
+	}else{
+		aLik[1].className = '';
+		for(i=2;i!=aLik.length;++i){
+			if(active_category[aLik[i].id]==1)
+					aLik[i].className = 'active';
+		}
+	}
+
+	if(active_type['t_all']==1){
+		aLit[1].className = "active";
+		for(i=2;i!=aLit.length;++i){
+			active_type[aLit[i].id] = 1;
+			aLit[i].className = '';
+		}
+
+	}else{
+		aLit[1].className = '';
+		for(i=2;i!=aLit.length;++i){
+			if(active_type[aLit[i].id]==1)
+					aLit[i].className = 'active';
+		}
+	}
+
+/*
+	if(active_type['t_all']==1){
+		for(i=2;i!=aLit.length;++i)
+			active_type[aLit[i].id] = 1;
+
+*/
+
+	for(var i=0; i!=all_items.length; ++i){
+		var campus = all_items[i].classList[4];
+		var category = all_items[i].classList[5];
+		var type = all_items[i].classList[6];
+		if((active_campus[campus]==1) && (active_category[category]==1) && (active_type[type]==1)){
+				all_items[i].style.display="block";
+		}else{
+				all_items[i].style.display="none";
+		}
+	}
+
+}
+
+display_active();
 
 // All campus
 aLis[1].addEventListener('click', function() {
-				this.className = "active";
 				active_campus['all'] = 1
-				for(i=1;i!=aLis.length;++i)
-						active_campus[aLis[i].id] = 1;
-
-				for(i=2;i<aLis.length;++i){
-							aLis[i].className="";
-				}
-			  for(var i=0; i!=all_items.length; ++i){
-						var category = all_items[i].classList[5];
-						var type = all_items[i].classList[6];
-						if((active_category[category]==1) && (active_type[type]==1)){
-						    all_items[i].style.display="block";
-						}else{
-						    all_items[i].style.display="none";
-						}
-				}
+				display_active();
 })
 // All category
 aLik[1].addEventListener('click', function() {
-				this.className = "active";
 				active_category['c_all'] = 1
-				for(i=1;i!=aLik.length;++i)
-						active_category[aLik[i].id] = 1;
-
-				for(i=2;i<aLik.length;++i){
-							aLik[i].className="";
-				}
-			  for(var i=0; i!=all_items.length; ++i){
-						var campus = all_items[i].classList[4];
-						var type = all_items[i].classList[6];
-						if((active_campus[campus]==1) && (active_type[type]==1)){
-						    all_items[i].style.display="block";
-						}else{
-						    all_items[i].style.display="none";
-						}
-				}
+				display_active();
 })
 // All type
 aLit[1].addEventListener('click', function() {
-				this.className = "active";
 				active_type['t_all'] = 1
-				for(i=1;i!=aLit.length;++i)
-						active_type[aLit[i].id] = 1;
-
-				for(i=2;i<aLit.length;++i){
-							aLit[i].className="";
-				}
-			  for(var i=0; i!=all_items.length; ++i){
-						var campus = all_items[i].classList[4];
-						var category = all_items[i].classList[5];
-						if((active_campus[campus]==1) && (active_category[category]==1)){
-						    all_items[i].style.display="block";
-						}else{
-						    all_items[i].style.display="none";
-						}
-				}
-})
-}
-// All
-/*
-aLis[1].addEventListener('click', function() {
-				this.className = "active";
-				active_campus['all'] = 1
-				for(i=1;i!=aLis.length;++i)
-						active_campus[aLis[i].id] = 0;
-
-				for(i=2;i<aLis.length;++i){
-							aLis[i].className="";
-				}
-			  for(var i=0; i!=all_items.length; ++i){
-						var category = all_items[i].classList[5];
-						var type = all_items[i].classList[6];
-						if((active_category[category]==1) && (active_type[type]==1)){
-						    all_items[i].style.display="block";
-						}else{
-						    all_items[i].style.display="none";
-						}
-				}
+				display_active();
 })
 
 // 6 campuses
 for (i = 2; i < aLis.length; i++) {
    aLis[i].addEventListener('click', function() {
+			active_campus['all'] = 0;
 	  	if(this.className==""){ 
 		     this.className="active";
 		  }else{this.className="";}
@@ -273,67 +277,21 @@ for (i = 2; i < aLis.length; i++) {
 											active_campus[aLis[j].id] = 0;
 							}
 			}
+			display_active();
 			
-			for(var i=0; i!=all_items.length; ++i){
-				// If all
-				if(active_campus['all']==1){
-						if((active_category[category]==1) && (active_type[type]==1)){
-						    all_items[i].style.display="block";
-						}else{
-						    all_items[i].style.display="none";
-						}
-						continue;
-				}
-
-				var campus = items[i].classList[4];
-				var category = all_items[i].classList[5];
-				var type = all_items[i].classList[6];
-				if((active_campus[campus]==1) && (active_category[category]==1) && (active_type[type]==1)){
-						items[i].style.display="block";
-				 }else{
-						items[i].style.display="none";
-				 }
-			}
 
   }, false);
  
 }
-
-// Category about
-// All
-aLik[1].addEventListener('click', function() {
-				items = new Array()
-				for(i=0;i!=all_items.length;++i)
-				{
-								if(all_items[i].style.display=="block"){
-												items.push(all_items[i]);
-								}
-				}
-				this.className = "active";
-				for(i=2;i<aLik.length;++i){
-							aLik[i].className="";
-				}
-			  for(var i=0; i!=items.length; ++i){
-						items[i].style.display="block";
-				}
-})
-
 // 12 categories
 for (i = 2; i < aLik.length; i++) {
    aLik[i].addEventListener('click', function() {
-				items = new Array()
-				for(i=0;i!=all_items.length;++i)
-				{
-								if(all_items[i].style.display=="block"){
-												items.push(all_items[i]);
-								}
-				}
+			active_category['c_all'] = 0;
 	  	if(this.className==""){ 
 		     this.className="active";
 		  }else{this.className="";}
       aLik[1].className="";
 
-			var active_category = new Array();
 			for(var j=1;j!=aLik.length;++j){
 							if(aLik[j].className=="active"){
 									active_category[aLik[j].id] = 1;
@@ -341,53 +299,34 @@ for (i = 2; i < aLik.length; i++) {
 											active_category[aLik[j].id] = 0;
 							}
 			}
+			display_active();
 			
-			for(var i=0; i!=items.length; ++i){
-				// If all
-				if(active_category['c_all']==1){
-						items[i].style.display="block";
-						continue;
-				}
 
-				 var category = items[i].classList[5];
-				 if(active_category[category]==1){
-						items[i].style.display="block";
-				 }else{
-						items[i].style.display="none";
-				 }
+  }, false);
+ 
+}
+// 3 typies
+for (i = 2; i < aLit.length; i++) {
+   aLit[i].addEventListener('click', function() {
+			active_type['t_all'] = 0;
+	  	if(this.className==""){ 
+		     this.className="active";
+		  }else{this.className="";}
+      aLit[1].className="";
+
+			for(var j=1;j!=aLit.length;++j){
+							if(aLit[j].className=="active"){
+									active_type[aLit[j].id] = 1;
+							} else{
+											active_type[aLit[j].id] = 0;
+							}
 			}
+			display_active();
+			
 
   }, false);
  
 }
-
-for (i = 2; i < aLik.length; i++) {
-   aLik[i].addEventListener('click', function() {
-		if(this.className=="")
-		  { 
-		   this.className="active";
-		  }
-		else{this.className="";}
-         aLik[1].className="";
-  }, false);
- 
 }
-aLik[1].addEventListener('click', function(){
-          this.className="active";
-		  for (var i = 2; i < aLik.length; i++) {
-			  aLik[i].className ="";
-		  }
-},false);
- for (i = 1; i < aLit.length; i++) {
-	  aLit[i].addEventListener('click', function() {
-		  for (var i = 0; i < aLit.length; i++) {
-			  aLit[i].className = '';
-		  }
-		  this.className = 'active';
-	  }, false);
-  }
-}
-*/
-
 </script>
 {% endblock body %}
