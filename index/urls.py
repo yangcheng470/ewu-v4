@@ -17,6 +17,9 @@ urlpatterns=[
         url(r'^find_password/$',index.find_password, name='find_password'),
         url(r'^reset_password/$', index.reset_password, name='reset_password'),
 
+        # Comment service
+        url(r'^service/comment/$', index.comment_service, name='comment_service'),
+
         # Account service about
         url(r'^service/login/$', account_service.login_service, name='login_service'),
         url(r'^service/logout/$', account_service.logout_service, name='logout_service'),

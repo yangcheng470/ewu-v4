@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from django.http import Http404
 from accounts.models import Account
 from products.models import Product
+from comments.models import Comment
 from notice.models import Notice
 from find_password.models import FindPassword
 from django.views.decorators.csrf import csrf_exempt
@@ -15,6 +16,29 @@ from django.db.models import Q
 from django.utils import timezone
 from django.core.mail import send_mail
 from django.template import loader
+
+
+# Close csrf validate temporarily
+@csrf_exempt
+def comment_service(request):
+    user = None
+    try:
+        user = Account.objects.get(id=request.session['user_id'])
+    except:
+        user = None
+    if not user:
+        return HttpResponse('false')
+    comment = request.POST.get('comment', '')
+    pid = request.POST.get('pid', False)
+
+    try:
+        product = Product.objects.get(id=pid)
+        comment_obj = Comment(comment_from=user, product=product, content=comment)
+        comment_obj.save()
+    except:
+        return HttpResponse('false')
+
+    return HttpResponse('true')
 
 
 def reset_password(request):
@@ -183,17 +207,25 @@ def detail(request):
         item = None
     if item==None:
         raise Http404('Wrong URL')
-    small_imgs = str(item.small_imgs).split(':')
-    big_imgs = str(item.big_imgs).split(':')
+
     recommand_item = Product.objects.filter(category=item.category).order_by('pub_date')[0]
-    render_dic = {
+
+    # Comments
+    comments = []
+    try:
+        comments = Comment.objects.filter(product=item)
+    except:
+        comments = []
+
+    render_dict = {
             'user': user,
             'item': item,
-            'small_imgs': small_imgs,
-            'big_imgs': big_imgs,
+            'small_imgs': item.small_imgs.split(';'),
+            'big_imgs': item.big_imgs.split(';'),
             'recommand_item': recommand_item,
+            'comments': comments,
     }
-    return render(request, "detail.html", render_dic )
+    return render(request, "detail.html", render_dict )
 
 def publish(request):
     # Get action to detect either want or sell

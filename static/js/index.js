@@ -64,7 +64,6 @@ $(function() {
                 $('#r_email').val('');
                 reg_info.removeAttr('hidden');
             } else {
-                alert(msg);
                 $("#btn-register").html("注册");
                 $("#btn-register").removeAttr("disabled");
             }
