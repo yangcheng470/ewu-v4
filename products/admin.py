@@ -21,6 +21,7 @@ class ProductAdmin(admin.ModelAdmin):
     ordering=['id']
     save_as = True
     actions = [make_sold, make_sale]
+    readonly_fields = ['small_img', 'big_img']
 
 
 admin.site.register(Product,ProductAdmin)

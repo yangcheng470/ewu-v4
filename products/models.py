@@ -68,6 +68,9 @@ class Product(models.Model):
 
     small_imgs = models.ImageField(upload_to='small', default='small/default.png')
     big_imgs = models.ImageField(upload_to='big', default='big/default.png')
+    # Below two fields are out of convenient
+    small_img = models.CharField(max_length=500)
+    big_img = models.CharField(max_length=500)
 
     content=models.TextField()
 
@@ -88,6 +91,13 @@ class Product(models.Model):
             return self.content
 
     get_content.short_description='Content'
+
+    # Rewrite save method to auto assign values to small_img and big_img
+    def save(self, *args, **kwargs):
+        self.small_img = str(self.small_imgs).split(';')[0]
+        self.big_img = str(self.big_imgs).split(';')[0]
+
+        super(Product, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.name
