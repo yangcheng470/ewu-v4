@@ -66,8 +66,8 @@ class Product(models.Model):
 
     deleted = models.BooleanField(default=False)
 
-    small_imgs = models.ImageField(upload_to='small', default='small/default.png')
-    big_imgs = models.ImageField(upload_to='big', default='big/default.png')
+    small_imgs = models.CharField(max_length=500, default='small/default.png')
+    big_imgs = models.CharField(max_length=500, default='big/default.png')
     # Below two fields are out of convenient
     small_img = models.CharField(max_length=500)
     big_img = models.CharField(max_length=500)
@@ -94,8 +94,8 @@ class Product(models.Model):
 
     # Rewrite save method to auto assign values to small_img and big_img
     def save(self, *args, **kwargs):
-        self.small_img = str(self.small_imgs).split(';')[0]
-        self.big_img = str(self.big_imgs).split(';')[0]
+        self.small_img = self.small_imgs.split(';')[0]
+        self.big_img = self.big_imgs.split(';')[0]
 
         super(Product, self).save(*args, **kwargs)
 
