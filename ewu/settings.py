@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'index',
     'notice',
     'find_password',
+    'feedback',
 ]
 
 MIDDLEWARE_CLASSES = [
