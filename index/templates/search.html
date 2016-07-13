@@ -3,8 +3,7 @@
 {% load static %}
 
 {% block spec_css %}
-    <style type="text/css">
-
+<style type="text/css">
 		.headlabel{
 		background-color:white;
 		border-left:1px solid #ddd;
@@ -16,8 +15,10 @@
 		color:#333;
 		}
 		.headlabel li.active a:link{
+		border-radius: 3px;
 		background-color:orange;
 		color:white;
+		margin: 0;
 		}
 		.headlabel li.active a:visited{
 		background-color:orange;
@@ -31,14 +32,14 @@
 		border:1px solid orange;
         
 		}
-       dlabel li.Title a:hover{
+    .headlabel li.Title a:hover{
 		background-color:white;
 		border:1px solid white;
 		}
-		.nav>li>a {
-		padding:2px 2px;
-        margin:5px 2px;
-		}
+		<!--.nav>li>a {-->
+		<!--padding:2px 2px;-->
+        <!--margin:5px 2px;-->
+		<!--}-->
 		#contNav{
 		border-bottom:1px solid orange;
         margin-top:10px;
