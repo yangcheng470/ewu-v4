@@ -14,6 +14,7 @@ from find_password.models import FindPassword
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.datastructures import MultiValueDictKeyError
 from .func import *
+from .publish_func import *
 from django.db.models import Q 
 from django.utils import timezone
 from django.core.mail import send_mail
@@ -21,7 +22,6 @@ from django.template import loader
 from django.conf import settings
 
 
-# To be improve, such a large function is stupid
 # Close csrf validate temporarily
 @csrf_exempt
 def publish_sale_service(request):
@@ -33,6 +33,7 @@ def publish_sale_service(request):
     if not user:
         return HttpResponse('false')
 
+    
     name = request.POST.get('name', '')
     purpose = request.POST.get('purpose', '')
     category = request.POST.get('category', '')
@@ -45,47 +46,17 @@ def publish_sale_service(request):
     files = request.FILES
     file_list = list(request.FILES.keys())
 
-    fail = False
-    if not re.match(r'^.{2,30}$', name):
-        fail = True
-    if not purpose in ['1', '2']:
-        fail = True
-    if not category in ['DB', 'SM', 'DQ', 'WT', 'FS', 'XL', 'ZS', 'XN', 'RY', 'SK', 'SP', 'QT']:
-        fail = True
-    if not re.match(r'^[0-9.]{1,10}$', price):
-        fail = True
-    if not re.match(r'^[0-9]$', condition):
-        fail = True
-    if not campus in ['NQ','NL','NH','XM','CY','HP']:
-        fail = True
-    if not re.match(r'^.{2,200}$', content):
-        fail = True
-    if len(file_list)<0 or len(file_list)>4:
-        fail = True
-    valid_suffix = ['jpg', 'png', 'bmp', 'jpeg']
-    for key, val in files.items():
-        if not val.name.split('.')[-1].lower() in valid_suffix:
-            fail = True
-            break
-    if fail:
+    validate_success = validate_publish(name, purpose, category, price, condition,
+                     phone, qq, campus, content, files)
+
+    if not validate_success:
         return HttpResponse('false')
 
-    # Build file names and write files to hard disk
-    big_imgs = ''
-    small_imgs = ''
-    for key, file in files.items():
-        suffix = file.name.split('.')[-1]
-        file_name = file.name + str(time.time())
-        file_name = md5(file_name.encode()).hexdigest() + '.' + suffix
-        big_imgs += 'big/big_' + file_name + ';'
-        small_imgs += 'small/small_' + file_name + ';'
-        with open('media/big/big_' + file_name, 'wb+') as destination:
-            for chunk in file.chunks():
-                destination.write(chunk)
-        with open('media/small/small_' + file_name, 'wb+') as destination:
-            for chunk in file.chunks():
-                destination.write(chunk)
+    # Get big_imgs and small_imgs
+    big_imgs, small_imgs = build_big_imgs_and_small_imgs(files)
 
+    # Save imgs
+    save_big_and_small_files(big_imgs, small_imgs, files)
     
     product = Product(name=name, purpose=purpose, category=category, price=price,
                       condition=condition, phone=phone, qq=qq, campus=campus,
