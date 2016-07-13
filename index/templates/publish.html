@@ -3,11 +3,43 @@
 
 {% block title %}转让宝贝{% endblock title %}
 
-{% block spec_css %}<link rel="stylesheet" type="text/css" href="{% static 'css/publish.css' %}">{% endblock spec_css %}
+{% block spec_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/publish.css' %}">
+<style>
+.sign_send{
+max-width: 480px;
+height:220px;
+background: #FFF;
+margin: 3em auto 4em;
+padding: 30px;
+}
+#send img{
+width:40px;;
+}
+#send a{
+display:inline;
+margin: 20px;
+margin-top:20px;
+background-color:orange;
+color:white;
+padding:3px 5px;
+border-radius:4px;
+}
+</style>
+{% endblock spec_css %}
 
 {% block body %}
 
-<div class="container" >
+<div id="success" class="container" hidden>
+  <div class="row sign_send">
+      <div id="send" class="">
+        <h2><img src="{% static 'image/right.png' %}">发布成功</h2>
+        <a role="button" class="btn btn-lg pull-right" href="{% url 'index' %}">返回首页</a>
+      </div>
+  </div>
+</div>
+
+<div id="publish" class="container">
   <div class="row">
     <div class="col-md-10 col-sm-14 hidden-xs" >
       <div class="div-anchor"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span><a href="#p1">填写基本信息</a></div>
@@ -217,21 +249,24 @@
 
 											err_info.attr('hidden', 'hidden');
 											// Check validation
-											if(!name.match(/^.{2,30}$/)){
-															err_info.html('<p>宝贝名字不合法,应该是2-30个字符</p>');
+											if(!name.match(/^.{2,100}$/)){
+															err_info.html('<p>宝贝名字不合法,应该是2-100个字符</p>');
 															err_info.removeAttr('hidden');
+															scroll(0,0);
 															return false;
 											}
 
 											if(!price.match(/^[0-9.]{1,10}$/)){
 															err_info.html('<p>价格不合法</p>');
 															err_info.removeAttr('hidden');
+															scroll(0,0);
 															return false;
 											}
 
-											if(!content.match(/^.{2,200}$/)){
-															err_info.html('<p>详细描述内容不合法，应该是2-200个字符</p>');
+											if(!content.match(/^.{2,500}$/)){
+															err_info.html('<p>详细描述内容不合法，应该是2-500个字符</p>');
 															err_info.removeAttr('hidden');
+															scroll(0,0);
 															return false;
 											}
 
@@ -239,12 +274,14 @@
 											if(files.length>4){
 															err_info.html('<p>图片太多，最多上传4张</p>');
 															err_info.removeAttr('hidden');
+															scroll(0,0);
 															return false;
 											}
 
 											if(files.length==0){
 															err_info.html('<p>至少要上传一张图片吧,同学</p>');
 															err_info.removeAttr('hidden');
+															scroll(0,0);
 															return false;
 											}
 
@@ -275,18 +312,20 @@
 
 											ajax.done(function(msg){
 															if(msg=='true'){
-																			alert('Success');
+																			$('#publish').attr('hidden', 'hidden');
+																			$('#success').removeAttr('hidden');
 															}else{
-																			alert(msg);
-																			err_info.html('<p>上传失败，可能是由于文件格式不正确。请确认上传的是图片</p>');
+																			err_info.html('<p>上传失败，可能是由于文件格式不正确或者图片太大，请确保是图片并且图片小于10M</p>');
 																			err_info.removeAttr('hidden');
+																			scroll(0,0);
 																			return false;
 															}
 											});
 
 											ajax.fail(function(msg){
-																			err_info.html('<p>上传失败，可能是由于文件格式不正确。请确认上传的是图片</p>');
+																			err_info.html('<p>上传失败，可能是由于文件格式不正确或者图片太大，请确保是图片并且图片小于10M</p>');
 																			err_info.removeAttr('hidden');
+																			scroll(0,0);
 																			return false;
 											});
 
@@ -305,21 +344,24 @@
 
 											err_info.attr('hidden', 'hidden');
 											// Check validation
-											if(!name.match(/^.{2,30}$/)){
-															err_info.html('<p>宝贝名字不合法,应该是2-30个字符</p>');
+											if(!name.match(/^.{2,100}$/)){
+															err_info.html('<p>宝贝名字不合法,应该是2-100个字符</p>');
 															err_info.removeAttr('hidden');
+															scroll(0,0);
 															return false;
 											}
 
 											if(!price.match(/^[0-9.]{1,10}$/)){
 															err_info.html('<p>价格不合法</p>');
 															err_info.removeAttr('hidden');
+															scroll(0,0);
 															return false;
 											}
 
-											if(!content.match(/^.{2,200}$/)){
-															err_info.html('<p>详细描述内容不合法，应该是2-200个字符</p>');
+											if(!content.match(/^.{2,500}$/)){
+															err_info.html('<p>详细描述内容不合法，应该是2-500个字符</p>');
 															err_info.removeAttr('hidden');
+															scroll(0,0);
 															return false;
 											}
 
@@ -339,11 +381,12 @@
 
 											ajax.done(function(msg){
 															if(msg == 'true'){
-																			alert('success');
+																			$('#publish').attr('hidden', 'hidden');
+																			$('#success').removeAttr('hidden');
 															}else{
-																			alert('fail');
 																			err_info.html('<p>发布失败</p>');
 																			err_info.removeAttr('hidden');
+																			scroll(0,0);
 																			return false;
 															}
 											});
@@ -352,6 +395,7 @@
 															alert('fail');
 															err_info.html('<p>发布失败</p>');
 															err_info.removeAttr('hidden');
+															scroll(0,0);
 															return false;
 											});
 

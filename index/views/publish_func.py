@@ -18,13 +18,13 @@ from .func import *
 def validate_publish(name, purpose, category, price, condition,
                      phone, qq, campus, content, files, type="sale"):
 
-    if (not re.match(r'^.{2,30}$', name) or
+    if (not re.match(r'^.{2,100}$', name) or
         not purpose in ['1', '2', '3'] or
         not category in ['DB', 'SM', 'DQ', 'WT', 'FS', 'XL', 'ZS', 'XN', 'RY', 'SK', 'SP', 'QT'] or
         not re.match(r'^[0-9.]{1,10}$', price) or
         not re.match(r'^[0-9]$', condition) or
         not campus in ['NQ','NL','NH','XM','CY','HP'] or
-        not re.match(r'^.{2,200}$', content)):
+        not re.match(r'^.{2,500}$', content)):
             return False
     
     # If validate 'want' type, that's enough
