@@ -36,7 +36,12 @@ class Account(models.Model):
     campus=models.CharField(max_length=2,choices=CAMPUS_CHOICES,default='NQ')
 
     def unread_comment_count(self):
-        return len(self.comment_set.all())
+        unread_comment_list = self.comment_forward.all()
+        # Exclude owner's comments
+        unread_comment_list = unread_comment_list.exclude(comment_from=self)
+        unread_comment_list = unread_comment_list.filter(valid=True)
+        unread_comment_list = unread_comment_list.filter(readed=False)
+        return len(unread_comment_list)
 
     def __str__(self):
         return self.name

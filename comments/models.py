@@ -25,3 +25,10 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.content
+
+    # Auto fill comment_forward field according to product
+    def save(self, *args, **kwargs):
+        product_owner = self.product.owner
+        self.comment_forward = product_owner
+
+        super(Comment, self).save(*args, **kwargs)
