@@ -69,6 +69,8 @@ def logout_service(request):
     return HttpResponse('true')
 
 
+# Close csrf validate temporarily
+@csrf_exempt
 def reg_service(request):
     if request.method == 'GET':
         raise Http404('Wrong URL')
