@@ -24,6 +24,57 @@ from django.conf import settings
 
 # Close csrf validate temporarily
 @csrf_exempt
+def item_edit_service(request):
+    user = None
+    try:
+        user = Account.objects.get(id=request.session['user_id'])
+    except:
+        user = None
+    if not user:
+        return HttpResponse('false')
+
+    pid = request.POST.get('pid', '')
+    name = request.POST.get('name', '')
+    purpose = request.POST.get('purpose', '')
+    category = request.POST.get('category', '')
+    price = request.POST.get('price', 0)
+    condition = request.POST.get('condition', '')
+    phone = request.POST.get('phone', '')
+    qq = request.POST.get('qq', '')
+    campus = request.POST.get('campus', '')
+    content = request.POST.get('content', '')
+    files = request.FILES
+    file_list = list(request.FILES.keys())
+
+    try:
+        product = Product.objects.get(id=pid)
+        if not product.owner==user:
+            return HttpResponse('false')
+    except:
+        return HttpResponse('false')
+
+    validate_success = validate_publish(name, purpose, category, price, condition,
+                     phone, qq, campus, content, files)
+
+    if not validate_success:
+        return HttpResponse('false')
+
+    # Get big_imgs and small_imgs
+    big_imgs, small_imgs = build_big_imgs_and_small_imgs(files)
+
+    # Save imgs
+    save_big_and_small_files(big_imgs, small_imgs, files)
+    
+    product = Product(id=product.id, name=name, purpose=purpose, category=category, price=price,
+                      condition=condition, phone=phone, qq=qq, campus=campus,
+                      content=content, big_imgs=big_imgs, small_imgs=small_imgs,
+                      owner=user)
+    product.save()
+
+    return HttpResponse('true')
+
+# Close csrf validate temporarily
+@csrf_exempt
 def publish_want_service(request):
     user = None
     try:
@@ -344,7 +395,18 @@ def publish(request):
 
 
 def item_edit(request):
-    return render(request, "item-edit.html", {})
+    user_id = request.session.get('user_id', False)
+    try:
+        user = Account.objects.get(id=user_id)
+    except:
+        user = None
+    pid = request.GET.get('pid', '')
+    item = ''
+    try:
+        item = Product.objects.get(id=pid)
+    except:
+        item = ''
+    return render(request, "item-edit.html", {'user': user, 'item': item} )
 
 
 def account(request, frame):

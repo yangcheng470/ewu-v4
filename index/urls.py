@@ -23,6 +23,8 @@ urlpatterns=[
         url(r'^service/publish/sale/$', index.publish_sale_service, name='publish_sale_service'),
         url(r'^service/publish/want/$', index.publish_want_service, name='publish_want_service'),
 
+        url(r'^service/item-edit/$', index.item_edit_service, name='item_edit_service'),
+
 
         # Account service about
         url(r'^service/login/$', account_service.login_service, name='login_service'),

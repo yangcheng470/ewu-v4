@@ -5,42 +5,6 @@
 
 {% block spec_css %}
     <style type="text/css">
-        body {
-            font-family: "微软雅黑";
-            background-color: #f5f5f5;
-            margin-top: 50px;
-        }
-
-        .foot {
-            margin-top: 10px;
-            text-align: center;
-            vertical-align: middle;
-            border-radius: 2px;
-            background-color: #f5f5f5;
-        }
-
-        footer a:link {
-            color: #999999;
-        }
-
-        footer a:hover {
-            color: #999999;
-        }
-
-        footer a:visited {
-            color: #999999;
-            text-decoration: none;
-        }
-
-        footer a:active {
-            color: #999999;
-        }
-
-        footer {
-            padding-top: 10px;
-            border-top: 1px #DDDDDD solid;
-        }
-
         .bgcolor {
             position: relative;
             background-color: #FFFFFF;
@@ -57,34 +21,71 @@
         input:focus,select:focus,textarea:focus {
             box-shadow: 0 0 8px orange !important;
         }
+        .div-anchor span{
+            color: #ff6600;
+        }
 
+        .div-anchor{
+        height:50px;
+        line-height:50px;
+        background-color:white;
+        margin:15px 0;
+        border:1px solid #eee;
+        font-size:16px;
+        text-align:center;
+
+        }
+        .div-anchor a{
+        color:#333;
+        }
+.sign_send{
+max-width: 480px;
+height:220px;
+background: #FFF;
+margin: 3em auto 4em;
+padding: 30px;
+}
+#send img{
+width:40px;;
+}
+#send a{
+display:inline;
+margin: 20px;
+margin-top:20px;
+background-color:orange;
+color:white;
+padding:3px 5px;
+border-radius:4px;
+}
     </style>
 {% endblock spec_css %}
 
 {% block body %}
-    <div class="container">
+<div id="success" class="container" hidden>
+  <div class="row sign_send">
+      <div id="send" class="">
+        <h2><img src="{% static 'image/right.png' %}">发布成功</h2>
+        <a role="button" class="btn btn-lg pull-right" href="{% url 'index' %}">返回首页</a>
+      </div>
+  </div>
+</div>
+
+<div id="publish" class="container">
         <div class="row">
-            <div class="col-md-10 col-sm-14 hidden-xs">
-                <p>
-                    <button type="button" class="btn btn-primary bgcolor"><span class="glyphicon glyphicon-pencil" aria-hidden="true" style="color:orange;"></span>&nbsp;填写基本信息</button>
-                </p>
-                <p>
-                    <button type="button" class="btn btn-primary bgcolor"><span class="glyphicon glyphicon-picture" aria-hidden="true" style="color:orange;"></span>&nbsp;上传宝贝图片</button>
-                </p>
-                <p>
-                    <button type="button" class="btn btn-primary bgcolor"><span class="glyphicon glyphicon-comment" aria-hidden="true" style="color:orange;"></span>&nbsp;宝贝详细描述</button>
-                </p>
-                <p>
-                    <button type="button" class="btn btn-primary bgcolor"><span class="glyphicon glyphicon-send" aria-hidden="true" style="color:orange;"></span>&nbsp;立即发布&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
-                </p>
-            </div>
+          <div class="col-md-10 col-sm-14 hidden-xs" >
+              <div class="div-anchor"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span><a href="#p1">填写基本信息</a></div>
+              <div class="div-anchor"><span class="glyphicon glyphicon-picture" aria-hidden="true"></span><a href="#p2">上传宝贝图片</a></div>
+              <div class="div-anchor"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span><a href="#p3">宝贝详细描述</a></div>
+              <div class="div-anchor"><span class="glyphicon glyphicon-send" aria-hidden="true"></span><a href="#p4">立即发送</a></div>
+          </div>
             <div class="col-md-50 col-sm-46 col-xs-60">
                 <div class="tab">
                     <ul class="nav nav-tabs">
-                        <li role="presentation" class="active"><a href="javascript:void(0)">请编辑宝贝信息</a></li>
+                        <li role="presentation" class="active"><a href="javascript:void(0)">编辑宝贝信息</a></li>
                     </ul>
                     <div class="tab-content bgcolor">
                         <form class="form-horizontal">
+														<div id="err_info" style="color: red;" class="text-center" hidden></div>
                             <div class="form-group">
                                 <label for="baby_transfer_product_name" class="col-md-10 col-sm-20 col-xs-60 control-label">宝贝名称</label>
                                 <div class="col-md-30 col-sm-30 col-md-offset-5">
@@ -94,22 +95,28 @@
                             <div class="form-group">
                                 <label class="col-md-10 col-sm-20 col-xs-60 control-label">宝贝类别</label>
                                 <div class="col-md-30 col-sm-30 col-md-offset-5">
-                                    <select class="form-control">
-                                        <option>----------请选择----------</option>
-                                        <option>鞋履</option>
-                                        <option>电子</option>
-                                        <option>代步</option>
-                                        <option>数码</option>
+																	  <select name="ask_baby_product_class"  class="form-control" id="s_ask_baby_product_class">
+																		<option value="DB">代步</option>
+																		<option value="SM">数码</option>
+																		<option value="DQ">电器</option>
+																		<option value="WT">文体</option>
+																		<option value="FS">服饰</option>
+																		<option value="XL">鞋履</option>
+																		<option value="ZS">装饰</option>
+																		<option value="XN">虚拟</option>
+																		<option value="RY">日用</option>
+																		<option value="SK">书刊</option>
+																		<option value="SP">食品</option>
+																		<option value="QT">其它</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-10 col-sm-20 col-xs-60 control-label">交易类型</label>
                                 <div class="col-md-30 col-sm-30 col-md-offset-5">
-                                    <select class="form-control">
-                                        <option>----------请选择----------</option>
-                                        <option>出售</option>
-                                        <option>求购</option>
+																	  <select name="s_purpose" class="form-control" id="s_purpose">
+                                        <option value="1">出售</option>
+                                        <option value="2">交换</option>
                                     </select>
                                 </div>
                             </div>
@@ -122,19 +129,18 @@
                             <div class="form-group">
                                 <label class="col-md-10 col-sm-20 col-xs-60 control-label">新旧程度</label>
                                 <div class="col-md-30 col-sm-30 col-md-offset-5">
-                                    <select class="form-control">
-                                        <option>----------请选择----------</option>
-                                        <option>八成新</option>
-                                        <option>九成新</option>
-                                        <option>全新</option>
-                                        <option>五成新</option>
+																	  <select name="ask_baby_product_newOrOld" class="form-control" id="ask_baby_product_newOrOld">
+                                        <option value="9">九成新</option>
+                                        <option value="8">八成新</option>
+                                        <option value="7">七成新</option>
+                                        <option value="6">六成新</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="baby_transfer_product_seller_phone" class="col-md-10 col-sm-20 col-xs-60 control-label">电话</label>
                                 <div class="col-md-30 col-sm-30 col-md-offset-5">
-                                    <input type="tel" class="form-control" id="baby_transfer_product_seller_phone" name="baby_transfer_product_seller_phone">
+																	  <input type="tel" class="form-control" id="baby_transfer_product_seller_phone" name="baby_transfer_product_seller_phone">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -145,23 +151,25 @@
                             </div>
                             <div class="form-group">
                                 <label class="col-md-10 col-sm-20 col-xs-60 control-label">交易区域</label>
-                                <div class="col-md-30 col-sm-30 checkbox col-md-offset-5">
-                                    <label class="col-md-15 col-sm-20 col-xs-20"><input type="checkbox">南区</label>
-                                    <label class="col-md-15 col-sm-20 col-xs-20"><input type="checkbox">南岭</label>
-                                    <label class="col-md-15 col-sm-20 col-xs-20"><input type="checkbox">南湖</label>
-                                    <br/>
-                                    <label class="col-md-15 col-sm-20 col-xs-20"><input type="checkbox">新民</label>
-                                    <label class="col-md-15 col-sm-20 col-xs-20"><input type="checkbox">和平</label>
-                                    <label class="col-md-15 col-sm-20 col-xs-20"><input type="checkbox">朝阳</label>
-                                </div>
+                                <div class="col-md-30 col-sm-30 col-md-offset-5">
+																	<select name="s_campus" class="form-control" id="s_campus">
+																		<option value="NQ">南区</option>
+																		<option value="NL">南岭</option>
+																		<option value="NH">南湖</option>
+																		<option value="HP">和平</option>
+																		<option value="XM">新民</option>
+																		<option value="CY">朝阳</option>
+																	</select>
+																</div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-10 col-sm-20 col-xs-60 control-label">上传图片<p>
-                                  <small>（最多可上传5张照片）</small>
+                                  <small>（最多可上传4张照片）</small>
                                 </p></label>
                                 <div class="col-md-30 col-sm-30 col-md-offset-5">
-                                    <span class="glyphicon glyphicon-camera" aria-hidden="true" style="color: #ff6600;"></span>
+                                    <span id="uploadpicture" class="glyphicon glyphicon-camera" aria-hidden="true" style="color: #ff6600;"></span>
                                 </div>
+																<input id="uploadPic" class="col-sm-10" type="file" name="uploadPic" multiple="multiple" accept="image/jpeg, image/gif" style="display: none;">
                             </div>
                             <div class="form-group">
                                 <label for="baby_transfer_product_detail" class="col-md-10 col-sm-20 col-xs-60 control-label">详细描述</label>
@@ -170,36 +178,127 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <button type="button" class="btn btn-warning col-md-10 col-md-offset-17 col-sm-10 col-sm-offset-17 col-xs-20 col-xs-offset-7">确认修改</button>
-                                <button type="button" class="btn btn-default col-md-10 col-md-offset-6 col-sm-10 col-sm-offset-6 col-xs-20  col-xs-offset-6">取消修改</button>
+														    <button id="finish_edit" type="button" {% if not user %}disabled title="请先登陆" {% endif %} class="btn btn-warning col-md-10 col-md-offset-17 col-sm-10 col-sm-offset-17 col-xs-20 col-xs-offset-7">确认修改</button>
+																<button id="cancel_edit" type="button" class="btn btn-default col-md-10 col-md-offset-6 col-sm-10 col-sm-offset-6 col-xs-20  col-xs-offset-6">取消修改</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="row">
-            <footer class="foot" style="text-align: center; color:#999999; top:50px; position:relative;">
-                <div id="footer">
-                    <span class="copyright-text">
-                ©2016&nbsp;
-                <a href="http://www.jluewu.com" target="_blank">吉大易物网</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-                <a href="http://www.miibeian.gov.cn/" target="_blank" rel="external nofollow">吉ICP备15002340</a> &nbsp;&nbsp;|&nbsp;&nbsp;
-                <a href="help.php">帮助</a> &nbsp;&nbsp;|&nbsp;&nbsp;
-                <a href="feedback.php">问题反馈</a> &nbsp;&nbsp;|&nbsp;&nbsp;
-                <a href="help.php#qid-6">联系我们</a> &nbsp;&nbsp;|&nbsp;&nbsp;
-                <a href="help.php#qid-1">关于</a> &nbsp;&nbsp;|&nbsp;&nbsp;
-                <a href="#">友情链接</a> &nbsp;&nbsp;|&nbsp;&nbsp;
-                <a href="#">站长统计</a>
-                </span>
-                </div>
-            </footer>
-        </div>
-    </div>
-
-    <script>
+			</div>
+    <script type="text/javascript">
         $(function() {
+
+								$('#finish_edit').click(function(){
+											var pid = "{{ item.id }}";
+											var name = $('#baby_transfer_product_name').val();
+											var purpose = $('#s_purpose').val();
+											var category = $('#s_ask_baby_product_class').val();
+											var price = $('#baby_transfer_product_price').val();
+											var condition = $('#ask_baby_product_newOrOld').val();
+											var phone = $('#baby_transfer_product_seller_phone').val();
+											var qq = $('#baby_transfer_product_seller_qq').val();
+											var campus = $('#s_campus').val();
+											var content = $('#baby_transfer_product_detail').val();
+
+											var err_info = $('#err_info');
+
+											err_info.attr('hidden', 'hidden');
+											// Check validation
+											if(!name.match(/^.{2,100}$/)){
+															err_info.html('<p>宝贝名字不合法,应该是2-100个字符</p>');
+															err_info.removeAttr('hidden');
+															scroll(0,0);
+															return false;
+											}
+
+											if(!price.match(/^[0-9.]{1,10}$/)){
+															err_info.html('<p>价格不合法</p>');
+															err_info.removeAttr('hidden');
+															scroll(0,0);
+															return false;
+											}
+
+											if(!content.match(/^.{2,500}$/)){
+															err_info.html('<p>详细描述内容不合法，应该是2-500个字符</p>');
+															err_info.removeAttr('hidden');
+															scroll(0,0);
+															return false;
+											}
+
+											var files = $('#uploadPic').get(0).files;
+											if(files.length>4){
+															err_info.html('<p>图片太多，最多上传4张</p>');
+															err_info.removeAttr('hidden');
+															scroll(0,0);
+															return false;
+											}
+
+											if(files.length==0){
+															err_info.html('<p>至少要上传一张图片吧,同学</p>');
+															err_info.removeAttr('hidden');
+															scroll(0,0);
+															return false;
+											}
+
+											var formData = new FormData();
+
+											// Insert files
+											for(var i=0, file; file=files[i];++i){
+															formData.append(file.name, file);
+											}
+											formData.append('pid', pid);
+											formData.append('name', name);
+											formData.append('purpose', purpose);
+											formData.append('category', category);
+											formData.append('price', price);
+											formData.append('condition', condition);
+											formData.append('phone', phone);
+											formData.append('qq', qq);
+											formData.append('campus', campus);
+											formData.append('content', content);
+
+											var ajax = $.ajax({
+															url: '/service/item-edit/',
+															type: 'POST',
+															data: formData,
+														  cache: false,
+															processData: false,
+															contentType: false,
+											});
+
+											ajax.done(function(msg){
+															if(msg=='true'){
+																			$('#publish').attr('hidden', 'hidden');
+																			$('#success').removeAttr('hidden');
+															}else{
+																			err_info.html('<p>上传失败，可能是由于文件格式不正确或者图片太大，请确保是图片并且图片小于10M</p>');
+																			err_info.removeAttr('hidden');
+																			scroll(0,0);
+																			return false;
+															}
+											});
+
+											ajax.fail(function(msg){
+																			err_info.html('<p>上传失败，可能是由于文件格式不正确或者图片太大，请确保是图片并且图片小于10M</p>');
+																			err_info.removeAttr('hidden');
+																			scroll(0,0);
+																			return false;
+											});
+
+
+								});
+
+								$('#cancel_edit').click(function(){
+												window.location.href = "{% url 'index' %}";
+								});
+
+							  $('#uploadpicture').click(function(){
+							  				$('#uploadPic').click();
+							  });
+
+
             $(window).scroll(function() {
                 var top = $(this).scrollTop();
                 var flowSearch = $("#flowSearchForm");
