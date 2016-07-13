@@ -57,7 +57,7 @@
 								<p>新旧：<span class="product-newOrOld" id="product_newOrOld">{{ item.condition }}成新</span></p>
 								{% endif %}
 								<p>标签：<span class="product-tag">{{ item.get_campus_display }}</span><span class="product-tag">{{ item.get_category_display }}</span><span class="product-tag">{{ item.get_purpose_display }}</span></p>
-								<p>主人：<a class="product-seller" id="product_seller" href="{% url 'ucenter' %}?uid={{ user.id }}" target="_blank" style="color:#000;"><strong>{{ item.owner.name }}</strong></a></p>
+								<p>主人：<a class="product-seller" id="product_seller" href="{% url 'ucenter' %}?uid={{ item.owner.id }}" target="_blank" style="color:#000;"><strong>{{ item.owner.name }}</strong></a></p>
 								{% if item.phone %}<p>电话：<span class="product-sellerPhone" id="product_sellerPhone">{{ item.owner.phone }}</span>{% endif %}
 								{% if item.qq %}<p> QQ: <span>{{ item.qq }}</span></p>{% endif %}
             <p style="display:inline-block;color: #ffffff;background-color: orange;padding: 3px 5px;border-radius: 3px;">详细描述</p>
