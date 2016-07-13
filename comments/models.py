@@ -10,6 +10,8 @@ class Comment(models.Model):
     pub_date=models.DateTimeField(default=timezone.now)
     content=models.CharField(max_length=300)
 
+    readed = models.BooleanField(default=False)
+
     valid = models.BooleanField(default=True)
 
     def get_content(self):
