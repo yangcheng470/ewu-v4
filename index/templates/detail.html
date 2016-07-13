@@ -82,9 +82,9 @@
 				{% endif %}
 				{% for comment in comments %}
 				{% if forloop.counter0 >= 4 %}
-				<div class="remark  col-md-45 col-md-offset-15 col-sm-offset-15 col-sm-45 col-xs-60">
+				<div id="comment_{{ comment.id }}" class="remark  col-md-45 col-md-offset-15 col-sm-offset-15 col-sm-45 col-xs-60">
 				{% else %}
-				<div class="remark  col-md-45 col-md-offset-2 col-sm-offset-3 col-sm-45 col-xs-60">
+				<div id="comment_{{ comment.id }}" class="remark  col-md-45 col-md-offset-2 col-sm-offset-3 col-sm-45 col-xs-60">
 				{% endif %}
 					 <a href="{% url 'ucenter' %}?uid={{ comment.comment_from.id }}" target="_blank">{{ comment.comment_from.name }}</a>
 					 <p>{{ comment.content }}</p>

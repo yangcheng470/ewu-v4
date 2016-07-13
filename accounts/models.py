@@ -35,6 +35,9 @@ class Account(models.Model):
     )
     campus=models.CharField(max_length=2,choices=CAMPUS_CHOICES,default='NQ')
 
+    def unread_comment_count(self):
+        return len(self.comment_set.all())
+
     def __str__(self):
         return self.name
 

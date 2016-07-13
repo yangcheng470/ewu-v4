@@ -23,7 +23,7 @@
 								<li><a href="{% url 'account' 'change-password' %}">修改密码</a></li>
               </ul>
             </li>
-						<li  style="z-index:1;"><a  href="{% url 'account' 'messages' %}">站内信</a></li>
+						<li  style="z-index:1;"><a  href="{% url 'account' 'messages' %}">站内信 {% if user.unread_comment_count %}<span class="badge">{{ user.unread_comment_count }}</span>{% endif %}</a></li>
 						<li><a href="{% url 'account' 'logout' %}">退出</a></li>
             <li class="dropdown" id="NAV" style="display:none;">
 						    <a href="{% url 'publish' %}" style="z-index:1;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">发布<span style="color:orange;" class="caret"></span></a>
