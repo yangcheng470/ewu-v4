@@ -123,10 +123,11 @@
               </div>
                 
             </form>
-               <button id="s_submit" type="submit" class="btn">立即发布</button>
+						<button id="s_submit" type="submit" class="btn" {% if not user %}disabled title="请先登陆" {% endif %}>立即发布</button>
           </div>
           <div id="ask_baby_div" class="div" style="display:none;">
             <form class="form-horizontal">
+							<div id="err_info_2" class="text-center" style="color: red;" hidden></div>
               <div class="form-group">
                 <label for="ask_baby_product_name" class="col-sm-10  control-label">宝贝名称</label>
                 <div class="col-sm-30  ">
@@ -155,7 +156,7 @@
               <div class="form-group">
                 <label for="ask_baby_product_price" class="col-sm-10  control-label">接受价格</label>
                 <div class="col-sm-30 ">
-                  <input type="number" class="form-control" id="ask_baby_product_price" name="ask_baby_product_price">
+                  <input type="text" class="form-control" id="ask_baby_product_price" name="ask_baby_product_price">
                 </div>
               </div>
               <div class="form-group">
@@ -167,7 +168,7 @@
               <div class="form-group">
                 <label for="baby_transfer_product_seller_qq" class="col-sm-10 control-label">QQ</label>
                 <div class="col-sm-30 ">
-                  <input type="number" class="form-control" id="ask_baby_product_seller_qq" name="ask_baby_product_seller_qq">
+                  <input type="text" class="form-control" id="ask_baby_product_seller_qq" name="ask_baby_product_seller_qq">
                 </div>
               </div>
               <div class="form-group">
@@ -189,8 +190,8 @@
                   <textarea cols="40" rows="10" class="form-control" id="ask_baby_product_detail" name="ask_baby_product_detail"></textarea>
                 </div>
               </div>
-              <button id="w_submit" type="submit" class="btn">立即发布</button>
             </form>
+						<button id="w_submit" type="submit" class="btn" {% if not user %}disabled title="请先登陆"{% endif %}>立即发布</button>
           </div>
         </div>
       </div>
@@ -287,6 +288,71 @@
 																			err_info.html('<p>上传失败，可能是由于文件格式不正确。请确认上传的是图片</p>');
 																			err_info.removeAttr('hidden');
 																			return false;
+											});
+
+							});
+
+							$('#w_submit').click(function(){
+											var name = $('#ask_baby_product_name').val();
+											var category = $('#ask_baby_product_class').val();
+											var price = $('#ask_baby_product_price').val();
+											var phone = $('#ask_baby_product_seller_phone').val();
+											var qq = $('#ask_baby_product_seller_qq').val();
+											var campus = $('#w_campus').val();
+											var content = $('#ask_baby_product_detail').val();
+
+											var err_info = $('#err_info_2');
+
+											err_info.attr('hidden', 'hidden');
+											// Check validation
+											if(!name.match(/^.{2,30}$/)){
+															err_info.html('<p>宝贝名字不合法,应该是2-30个字符</p>');
+															err_info.removeAttr('hidden');
+															return false;
+											}
+
+											if(!price.match(/^[0-9.]{1,10}$/)){
+															err_info.html('<p>价格不合法</p>');
+															err_info.removeAttr('hidden');
+															return false;
+											}
+
+											if(!content.match(/^.{2,200}$/)){
+															err_info.html('<p>详细描述内容不合法，应该是2-200个字符</p>');
+															err_info.removeAttr('hidden');
+															return false;
+											}
+
+											var ajax = $.ajax({
+															url: '/service/publish/want/',
+															type: 'POST',
+															data: {
+																			name: name,
+																			category: category,
+																			price: price,
+																			phone: phone,
+																			qq: qq,
+																			campus: campus,
+																			content: content,
+															}
+											});
+
+											ajax.done(function(msg){
+															if(msg == 'true'){
+																			alert('success');
+															}else{
+																			alert('fail');
+																			err_info.html('<p>发布失败</p>');
+																			err_info.removeAttr('hidden');
+																			return false;
+															}
+											});
+
+											ajax.fail(function(msg){
+															alert('fail');
+															err_info.html('<p>发布失败</p>');
+															err_info.removeAttr('hidden');
+															return false;
 											});
 
 							});

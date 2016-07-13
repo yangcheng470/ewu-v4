@@ -24,6 +24,41 @@ from django.conf import settings
 
 # Close csrf validate temporarily
 @csrf_exempt
+def publish_want_service(request):
+    user = None
+    try:
+        user = Account.objects.get(id=request.session['user_id'])
+    except:
+        user = None
+    if not user:
+        return HttpResponse('false')
+
+    name = request.POST.get('name', '')
+    purpose = '3'
+    category = request.POST.get('category', '')
+    price = request.POST.get('price', '')
+    condition = '0'
+    phone = request.POST.get('phone', '')
+    qq = request.POST.get('qq', '')
+    campus = request.POST.get('campus', '')
+    content = request.POST.get('content', '')
+
+    validate_success = validate_publish(name, purpose, category, price, condition,
+                     phone, qq, campus, content, '','want')
+    if not validate_success:
+        return HttpResponse('false')
+
+    big_imgs = 'big/big_default_want.jpg'
+    small_imgs = 'small/small_default_want.jpg'
+    product = Product(name=name, purpose=purpose, category=category, price=price,
+                      condition=condition, phone=phone, qq=qq, campus=campus,
+                      content=content, big_imgs=big_imgs, small_imgs=small_imgs,
+                      owner=user)
+    product.save()
+    return HttpResponse('true')
+
+# Close csrf validate temporarily
+@csrf_exempt
 def publish_sale_service(request):
     user = None
     try:
@@ -33,7 +68,6 @@ def publish_sale_service(request):
     if not user:
         return HttpResponse('false')
 
-    
     name = request.POST.get('name', '')
     purpose = request.POST.get('purpose', '')
     category = request.POST.get('category', '')
@@ -66,11 +100,6 @@ def publish_sale_service(request):
 
     return HttpResponse('true')
 
-
-# Close csrf validate temporarily
-@csrf_exempt
-def publish_want_service(request):
-    return HttpResponse('true')
 
 # Close csrf validate temporarily
 @csrf_exempt

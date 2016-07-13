@@ -16,17 +16,23 @@ from .func import *
 
 
 def validate_publish(name, purpose, category, price, condition,
-                     phone, qq, campus, content, files):
+                     phone, qq, campus, content, files, type="sale"):
 
     if (not re.match(r'^.{2,30}$', name) or
-        not purpose in ['1', '2'] or
+        not purpose in ['1', '2', '3'] or
         not category in ['DB', 'SM', 'DQ', 'WT', 'FS', 'XL', 'ZS', 'XN', 'RY', 'SK', 'SP', 'QT'] or
         not re.match(r'^[0-9.]{1,10}$', price) or
         not re.match(r'^[0-9]$', condition) or
         not campus in ['NQ','NL','NH','XM','CY','HP'] or
-        not re.match(r'^.{2,200}$', content) or
-        not (len(files)>0 and len(files)<5)):
-           return False
+        not re.match(r'^.{2,200}$', content)):
+            return False
+    
+    # If validate 'want' type, that's enough
+    if type == 'want' and purpose == '3':
+        return True
+
+    if not (len(files)>0 and len(files)<5):
+        return False
 
     # Check imgs' size, less than 10M(10240K)
     for file_obj in files.values():

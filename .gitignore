@@ -7,3 +7,6 @@ ewu.log
 
 # Pycharm temp dir
 .idea/
+
+# media files
+media/
