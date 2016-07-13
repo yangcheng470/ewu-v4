@@ -57,8 +57,8 @@ class Product(models.Model):
                                   default=0.0)     
     owner=models.ForeignKey('accounts.Account')
 
-    phone = models.CharField(max_length=11)
-    qq = models.CharField(max_length=15)
+    phone = models.CharField(max_length=11, blank=True)
+    qq = models.CharField(max_length=15, blank=True)
 
     # This field has magnitude sale < sold
     STATUS_CHOICES = (
