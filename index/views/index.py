@@ -290,15 +290,21 @@ def detail(request):
         item = None
     if item==None:
         raise Http404('Wrong URL')
+    # Add related product's visitors field
+    item.visitors += 1
+    item.save()
 
-    recommand_item = Product.objects.filter(category=item.category).order_by('pub_date')[0]
+    recommand_item = Product.objects.filter(valid=True).filter(deleted=False)
+    recommand_item = recommand_item.filter(category=item.category).order_by('pub_date')
+    try:
+        recommand_item = recommand_item[0]
+    except:
+        recommand_item = None
 
     # Comments
     comments = []
-    try:
-        comments = Comment.objects.filter(product=item)
-    except:
-        comments = []
+    comments = Comment.objects.filter(valid=True)
+    comments = comments.filter(product=item).order_by('pub_date')
 
     render_dict = {
             'user': user,
