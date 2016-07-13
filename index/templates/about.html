@@ -185,7 +185,7 @@ float: right;
                             <div class="row"> 
 																{% for f in feedback %}
                                 <div class="back  col-md-58 col-ms-offset-1 col-sm-offset-1 col-sm-58 col-xs-58" style="margin-bottom: 5px;">
-																		<p style="margin-bottom: 20px;">{{ f.user_content }}</p>
+																		<p style="margin-bottom: 20px;word-break: break-all">{{ f.user_content }}</p>
                                      <div>
 																		 <span class="small">{{ f.user_pub_date }}</span>
 																		 {% if not f.user %}
@@ -197,7 +197,7 @@ float: right;
                                 </div>
 																{% if f.admin_content %}
                                 <div class="reponse  col-md-58 col-ms-offset-1 col-sm-offset-1 col-sm-58 col-xs-58">
-																		 <p style="margin-bottom: 20px;">{{ f.admin_content }}</p>
+																		 <p style="margin-bottom: 20px;word-break: break-all">{{ f.admin_content }}</p>
                                      <div>
 																		 <span class="small">{{ f.admin_pub_date }}</span>
 																			<span class="pull-right small">管理员</span>
@@ -222,6 +222,11 @@ $(function(){
 									$('#err_info').removeAttr('hidden');
 									return false;
 								}
+								if(content.length>500){
+								  $('#err_info').html('<p>内容太长，请确保在500个字符以内</p>');
+									$('#err_info').removeAttr('hidden');
+									return false;
+								}
 
 								var ajax = $.ajax({
 												url:'/service/feedback/',
@@ -232,7 +237,13 @@ $(function(){
 								});
 
 								ajax.done(function(msg){
-												window.location.href = "{% url 'about' %}?label=feedback";
+												if(msg=='true'){
+																window.location.href = "{% url 'about' %}?label=feedback";
+												}else{
+																$('#err_info').html('<p>提交失败，请确保内容在500个字符以内</p>');
+																$('#err_info').removeAttr('hidden');
+												}
+
 									return true;
 								});
 

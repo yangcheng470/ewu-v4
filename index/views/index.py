@@ -32,7 +32,7 @@ def feedback_service(request):
     except:
         user = None
     content = request.POST.get('content', '')
-    if not content:
+    if not content or len(content)>500:
         return HttpResponse('false')
     
     feedback = Feedback(user=user,user_content=content)
