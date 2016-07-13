@@ -68,15 +68,15 @@ def page_items(category='new', page=1):
     if page<1 or page>max_page():
         page = 1
     
-    page_list = []
+    page_list = Product.objects.filter(valid=True).filter(deleted=False)
     if category == 'new':
-        page_list = Product.objects.filter(valid=True).order_by('status','-pub_date')
+        page_list = page_list.order_by('status','-pub_date')
     elif category == 'hot':
-        page_list = Product.objects.filter(valid=True).order_by('status','-visitors')
+        page_list = page_list.order_by('status','-visitors', '-pub_date')
     elif category == 'change':
-        page_list = Product.objects.filter(valid=True).filter(purpose='2').order_by('status','-visitors')
+        page_list = page_list.filter(purpose='2').order_by('status','-pub_date')
     else:
-        page_list = Product.objects.filter(valid=True).filter(purpose='3').order_by('status','-visitors')
+        page_list = page_list.filter(purpose='3').order_by('status','-pub_date')
 
     begin = (page-1)*20
     if max_items(category) < page*20:
