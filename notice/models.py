@@ -8,6 +8,9 @@ class Notice(models.Model):
     pub_name = models.CharField(max_length=20)
     pub_date = models.DateTimeField(default=timezone.now)
     content = models.TextField()
+    # valid field means current notice
+    # If valid is True, it will be set to current notice
+    valid = models.BooleanField(default=False)
 
     def __get_content__(self):
         if len(self.content)<80:

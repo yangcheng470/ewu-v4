@@ -185,7 +185,7 @@ def index(request):
     # Get notice
     notice = None
     try:
-        notice = Notice.objects.order_by('-pub_date')[0]
+        notice = Notice.objects.filter(valid=True)[0]
     except:
         notice = None
 
