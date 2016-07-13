@@ -178,7 +178,10 @@ def find_password_service(request):
 
     # Start render mail template
     mail = loader.render_to_string('find_password_mail.html', {'url': url})
-    send_mail('吉大易物-找回密码','','admin', [email],  html_message=mail)
+    try:
+        send_mail('吉大易物-找回密码','','admin', [email],  html_message=mail)
+    except:
+        return HttpResponse('service_false')
     return HttpResponse('true')
 
 
