@@ -71,7 +71,29 @@ list-style:none;
 				margin-left: 0;
 				margin-right: 0;
 }
+.back{
+position: relative;
+padding: 5px;
+background-color: white;
+border-top: 1px solid #eee;
+}
+.reponse{
+position: relative;
+padding: 5px;
+background-color: white;
+clear: both;
+}
+.back p，.reponse p{
+padding: 10px 10px 0;
+}
+.back_footer,.reponse_footer{
+display: block;
+float: right;
+}
 
+#feedback{
+				height: auto;
+}
 </style>
 {% endblock spec_css %}
 
@@ -149,19 +171,80 @@ list-style:none;
                   <p>我们欢迎学校各社团与我们合作</p>
                 </div>
             </div>
-						<div id="feedback" class="others col-md-40 col-sm-40 col-xs-50" >
-                <h3>问题反馈</h3>
-                <div class="ever_wrap">
-                 <a href=""></a>
-                 <a href=""></a>
-                 <a href=""></a>
-                </div>
+            <div id="feedback" class="others col-md-40 col-sm-40 col-xs-50">            
+                <h3 style="margin-top: 10px; margin-bottom: 10px; padding-bottom: 0px;">问题反馈</h3>
+                            <div class="row" style="margin-top:20px;">
+                                <div class="col-md-58 col-ms-offset-1 col-sm-offset-1 col-sm-58 " style="padding:0; background-color:white;">
+																		<div id="err_info" class="text-center" style="color: red;" hidden></div>
+                                    <form>
+                                        <textarea id="content" placeholder="有什么建议或意见，或者想吐槽，都可以发表" class="text col-md-58 col-sm-58 col-xs-58" style="border:1px solid orange; border-radius:3px; height:100px; margin-left:5px;" ></textarea><br>
+                                        <button id="submit" type="button" class="btn btn-lg" style="background-color: orange;color: white;padding: 3px 5px;border-radius: 3px;margin-top: 10px; margin-right:15px;margin-bottom: 5px; float:right">提交反馈</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="row"> 
+																{% for f in feedback %}
+                                <div class="back  col-md-58 col-ms-offset-1 col-sm-offset-1 col-sm-58 col-xs-58" style="margin-bottom: 5px;">
+																		<p style="margin-bottom: 20px;">{{ f.user_content }}</p>
+                                     <div>
+																		 <span class="small">{{ f.user_pub_date }}</span>
+																		 {% if not f.user %}
+																			<p class="pull-right small">匿名者</p>
+																			{% else %}
+																			<a class="pull-right small" href="{% url 'ucenter' %}?uid={{ f.user.id }}" target="_blank">{{ f.user.name }}</a>
+																			{% endif %}
+                                     </div>
+                                </div>
+																{% if f.admin_content %}
+                                <div class="reponse  col-md-58 col-ms-offset-1 col-sm-offset-1 col-sm-58 col-xs-58">
+																		 <p style="margin-bottom: 20px;">{{ f.admin_content }}</p>
+                                     <div>
+																		 <span class="small">{{ f.admin_pub_date }}</span>
+																			<span class="pull-right small">管理员</span>
+                                     </div>
+                                </div>
+																{% endif %}
+																{% endfor %}
+                            </div>
             </div>
        </div>
 </div>
 
 
 <script>
+
+$(function(){
+				$('#submit').click(function(){
+								var content = $('#content').val();
+								$('#err_info').attr('hidden','hidden');
+								if(content==''){
+								  $('#err_info').html('<p>好歹提交点东西吧，同学</p>');
+									$('#err_info').removeAttr('hidden');
+									return false;
+								}
+
+								var ajax = $.ajax({
+												url:'/service/feedback/',
+												type:'POST',
+												data:{
+																content: content,
+												}
+								});
+
+								ajax.done(function(msg){
+												window.location.href = "{% url 'about' %}?label=feedback";
+									return true;
+								});
+
+								ajax.fail(function(msg){
+								  $('#err_info').html('<p>提交失败，服务器出错</p>');
+									$('#err_info').removeAttr('hidden');
+									return true;
+								});
+
+				});
+})
+
 //切换标签页面
 	window.onload=function(){
 		var others=document.getElementsByClassName("others");

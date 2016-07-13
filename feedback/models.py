@@ -8,7 +8,7 @@ class Feedback(models.Model):
     user_content = models.CharField(max_length=300)
     user_pub_date = models.DateTimeField(default=timezone.now)
 
-    admin_content = models.CharField(max_length=300)
+    admin_content = models.CharField(max_length=300,default='', blank=True)
     admin_pub_date = models.DateTimeField(default=timezone.now)
 
     valid = models.BooleanField(default=True)

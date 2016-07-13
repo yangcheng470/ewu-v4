@@ -25,6 +25,8 @@ urlpatterns=[
 
         url(r'^service/item-edit/$', index.item_edit_service, name='item_edit_service'),
 
+        url(r'service/feedback/$', index.feedback_service, name='feedback_service'),
+
 
         # Account service about
         url(r'^service/login/$', account_service.login_service, name='login_service'),

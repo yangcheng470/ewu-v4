@@ -11,6 +11,7 @@ from products.models import Product
 from comments.models import Comment
 from notice.models import Notice
 from find_password.models import FindPassword
+from feedback.models import Feedback
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.datastructures import MultiValueDictKeyError
 from .func import *
@@ -20,6 +21,24 @@ from django.utils import timezone
 from django.core.mail import send_mail
 from django.template import loader
 from django.conf import settings
+
+
+# Close csrf validate temporarily
+@csrf_exempt
+def feedback_service(request):
+    user = None
+    try:
+        user = Account.objects.get(id=request.session['user_id'])
+    except:
+        user = None
+    content = request.POST.get('content', '')
+    if not content:
+        return HttpResponse('false')
+    
+    feedback = Feedback(user=user,user_content=content)
+    feedback.save()
+
+    return HttpResponse('true')
 
 
 # Close csrf validate temporarily
@@ -463,4 +482,7 @@ def about(request):
     if not label in ['help', 'about', 'contact', 'recruit', 'cooperation', 'feedback']:
         label = 'help'
 
-    return render(request, 'about.html', {'user': user, 'label': label} )
+    # Get feedback
+    feedback = Feedback.objects.filter(valid=True).order_by('-admin_pub_date', '-user_pub_date')
+
+    return render(request, 'about.html', {'user': user, 'label': label, 'feedback': feedback})
