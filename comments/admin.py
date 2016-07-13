@@ -10,7 +10,7 @@ set_invalid.short_description = "设置为无效"
 
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display=['id','comment_from','product','pub_date','get_content', 'valid', 'readed']
+    list_display=['id','comment_from','comment_forward', 'product','pub_date','get_content', 'valid', 'readed']
     ordering=['id']
     actions = [set_invalid]
 
