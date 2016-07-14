@@ -23,6 +23,52 @@ from django.template import loader
 from django.conf import settings
 
 
+@csrf_exempt
+def person_info_edit_service(request):
+    user = None
+    try:
+        user = Account.objects.get(id=request.session['user_id'])
+    except:
+        user = None
+    if not user:
+        return HttpResponse('false')
+    name = request.POST.get('name', '')
+    sex = request.POST.get('sex', '')
+    email = request.POST.get('email', '')
+    campus = request.POST.get('campus', '')
+    college = request.POST.get('college', '')
+    entry_year = request.POST.get('entry_year', '')
+    phone = request.POST.get('phone', '')
+    qq = request.POST.get('qq', '')
+    
+    if re.match(r'^.{2,15}$', name):
+        user.name = name
+    if re.match(r'^[MFU]$', sex):
+        user.sex = sex
+    if re.match(r'^[a-zA-Z0-9.-_]{2,50}@[a-zA-Z0-9]{2,30}.[a-zA-Z0-9]{1,10}$', email):
+        user.email = email
+    if campus in ['NQ','NL','NH','XM','CY','HP']:
+        user.campus = campus
+    if re.match(r'^.{1,30}$', college):
+        user.college = college
+    if re.match(r'^[0-9]{4}$', entry_year):
+        user.entry_year = entry_year
+    if phone:
+        user.phone = phone
+    if qq:
+        user.qq = qq
+    user.save()
+    return HttpResponse('true')
+
+
+def person_info_edit(request):
+    user = None
+    try:
+        user = Account.objects.get(id=request.session['user_id'])
+    except:
+        user = None
+    return render(request, 'person_info_edit.html', {'user': user})
+
 # Close csrf validate temporarily
 @csrf_exempt
 def feedback_service(request):

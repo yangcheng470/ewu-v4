@@ -16,6 +16,7 @@ urlpatterns=[
         url(r'^about/$',index.about,name='about'),
         url(r'^find_password/$',index.find_password, name='find_password'),
         url(r'^reset_password/$', index.reset_password, name='reset_password'),
+        url(r'^person_info_edit/$', index.person_info_edit, name='person_info_edit'),
 
         # Comment service
         url(r'^service/comment/$', index.comment_service, name='comment_service'),
@@ -26,6 +27,8 @@ urlpatterns=[
         url(r'^service/item-edit/$', index.item_edit_service, name='item_edit_service'),
 
         url(r'service/feedback/$', index.feedback_service, name='feedback_service'),
+
+        url(r'service/person_info_edit/$', index.person_info_edit_service, name='person_info_edit_service'),
 
 
         # Account service about
