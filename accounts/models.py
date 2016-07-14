@@ -8,9 +8,9 @@ class Account(models.Model):
     name=models.CharField(max_length=50,null=False)
     
     SEX_CHOICES=(
-            ('M','Male'),
-            ('F','Female'),
-            ('U', 'Unknown'),
+            ('M','男'),
+            ('F','女'),
+            ('U', '未知'),
     )
     sex=models.CharField(max_length=1,choices=SEX_CHOICES,default='U')
     pwd=models.CharField(max_length=128,null=False)
