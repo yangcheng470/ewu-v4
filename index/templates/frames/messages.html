@@ -1,27 +1,18 @@
 {% load staticfiles %}
 
 <div class="content_information col-md-60" id="message" style="">
-          <div class="" style="background-color: white;">
+					{% for message in messages %}
+					<div class="" style="background-color: white; {% if forloop.counter0 != 0 %}margin-top: 4px;{% endif %}">
                <div style="padding: 20px; padding-bottom: 2px;">
-               <p>我们都是好孩子，异想天开的孩子,相信爱可以永远啊我们都是好孩子，异想天开的孩子,相信爱可以永远啊我们都是好孩子，异想天开的孩子,相信爱可以永远啊。</p>
+							 <p>{{ message.content }}</p>
 							 <p class="small">
-							 <span style="margin-right: 20px;">已读</span>
-							 <span style="margin-right: 30px;">来自 <a>pixiu</a></span>
-							 <span style="margin-right: 30px;">2016-6-8</span>
-							 <span class="pull-right"><a href="#">回复</a></span>
+							 <span style="margin-right: 20px;">{% if message.readed %}已读{% else %}未读{% endif %}</span>
+							 <span style="margin-right: 30px;">来自 <a target="_blank" href="{% url 'ucenter' %}?uid={{ message.comment_from.id }}">{{ message.comment_from.name }}</a></span>
+							 <span style="margin-right: 15px;">{{ message.pub_date|date:"Y-m-d" }}</span> <span style="margin-right: 30px;">{{ message.pub_date|date:"H:i" }}</span>
+							 <span class="pull-right"><a target="_blank" href="{% url 'detail' %}?pid={{ message.product.id }}">回复</a></span>
 							 </p>
                </div>
          </div>  
-          <div class="" style="background-color: white;border-top: 2px solid #f5f5f5">
-               <div style="padding: 20px; padding-bottom: 2px;">
-               <p>我们都是好孩子，异想天开的孩子,相信爱可以永远啊我们都是好孩子，异想天开的孩子,相信爱可以永远啊我们都是好孩子，异想天开的孩子,相信爱可以永远啊。</p>
-							 <p class="small">
-							 <span style="margin-right: 20px;">已读</span>
-							 <span style="margin-right: 30px;">来自 <a>pixiu</a></span>
-							 <span style="margin-right: 30px;">2016-6-8</span>
-							 <span class="pull-right"><a>回复</a></span>
-							 </p>
-               </div>
-         </div>  
-       </div>
+				 {% endfor %}
+</div>
 

@@ -481,15 +481,28 @@ def account(request, frame):
     except:
         user = None
 
-    items = None
-    try:
-        items = Product.objects.filter(valid=True).filter(deleted=False)
-        items = items.filter(owner=user)
-    except:
-        pass
+    items = Product.objects.filter(valid=True).filter(deleted=False)
+    items = items.filter(owner=user)
+
+    messages = Comment.objects.filter(valid=True)
+    messages = messages.filter(comment_forward=user).order_by('readed', '-pub_date')
+
+    if user and frame == 'messages':
+        # copy_messages is for update readed status
+        # convert messages to list is to query last status
+        copy_messages = messages
+        messages = list(messages)
+        copy_messages.update(readed=True)
 
     frame_url = 'frames/' + frame + '.html'
-    return render(request, "account.html", {'user': user, 'frame_url':frame_url, 'items': items})
+
+    render_dict = {
+            'user': user,
+            'frame_url': frame_url,
+            'items': items,
+            'messages': messages,
+    }
+    return render(request, "account.html", render_dict)
 
 def ucenter(request):
     user_id = request.session.get('user_id', False)
