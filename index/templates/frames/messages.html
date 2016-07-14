@@ -1,158 +1,27 @@
-{% extends 'base.html' %}
 {% load staticfiles %}
 
-{% block header %}{% endblock header %}
-{% block qrcode %}{% endblock qrcode %}
-{% block login_sign %}{% endblock login_sign %}
-{% block right_bar %}{% endblock right_bar %}
-{% block search_box %}{% endblock search_box %}
-{% block footer %}{% endblock footer %}
-
-{% block spec_css %}
-<style type="text/css">
-body{
-				padding: 0;
-}
-p{
-margin:0;
-}
-#message{
-background-color:white; 
-clear:both; 
-overflow:hidden;
-padding-top:15px;
-padding-left:20px;
-}
-.right{
-padding-left:0; 
-margin-top:5px;
-border-bottom:1px solid #eee;
-}
-.right img{
-float:left; 
-margin-right:10px; 
-padding-right:0; 
-padding-left:2px;
-
-}
-
-.message{
-position:relative;  
-padding-left:0;
-height:100px;
-}
-.date{
-position:absolute;
-bottom:0;
-left:0;
-color:#999;
-}
-.time{
-position:absolute;
-bottom:0;
-left:80px;
-color:#999;
-}
-.reply{
-position:absolute;
-bottom:0;
-right:65px;
-}
-.delete{
-position:absolute;
-bottom:0;
-right:15px;
-color:#999;
-}
-</style>
-{% endblock spec_css %}
-
-{% block body %}
-       <div class="content_information" id="message" >
-          <div class="col-md-30 col-xs-60 right" >
-               <img width="100px" src="{% static 'image/phone2_s.jpg' %}">
-               <div class="col-xs-47 message">
-               <p><span>风雨孤独：</span>我们都是好孩子，异想天开的孩子,相信爱可以永远啊我们都是好孩子，异想天开的孩子,相信爱可以永远啊我们都是好孩子，异想天开的孩子,相信爱可以永远啊。</p>
-               <p class="date">2016-05-24</p>
-               <p class="time">9:46</p>
-               <a class="reply" href="">回复</a>
-               <a class="delete" href="">删除</a>
+<div class="content_information col-md-60" id="message" style="">
+          <div class="" style="background-color: white;">
+               <div style="padding: 20px; padding-bottom: 2px;">
+               <p>我们都是好孩子，异想天开的孩子,相信爱可以永远啊我们都是好孩子，异想天开的孩子,相信爱可以永远啊我们都是好孩子，异想天开的孩子,相信爱可以永远啊。</p>
+							 <p class="small">
+							 <span style="margin-right: 20px;">已读</span>
+							 <span style="margin-right: 30px;">来自 <a>pixiu</a></span>
+							 <span style="margin-right: 30px;">2016-6-8</span>
+							 <span class="pull-right"><a href="#">回复</a></span>
+							 </p>
                </div>
          </div>  
-          <div class="col-md-30 col-xs-60 right" >
-               <img width="100px" src="{% static 'image/phone2_s.jpg' %}">
-               <div class="col-xs-47 message">
-               <p><span>风雨孤独：</span>我们都是好孩子，异想天开的孩子,相信爱可以永远啊我们都是好孩子，异想天开的孩子,相信爱可以永远啊我们都是好孩子，异想天开的孩子,相信爱可以永远啊。</p>
-               <p class="date">2016-05-24</p>
-               <p class="time">9:46</p>
-               <a class="reply" href="">回复</a>
-               <a class="delete" href="">删除</a>
-               </div>
-         </div>  
-          <div class="col-md-30 col-xs-60 right" >
-               <img width="100px" src="{% static 'image/phone2_s.jpg' %}">
-               <div class="col-xs-47 message">
-               <p><span>风雨孤独：</span>我们都是好孩子，异想天开的孩子,相信爱可以永远啊我们都是好孩子，异想天开的孩子,相信爱可以永远啊我们都是好孩子，异想天开的孩子,相信爱可以永远啊。</p>
-               <p class="date">2016-05-24</p>
-               <p class="time">9:46</p>
-               <a class="reply" href="">回复</a>
-               <a class="delete" href="">删除</a>
-               </div>
-         </div>  
-          <div class="col-md-30 col-xs-60 right" >
-               <img width="100px" src="{% static 'image/phone2_s.jpg' %}">
-               <div class="col-xs-47 message">
-               <p><span>风雨孤独：</span>我们都是好孩子，异想天开的孩子,相信爱可以永远啊我们都是好孩子，异想天开的孩子,相信爱可以永远啊我们都是好孩子，异想天开的孩子,相信爱可以永远啊。</p>
-               <p class="date">2016-05-24</p>
-               <p class="time">9:46</p>
-               <a class="reply" href="">回复</a>
-               <a class="delete" href="">删除</a>
-               </div>
-         </div>  
-          <div class="col-md-30 col-xs-60 right" >
-               <img width="100px" src="{% static 'image/phone2_s.jpg' %}">
-               <div class="col-xs-47 message">
-               <p><span>风雨孤独：</span>我们都是好孩子，异想天开的孩子,相信爱可以永远啊我们都是好孩子，异想天开的孩子,相信爱可以永远啊我们都是好孩子，异想天开的孩子,相信爱可以永远啊。</p>
-               <p class="date">2016-05-24</p>
-               <p class="time">9:46</p>
-               <a class="reply" href="">回复</a>
-               <a class="delete" href="">删除</a>
-               </div>
-         </div>  
-          <div class="col-md-30 col-xs-60 right" >
-               <img width="100px" src="{% static 'image/phone2_s.jpg' %}">
-               <div class="col-xs-47 message">
-               <p><span>风雨孤独：</span>我们都是好孩子，异想天开的孩子,相信爱可以永远啊我们都是好孩子，异想天开的孩子,相信爱可以永远啊我们都是好孩子，异想天开的孩子,相信爱可以永远啊。</p>
-               <p class="date">2016-05-24</p>
-               <p class="time">9:46</p>
-               <a class="reply" href="">回复</a>
-               <a class="delete" href="">删除</a>
-               </div>
-         </div>  
-          <div class="col-md-30 col-xs-60 right" >
-               <img width="100px" src="{% static 'image/phone2_s.jpg' %}">
-               <div class="col-xs-47 message">
-               <p><span>风雨孤独：</span>我们都是好孩子，异想天开的孩子,相信爱可以永远啊我们都是好孩子，异想天开的孩子,相信爱可以永远啊我们都是好孩子，异想天开的孩子,相信爱可以永远啊。</p>
-               <p class="date">2016-05-24</p>
-               <p class="time">9:46</p>
-               <a class="reply" href="">回复</a>
-               <a class="delete" href="">删除</a>
-               </div>
-         </div>  
-          <div class="col-md-30 col-xs-60 right" >
-               <img width="100px" src="{% static 'image/phone2_s.jpg' %}">
-               <div class="col-xs-47 message">
-               <p><span>风雨孤独：</span>我们都是好孩子，异想天开的孩子,相信爱可以永远啊我们都是好孩子，异想天开的孩子,相信爱可以永远啊我们都是好孩子，异想天开的孩子,相信爱可以永远啊。</p>
-               <p class="date">2016-05-24</p>
-               <p class="time">9:46</p>
-               <a class="reply" href="">回复</a>
-               <a class="delete" href="">删除</a>
+          <div class="" style="background-color: white;border-top: 2px solid #f5f5f5">
+               <div style="padding: 20px; padding-bottom: 2px;">
+               <p>我们都是好孩子，异想天开的孩子,相信爱可以永远啊我们都是好孩子，异想天开的孩子,相信爱可以永远啊我们都是好孩子，异想天开的孩子,相信爱可以永远啊。</p>
+							 <p class="small">
+							 <span style="margin-right: 20px;">已读</span>
+							 <span style="margin-right: 30px;">来自 <a>pixiu</a></span>
+							 <span style="margin-right: 30px;">2016-6-8</span>
+							 <span class="pull-right"><a>回复</a></span>
+							 </p>
                </div>
          </div>  
        </div>
 
-</body>
-    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
-
-{% endblock body %}
