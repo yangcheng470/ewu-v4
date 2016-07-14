@@ -1,82 +1,20 @@
-{% extends 'base.html' %}
 {% load staticfiles %}
 {% load static %}
-{% block title %}退出登陆{% endblock %}
 
-{% block header %}{% endblock header %}
-{% block qrcode %}{% endblock qrcode %}
-{% block login_sign %}{% endblock login_sign %}
-{% block right_bar %}{% endblock right_bar %}
-{% block search_box %}{% endblock search_box %}
-{% block footer %}{% endblock footer %}
-
-{% block spec_css %}
-<style type="text/css">
-body{
-    background-color: #f5f5f5;
-		padding: 0;
-}
-#wrap{
-height:200px;
-margin-top:15%;
-}
-#user_exit{
-
-width:350px;
-height:200px;
-background-color:white;
-
-margin:0 auto;
-
-}
-
-
-#back a{
-color:#000;
-}
-#back a:hover{
-text-decoration:none;
-}
-h4{
-text-align:center;
-padding-top:52px;
-}
-.bt{
-margin:0 auto;
-width:250px;
-}
-.btn{
-color:white;
-width:80px;
-margin:20px 20px;
-display:block;
-float:left;
-}
-#bt1{
-background-color:#CCC;
-}
-#bt2{
-background-color:orange;
-}
-
-</style>
-{% endblock spec_css %}
-
-{% block body %}
 
 {% if not user %}
 <div>
 				<h2>还未登陆，不需要退出</h2>
 </div>
 {% else %}
-    <div id="wrap">
+<div id="wrap" style="height: 200px; margin-top: 5%">
    
-    <div class="content_information  " id="user_exit">
+				<div class="content_information  " id="user_exit" style="width:350px; height: 200px; background-color: white; margin: 0 auto">
 
-          <h4>确定退出登录？</h4>
-          <div class="row bt">
-					  <button id="bt1" class="btn btnl" role="button" >是</button>
-						<button id="bt2" class="btn btnl" role="button" >否</button>
+          <h4 style="text-align: center; padding-top: 52px;">确定退出登录？</h4>
+          <div class="row bt" style="margin: 0 auto; width: 250px;">
+					  <button id="bt1" class="btn btnl" role="button" style="background-color: #ccc; color: white; width: 80px;margin: 20px 20px;display: block; float: left;">是</button>
+						<button id="bt2" class="btn btnl" role="button" style="background-color: orange; color: white; width: 80px;margin: 20px 20px;display: block; float: left;">否</button>
           </div>
           
     </div>
@@ -102,5 +40,4 @@ $(function(){
 
 });
 </script>
-		{% endif %}
-{% endblock body %}
+{% endif %}
