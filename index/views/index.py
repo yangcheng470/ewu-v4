@@ -435,9 +435,15 @@ def account(request, frame):
     except:
         user = None
 
-    items = Product.objects.filter(valid=True)[:10]
+    items = None
+    try:
+        items = Product.objects.filter(valid=True).filter(deleted=False)
+        items = items.filter(owner=user)
+    except:
+        pass
 
-    return render(request, "account.html", {'user': user, 'frame_url':frame, 'items': items})
+    frame_url = 'frames/' + frame + '.html'
+    return render(request, "account.html", {'user': user, 'frame_url':frame_url, 'items': items})
 
 def ucenter(request):
     user_id = request.session.get('user_id', False)
