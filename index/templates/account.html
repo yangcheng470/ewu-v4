@@ -19,17 +19,17 @@
         <div class="col-md-10 col-sm-20 menu_list hidden-xs">
             <ul id="personal_data" >
                 <li id="person_info" class="col-xs-60 col-md-60 col-sm-60 ">
-					<a><span>个人信息</span></a></li>
+												<a href="{% url 'account' 'person_info' %}"><span>个人信息</span></a></li>
                 <li id="change-password" class="col-xs-60 col-md-60 col-sm-60 ">
-					<a><span>修改密码</span></a> </li>
+												<a  href="{% url 'account' 'change_password' %}"><span>修改密码</span></a> </li>
                 <li id="messages" class="col-xs-60 col-md-60 col-sm-60 ">
-					<a><span>站内信</span></a> </li>
+												<a  href="{% url 'account' 'messages' %}"><span>站内信</span></a> </li>
                 <li id="my-items" class="col-xs-60 col-md-60 col-sm-60 ">
-					<a><span>我的宝贝</span></a> </li>
+												<a  href="{% url 'account' 'my_items' %}"><span>我的宝贝</span></a> </li>
                 <!--<li id="my_collect" class="col-xs-60 col-md-60 col-sm-60 ">-->
 					<!--<a><span>我的收藏</span></a></li>-->
                 <li id="logout" class="col-xs-60 col-md-60 col-sm-60 ">
-					<a><span>退出登录</span></a> </li>
+												<a  href="{% url 'account' 'logout' %}"><span>退出登陆</span></a> </li>
             </ul>
         </div>
         <div class="col-xs-60 col-md-10 col-sm-20 menu_list menu_list1" id="instead" style="display:none;">
@@ -102,6 +102,7 @@
 					  }
 			},10);
 
+/*
 var personal_data=document.getElementById("personal_data");
 var alis=personal_data.getElementsByTagName("li");
 var ifa= document.getElementsByTagName("iframe");
@@ -111,6 +112,7 @@ var ifa= document.getElementsByTagName("iframe");
 		},false);
 }
 
+*/
 
 </script>
 
