@@ -36,6 +36,9 @@ class Account(models.Model):
     )
     campus=models.CharField(max_length=2,choices=CAMPUS_CHOICES,default='NQ')
 
+    college = models.CharField(max_length=30, blank=True)
+    entry_year = models.CharField(max_length=4, blank=True)
+
     def unread_comment_count(self):
         unread_comment_list = self.comment_forward.all()
         # Exclude owner's comments
