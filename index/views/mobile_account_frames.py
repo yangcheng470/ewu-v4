@@ -7,6 +7,7 @@ from django.http import Http404
 from accounts.models import Account
 from products.models import Product
 from notice.models import Notice
+from comments.models import Comment
 from find_password.models import FindPassword
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.datastructures import MultiValueDictKeyError
@@ -44,7 +45,16 @@ def mobile_messages(request):
     except:
         user = None
 
-    return render(request, 'frames/mobile/messages.html', {'user': user})
+    messages = Comment.objects.filter(valid=True)
+    messages = messages.filter(comment_forward=user).order_by('readed', '-pub_date')
+
+    # copy_messages is for update readed status
+    # convert messages to list is to query last status
+    copy_messages = messages
+    messages = list(messages)
+    copy_messages.update(readed=True)
+
+    return render(request, 'frames/mobile/messages.html', {'user': user, 'messages': messages})
 
 
 def mobile_my_items(request):
@@ -54,7 +64,10 @@ def mobile_my_items(request):
     except:
         user = None
 
-    return render(request, 'frames/mobile/my_items.html', {'user': user})
+    items = Product.objects.filter(valid=True).filter(deleted=False)
+    items = items.filter(owner=user)
+
+    return render(request, 'frames/mobile/my_items.html', {'user': user, 'items': items})
 
 
 def mobile_logout(request):

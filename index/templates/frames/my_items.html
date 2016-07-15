@@ -7,8 +7,8 @@
 								<div class="row product" style=" background-color: white; margin: 0; {% if forloop.counter0 != 0 %} margin-top: 5px;{% endif %} position:relative;">
 							 <div class="col-md-50 col-sm-50" style="padding:0;">
 											 <img src="{% get_media_prefix %}{{ item.small_img }}" style="float: left; width: 170px; height: 120px; margin-right: 20px;" >
-											 <p style="margin-top: 10px;">{{ item.name }}</p>
-											 <p>{{ item.content }}</p>
+											 <a href="{% url 'detail' %}?pid={{ item.id }}" style="margin-top: 10px;">{{ item.name }}</a>
+											 <p style="margin-top: 10px;">{{ item.content }}</p>
 											 <p class="product-price" style="color: #f30; display: inline-block; position: absolute; bottom: 0; margin: 0; font-size: 16px;">￥{{ item.price }}</p>
 							 </div>                
 							 <div class="dropdown col-md-10 col-sm-10" style="list-style-type: none; height: 20px; line-height: 20px;margin-top:40px;">  
@@ -35,7 +35,7 @@
 							 </div>
 							 <div class="col-xs-30 " style=" padding-right:0;">
 										<div style="margin-top: 10px;">
-												<a href="javascript:void(0)">编辑</a><br>
+														<a href="{% url 'item_edit' %}?pid={{ item.id }}" target="_blank">编辑</a><br>
 												<a href="javascript:void(0)">删除</a>
 										</div>
 							 </div>
