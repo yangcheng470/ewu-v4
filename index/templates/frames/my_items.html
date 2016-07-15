@@ -36,7 +36,7 @@
 							 <div class="col-xs-30 " style=" padding-right:0;">
 										<div style="margin-top: 10px;">
 														<a href="{% url 'item_edit' %}?pid={{ item.id }}" target="_blank">编辑</a><br>
-												<a href="javascript:void(0)">删除</a>
+														<a href="{% url 'item_delete_service' %}?pid={{ item.id }}">删除</a>
 										</div>
 							 </div>
 						</div>

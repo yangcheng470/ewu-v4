@@ -25,6 +25,7 @@ urlpatterns=[
         url(r'^service/publish/want/$', index.publish_want_service, name='publish_want_service'),
 
         url(r'^service/item-edit/$', index.item_edit_service, name='item_edit_service'),
+        url(r'^service/item-delete/$', index.item_delete_service, name='item_delete_service'),
 
         url(r'service/feedback/$', index.feedback_service, name='feedback_service'),
 

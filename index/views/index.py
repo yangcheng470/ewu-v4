@@ -5,6 +5,7 @@ import time
 from hashlib import md5
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.http import Http404
 from accounts.models import Account
 from products.models import Product
@@ -21,6 +22,30 @@ from django.utils import timezone
 from django.core.mail import send_mail
 from django.template import loader
 from django.conf import settings
+from django.core.urlresolvers import reverse
+
+
+def item_delete_service(request):
+    # 'delete' is not actually delete, but just set deleted field to True
+    user = None
+    try:
+        user = Account.objects.get(id=request.session['user_id'])
+    except:
+        user = None
+    
+    pid = request.GET.get('pid', '')
+
+    item = None
+    try:
+        item = Product.objects.get(id=pid)
+    except:
+        item = None
+
+    if item and user and (item.owner == user):
+        item.deleted = True
+        item.save()
+
+    return HttpResponseRedirect(reverse('account', args=['my_items']))
 
 
 @csrf_exempt
