@@ -25,6 +25,9 @@ height:30px;
 line-height:30px;
 width:150px;
 }
+#help,#about,#contact,#recruit,#cooperation{
+	height: 420px;
+}
 .more_other li a{
 text-decoration:none;
 color:#777;
@@ -36,25 +39,26 @@ cursor: default;
 
 
 .others{
-height:500px;
 background-color:white;
 margin-bottom:30px;
 color:#777;
 padding-top:10px;
 display:none;
 }
-.others h3{
+.others p{
+	text-indent:2em;
+	font-size:16px;
+}
+.others h4{
 display:block;
 margin:0 auto;
 word-spacing:normal;
 width:100px;
 color:black;
+text-align: center;
 padding-bottom:20px;
 }
-.ever_wrap{
-width:300px;
-margin:0 auto;
-}
+
 #{{ label }}{
 display:block;
 }
@@ -91,9 +95,6 @@ display: block;
 float: right;
 }
 
-#feedback{
-				height: auto;
-}
 </style>
 {% endblock spec_css %}
 
@@ -102,10 +103,10 @@ float: right;
 <div class="row">
         <div class="hidden-xs col-md-10 col-sm-12 col-md-offset-5 more_other">
             <ul>
-						<li id="more_help" title="help"  class="col-xs-60 col-md-60 col-sm-60 ">
+				<li id="more_help" title="help"  class="col-xs-60 col-md-60 col-sm-60 ">
                     <a><span>>帮助</span></a></li>
                 <li id="more_about" title="about" class="col-xs-60 col-md-60 col-sm-60 ">
-				          	<a><span>>关于</span></a> </li>
+				     <a><span>>关于</span></a> </li>
                 <li id="more_contact" title="contact" class="col-xs-60 col-md-60 col-sm-60 ">
 					<a><span>>联系我们</span></a> </li>
                 <li id="more_recruit" title="recruit" class="col-xs-60 col-md-60 col-sm-60 ">
@@ -116,23 +117,20 @@ float: right;
 					<a><span>>问题反馈</span></a> </li>
             </ul>
         </div>
-				<div class="col-md-40 col-sm-40 col-xs-60 col-xs-offset-5 col-md-offset-5 col-sm-offset-8 ">
+		<div class="col-md-40 col-sm-40 col-xs-60 col-xs-offset-5 col-md-offset-5 col-sm-offset-8 ">
             <div id="help" class="others col-md-40 col-sm-40 col-xs-50" >
-                 <h3>帮助</h3>
-                 <div class="ever_wrap">
-                     <h4>Q1 如何进行交易？</h4>
+                 <h4>帮助</h4>
+                
+                     <h5>Q1 如何进行交易？</h5>
                      <ol>
                         <li>找到中意的物品，利用留言功能或者下方联系啊方式询问更详细的内容</li>
                         <li>找到主人，直接当面交易</li>
-                        <li></li>
                      </ol>
-                     <h4>Q2 如何进行以物易物？</h4>
+                     <h5>Q2 如何进行以物易物？</h5>
                      <ol>
-                        <li>找到中意的物品，利用留言功能或者下方联系啊方式询问更详细的内容</li>
-                        <li>找到主人，直接当面交易</li>
-                        <li></li>
+                        <span>用户可在标有“可交换”标签的宝贝的宝贝评论区给主人留言描述自己想要换出的宝贝，或者添加自己发布宝贝的链接，若双方均有意交换可通过联系方式沟通并进行交换</span>
                      </ol>
-                     <h4>Q3 图片上传失败的原因？</h4>
+                     <h5>Q3 图片上传失败的原因？</h5>
                      <ol>
                         <li>你没登陆</li>
                         <li>你的图片太大了</li>
@@ -140,56 +138,48 @@ float: right;
                         <li>图片上传太多</li>
                         <li>系统出现位置BUG，请联系后台维护人员</li>
                      </ol>
-                </div>
+                
             </div>
-						<div id="about" class="others col-md-40 col-sm-40 col-xs-50">
-                 <h3>关于</h3>
-                 <div class="ever_wrap">
-                 </div>
+			<div id="about" class="others col-md-40 col-sm-40 col-xs-50">
+                 <h4>关于</h4>
+                 	<p>吉大易物网创建于2015年5月，是由一群有共同兴趣爱好和志向的吉林大学在校生开发的校内服务网站。网站以在校生为主要服务对象，专注于校园易物，旨在让同学们的闲置物品发挥价值，促进同学间的交流，同时倡导低碳环保的生活方式。我们以“服务与传承”的理念为同学们提供一个便捷、可靠、健康的信息服务平台。</p>
+                 
             </div>
-						<div id="contact" class="others col-md-40 col-sm-40 col-xs-50" >
-                <h3>联系我们</h3>
-                <div class="ever_wrap">
-                <p>如果让有任何问题请联系我们，联系方式：</p>
-                   <ul>
-                    <li>QQ群463514269</li>
-                    <li>support@newnius.com</li>
-                    <li>inner.roe.deer@gmail.com</li>
-                    <li>470957988@qq.com</li>
-                   </ul>
-                </div>
+			<div id="contact" class="others col-md-40 col-sm-40 col-xs-50" >
+                <h4>联系我们</h4>
+                <p>QQ群:463514269
+                <p>email: support@newnius.com（请注明吉大易物）</p>
+                <p>email: inner.roe.deer@gmail.com(请注明吉大易物)</p>
+                <p>email: web_chengzi@163.com(请注明吉大易物)</p>
+
             </div>
-						<div id="recruit" class="others col-md-40 col-sm-40 col-xs-50" >
-                <h3>招贤纳士</h3>
-                <div class="ever_wrap">
-                  <p>我们招下一代的前端和后台开发</p>
-                </div>
+			<div id="recruit" class="others col-md-40 col-sm-40 col-xs-50" >
+                <h4>招贤纳士</h4>
+                  <p> 如果把产品的生命周期比作一个人，那么现在的吉大易物毫无疑问尚处在襁褓期。功能还不够完善，界面还不够美观，交互还不够友好，已上线的功能还存在隐含的问题。我们会不断改进，也希望更多的小伙伴可以参与其中，让我们一同把吉大人自己的闲置物品信息发布平台做大，做好。</p>
             </div>
-						<div id="cooperation" class="others col-md-40 col-sm-40 col-xs-50" >
-                <h3>业务合作</h3>
-                <div class="ever_wrap">
-                  <p>我们欢迎学校各社团与我们合作</p>
-                </div>
+			<div id="cooperation" class="others col-md-40 col-sm-40 col-xs-50" >
+                <h4>业务合作</h4>
+                  <p>欢迎学校内社团、学生组织、商家及其他组织或个人与吉大易物网合作，合作请联系12345@qq.com</p>
             </div>
             <div id="feedback" class="others col-md-40 col-sm-40 col-xs-50">            
-                <h3 style="margin-top: 10px; margin-bottom: 10px; padding-bottom: 0px;">问题反馈</h3>
+                <h4 style="margin-top: 10px; margin-bottom: 10px; padding-bottom: 0px;">问题反馈</h4>
                             <div class="row" style="margin-top:20px;">
                                 <div class="col-md-58 col-ms-offset-1 col-sm-offset-1 col-sm-58 " style="padding:0; background-color:white;">
-																		<div id="err_info" class="text-center" style="color: red;" hidden></div>
-                                    <form>
-                                        <textarea id="content" placeholder="有什么建议或意见，或者想吐槽，都可以发表" class="text col-md-58 col-sm-58 col-xs-58" style="border:1px solid orange; border-radius:3px; height:100px; margin-left:5px;" ></textarea><br>
-                                        <button id="submit" type="button" class="btn btn-lg" style="background-color: orange;color: white;padding: 3px 5px;border-radius: 3px;margin-top: 10px; margin-right:15px;margin-bottom: 5px; float:right">提交反馈</button>
-                                    </form>
-                                </div>
-                            </div>
+	                 <div id="err_info" class="text-center" style="color: red;" hidden></div>
+                 		<form>
+                            <textarea id="content" placeholder="有什么建议或意见，或者想吐槽，都可以发表" class="text col-md-58 col-sm-58 col-xs-58" style="border:1px solid orange; border-radius:3px; height:100px; margin-left:5px;" ></textarea><br>
+                            <button id="submit" type="button" class="btn" style="background-color: orange;color: white;padding: 3px 5px;border-radius: 3px;margin-top: 10px; margin-right:15px;margin-bottom: 5px; float:right">提交反馈</button>
+                        </form>
+                    </div>
+                </div>
                             <div class="row"> 
 																{% for f in feedback %}
                                 <div class="back  col-md-58 col-ms-offset-1 col-sm-offset-1 col-sm-58 col-xs-58" style="margin-bottom: 5px;">
-																		<p style="margin-bottom: 20px;word-break: break-all">{{ f.user_content }}</p>
+			                  <p style="margin-bottom: 20px;word-break: break-all">{{ f.user_content }}</p>
                                      <div>
-																		 <span class="small">{{ f.user_pub_date }}</span>
+							<span class="small">{{ f.user_pub_date }}</span>
 																		 {% if not f.user %}
-																			<p class="pull-right small">匿名者</p>
+						          <p class="pull-right small">匿名者</p>
 																			{% else %}
 																			<a class="pull-right small" href="{% url 'ucenter' %}?uid={{ f.user.id }}" target="_blank">{{ f.user.name }}</a>
 																			{% endif %}
