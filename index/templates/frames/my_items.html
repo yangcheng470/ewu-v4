@@ -23,7 +23,7 @@
 										<li class="dropdown" style="list-style-type: none; height: 20px; line-height: 20px;">
 														<a href="#" style="z-index:1; display: block; color: #000; text-decoration: none; text-align: center; margin-top: 10px;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ item.get_status_display }}<span  class="caret"></span></a>
 											<ul class="dropdown-menu">
-															<li><a href="#">{% if item.status == 'sale' %}已售{% else %}在售{% endif %}</a></li>
+															<li><a href="{% url 'item_toggle_status_service' %}?pid={{ item.id }}&status={% if item.status == 'sale' %}sold{% else %}sale{% endif %}">{% if item.status == 'sale' %}已售{% else %}在售{% endif %}</a></li>
 											</ul>
 										</li>
 								</div>

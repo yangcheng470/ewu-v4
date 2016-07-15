@@ -25,6 +25,31 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 
 
+def item_toggle_status_service(request):
+    user = None
+    try:
+        user = Account.objects.get(id=request.session['user_id'])
+    except:
+        user = None
+    
+    pid = request.GET.get('pid', '')
+    status = request.GET.get('status', '')
+
+    item = None
+    try:
+        item = Product.objects.get(id=pid)
+    except:
+        item = None
+    
+    if not status in ['sale', 'sold']:
+        return HttpResponseRedirect(reverse('account', args=['my_items']))
+
+    if item and user and (item.owner == user):
+        item.status = status
+        item.save()
+        return HttpResponseRedirect(reverse('account', args=['my_items']))
+
+
 def item_delete_service(request):
     # 'delete' is not actually delete, but just set deleted field to True
     user = None

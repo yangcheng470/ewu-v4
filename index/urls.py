@@ -26,6 +26,7 @@ urlpatterns=[
 
         url(r'^service/item-edit/$', index.item_edit_service, name='item_edit_service'),
         url(r'^service/item-delete/$', index.item_delete_service, name='item_delete_service'),
+        url(r'^service/item-toggle-status/$', index.item_toggle_status_service, name='item_toggle_status_service'),
 
         url(r'service/feedback/$', index.feedback_service, name='feedback_service'),
 
