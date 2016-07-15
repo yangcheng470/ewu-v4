@@ -10,3 +10,7 @@ ewu.log
 
 # media files
 media/
+
+# sqlite
+db.sqlite3
+ewu/settings.py
