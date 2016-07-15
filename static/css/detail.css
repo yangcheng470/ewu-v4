@@ -3,10 +3,6 @@
             background-color: #f5f5f5;
             margin-top:0;
         }
-
-		.thumbnail{
-		padding:0;
-		}
 		#pic{
 		
 		padding:0;
@@ -24,8 +20,10 @@
 		height:117px;
 		}
       div#product_detail{
-            height: 170px;
-            overflow-x: hidden;
+            height: 202px;
+        }
+        .thumbnail{
+            margin-bottom: 10px;
         }
         .product-price{
             font-weight: bold;

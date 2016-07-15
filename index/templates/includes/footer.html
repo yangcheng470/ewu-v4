@@ -1,16 +1,20 @@
 {% load staticfiles %}
   <footer class="foot" style="text-align: center; color:#999999;">
     <div id="footer">
+      <div>
       <span class="copyright-text ">
       ©2016&nbsp;
-			<a href="{% url 'index' %}" target="_blank">吉大易物网</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-      <a href="http://www.miibeian.gov.cn/" target="_blank" rel="external nofollow">吉ICP备15002340</a> &nbsp;&nbsp;|&nbsp;&nbsp;
-			<a href="{% url 'about' %}?label=help" target="_blank">帮助</a> &nbsp;&nbsp;|&nbsp;&nbsp;
-			<a href="{% url 'about' %}?label=feedback" target="_blank">问题反馈</a> &nbsp;&nbsp;|&nbsp;&nbsp;
-			<a href="{% url 'about' %}?label=contact" target="_blank">联系我们</a> &nbsp;&nbsp;|&nbsp;&nbsp;
-			<a href="{% url 'about' %}?label=about" target="_blank">关于</a> &nbsp;&nbsp;|&nbsp;&nbsp;
-      <a href="https://www.djangoproject.com/" target="_blank">友情链接</a> &nbsp;&nbsp;|&nbsp;&nbsp;
-      <a href="http://www.cnzz.com/stat/website.php?web_id=1255344168" target="_blank">站长统计</a>
+			<a href="{% url 'index' %}" target="_blank">吉大易物网</a>&nbsp;|&nbsp;
+      <a href="http://www.miibeian.gov.cn/" target="_blank" rel="external nofollow">吉ICP备15002340</a>
+      </span>
+      </div>
+      <span class="copyright-text ">
+			<a href="{% url 'about' %}?label=feedback" target="_blank">问题反馈</a>&nbsp;|
+			<a href="{% url 'about' %}?label=contact" target="_blank">联系我们</a>&nbsp;|
+      <a href="https://www.djangoproject.com/" target="_blank">友情链接</a>&nbsp;|
+      <a href="http://www.cnzz.com/stat/website.php?web_id=1255344168" target="_blank">站长统计</a>&nbsp;|
+      <a href="{% url 'about' %}?label=about" target="_blank">关于</a>&nbsp;|
+      <a href="{% url 'about' %}?label=help" target="_blank">帮助</a>&nbsp;
       </span>
     </div>
   </footer>
