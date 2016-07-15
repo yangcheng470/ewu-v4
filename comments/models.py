@@ -17,11 +17,11 @@ class Comment(models.Model):
 
     def get_content(self):
         if len(self.content)>80:
-            return self.contene[:77]+' ...'
+            return self.content[:77]+' ...'
         else:
             return self.content
 
-    get_content.short_description='Comment contene'
+    get_content.short_description='Comment content'
 
     def __str__(self):
         return self.content

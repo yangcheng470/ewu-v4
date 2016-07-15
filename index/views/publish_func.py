@@ -26,7 +26,7 @@ def validate_publish(name, purpose, category, price, condition,
         not campus in ['NQ','NL','NH','XM','CY','HP'] or
         not re.match(r'^.{2,500}$', content)):
             return False
-    
+
     # If validate 'want' type, that's enough
     if type == 'want' and purpose == '3':
         return True

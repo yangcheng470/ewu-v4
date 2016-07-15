@@ -12,12 +12,12 @@ from find_password.models import FindPassword
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.datastructures import MultiValueDictKeyError
 from .func import *
-from django.db.models import Q 
+from django.db.models import Q
 from django.utils import timezone
 from django.core.mail import send_mail
 from django.template import loader
 
-logger = logging.getLogger(__name__)                                                 
+logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 handler = logging.FileHandler('ewu.log')
 formatter = logging.Formatter('[%(asctime)s]-%(levelname)s : %(message)s')
@@ -60,7 +60,7 @@ def login_service(request):
     except:
         return HttpResponse('false')
 
-    
+
 def logout_service(request):
     try:
         del request.session['user_id']
@@ -84,7 +84,7 @@ def reg_service(request):
                 re.match(r'^[a-zA-Z0-9.-_]{2,50}@[a-zA-Z0-9]{2,30}.[a-zA-Z0-9]{1,10}$', email) or
                 re.match(r'^.{6,20}$', password)):
             return HttpResponse('false')
-        
+
         try:
             # If email has been registered, return 'register'
             # Or continue
@@ -101,7 +101,7 @@ def reg_service(request):
         return HttpResponse('true')
     except:
         return HttpResponse('false')
-        
+
 
 # Close csrf validate temporarily
 @csrf_exempt
@@ -172,7 +172,7 @@ def find_password_service(request):
     except:
         find_password_obj = FindPassword(account=user, date_time=timezone.now(),valid=True, key=key, email=email)
     find_password_obj.save()
-    
+
     # Construct a find_password url
     url = "http://127.0.0.1:8000/reset_password/?key=" + key
 

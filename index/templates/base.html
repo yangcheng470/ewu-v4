@@ -12,7 +12,7 @@
     <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
   </head>
-  
+
   <body>
     {% block header %}
 			{% if request.session.user_id %}
@@ -27,14 +27,14 @@
       <img src="{% static 'image/二维码.jpg' %}" />
     </div>
     {% endblock qrcode %}
-  
+
     {% block login_sign %}{% include 'includes/login_sign.html' %}{% endblock login_sign %}
-    
+
     {% block search_box %}{% include 'includes/search_box.html' %}{% endblock search_box %}
-   
+
   	{% block body %}{% endblock %}
-  
+
     {% block footer %}{% include 'includes/footer.html' %}{% endblock %}
-  
+
   </body>
 </html>

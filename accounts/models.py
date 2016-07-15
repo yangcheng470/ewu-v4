@@ -8,16 +8,17 @@ class Account(models.Model):
     name=models.CharField(max_length=50,null=False)
     
     SEX_CHOICES=(
-            ('M','Male'),
-            ('F','Female'),
-            ('U', 'Unknown'),
+            ('M','男'),
+            ('F','女'),
+            ('U', '未知'),
     )
     sex=models.CharField(max_length=1,choices=SEX_CHOICES,default='U')
     pwd=models.CharField(max_length=128,null=False)
     salt=models.CharField(max_length=64,null=False)
     email=models.EmailField(null=False)
     email_verified=models.BooleanField(default=False)
-    phone=models.CharField(max_length=11) 
+    phone=models.CharField(max_length=11, blank=True)
+    qq = models.CharField(max_length=20, blank=True)
     phone_verified=models.BooleanField(default=False)
     reg_time=models.DateTimeField(default=timezone.now)
     last_ip=models.GenericIPAddressField(null=True)
@@ -34,6 +35,9 @@ class Account(models.Model):
             ('XM','新民'),
     )
     campus=models.CharField(max_length=2,choices=CAMPUS_CHOICES,default='NQ')
+
+    college = models.CharField(max_length=30, blank=True)
+    entry_year = models.CharField(max_length=4, blank=True)
 
     def unread_comment_count(self):
         unread_comment_list = self.comment_forward.all()

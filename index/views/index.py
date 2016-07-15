@@ -5,6 +5,7 @@ import time
 from hashlib import md5
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.http import Http404
 from accounts.models import Account
 from products.models import Product
@@ -16,12 +17,107 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.datastructures import MultiValueDictKeyError
 from .func import *
 from .publish_func import *
-from django.db.models import Q 
+from django.db.models import Q
 from django.utils import timezone
 from django.core.mail import send_mail
 from django.template import loader
 from django.conf import settings
+from django.core.urlresolvers import reverse
 
+
+def item_toggle_status_service(request):
+    user = None
+    try:
+        user = Account.objects.get(id=request.session['user_id'])
+    except:
+        user = None
+    
+    pid = request.GET.get('pid', '')
+    status = request.GET.get('status', '')
+
+    item = None
+    try:
+        item = Product.objects.get(id=pid)
+    except:
+        item = None
+    
+    if not status in ['sale', 'sold']:
+        return HttpResponseRedirect(reverse('account', args=['my_items']))
+
+    if item and user and (item.owner == user):
+        item.status = status
+        item.save()
+        return HttpResponseRedirect(reverse('account', args=['my_items']))
+
+
+def item_delete_service(request):
+    # 'delete' is not actually delete, but just set deleted field to True
+    user = None
+    try:
+        user = Account.objects.get(id=request.session['user_id'])
+    except:
+        user = None
+    
+    pid = request.GET.get('pid', '')
+
+    item = None
+    try:
+        item = Product.objects.get(id=pid)
+    except:
+        item = None
+
+    if item and user and (item.owner == user):
+        item.deleted = True
+        item.save()
+
+    return HttpResponseRedirect(reverse('account', args=['my_items']))
+
+
+@csrf_exempt
+def person_info_edit_service(request):
+    user = None
+    try:
+        user = Account.objects.get(id=request.session['user_id'])
+    except:
+        user = None
+    if not user:
+        return HttpResponse('false')
+    name = request.POST.get('name', '')
+    sex = request.POST.get('sex', '')
+    email = request.POST.get('email', '')
+    campus = request.POST.get('campus', '')
+    college = request.POST.get('college', '')
+    entry_year = request.POST.get('entry_year', '')
+    phone = request.POST.get('phone', '')
+    qq = request.POST.get('qq', '')
+
+    if re.match(r'^.{2,15}$', name):
+        user.name = name
+    if re.match(r'^[MFU]$', sex):
+        user.sex = sex
+    if re.match(r'^[a-zA-Z0-9.-_]{2,50}@[a-zA-Z0-9]{2,30}.[a-zA-Z0-9]{1,10}$', email):
+        user.email = email
+    if campus in ['NQ','NL','NH','XM','CY','HP']:
+        user.campus = campus
+    if re.match(r'^.{1,30}$', college):
+        user.college = college
+    if re.match(r'^[0-9]{4}$', entry_year):
+        user.entry_year = entry_year
+    if phone:
+        user.phone = phone
+    if qq:
+        user.qq = qq
+    user.save()
+    return HttpResponse('true')
+
+
+def person_info_edit(request):
+    user = None
+    try:
+        user = Account.objects.get(id=request.session['user_id'])
+    except:
+        user = None
+    return render(request, 'person_info_edit.html', {'user': user})
 
 # Close csrf validate temporarily
 @csrf_exempt
@@ -34,7 +130,7 @@ def feedback_service(request):
     content = request.POST.get('content', '')
     if not content or len(content)>500:
         return HttpResponse('false')
-    
+
     feedback = Feedback(user=user,user_content=content)
     feedback.save()
 
@@ -83,7 +179,7 @@ def item_edit_service(request):
 
     # Save imgs
     save_big_and_small_files(big_imgs, small_imgs, files)
-    
+
     product = Product(id=product.id, name=name, purpose=purpose, category=category, price=price,
                       condition=condition, phone=phone, qq=qq, campus=campus,
                       content=content, big_imgs=big_imgs, small_imgs=small_imgs,
@@ -161,7 +257,7 @@ def publish_sale_service(request):
 
     # Save imgs
     save_big_and_small_files(big_imgs, small_imgs, files)
-    
+
     product = Product(name=name, purpose=purpose, category=category, price=price,
                       condition=condition, phone=phone, qq=qq, campus=campus,
                       content=content, big_imgs=big_imgs, small_imgs=small_imgs,
@@ -200,7 +296,7 @@ def reset_password(request):
         key = request.GET['key']
     except KeyError:
         key = None
-    
+
     email = None
     date_time = None
     try:
@@ -209,7 +305,7 @@ def reset_password(request):
         date_time = find_password_obj.date_time
         is_link_valid = find_password_obj.valid
 
-        # Reset link is valid within 30 mins      
+        # Reset link is valid within 30 mins
         now = datetime.datetime.utcnow().replace(tzinfo=pytz.utc)
         if (now - date_time).seconds>1800:
             find_password_obj.valid = False
@@ -435,7 +531,28 @@ def account(request, frame):
     except:
         user = None
 
-    return render(request, "account.html", {'user': user, 'frame_url':frame})
+    items = Product.objects.filter(valid=True).filter(deleted=False)
+    items = items.filter(owner=user)
+
+    messages = Comment.objects.filter(valid=True)
+    messages = messages.filter(comment_forward=user).order_by('readed', '-pub_date')
+
+    if user and frame == 'messages':
+        # copy_messages is for update readed status
+        # convert messages to list is to query last status
+        copy_messages = messages
+        messages = list(messages)
+        copy_messages.update(readed=True)
+
+    frame_url = 'frames/' + frame + '.html'
+
+    render_dict = {
+            'user': user,
+            'frame_url': frame_url,
+            'items': items,
+            'messages': messages,
+    }
+    return render(request, "account.html", render_dict)
 
 def ucenter(request):
     user_id = request.session.get('user_id', False)

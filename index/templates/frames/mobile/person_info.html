@@ -24,23 +24,23 @@ padding: 3px 6px;
 
 </style>
 {% endblock spec_css %}
+
 {% block body %}
-				{% if user %}
-				<h5 id="back"><a href="{% url 'account' '' %}"  >个人中心</a>>个人信息</h5>
-           <div class="content_information" id="personal_information">
-								<p>用户：<span id="user_name">{{ user.name }}</span></p>
-								<p>性别：<span id="user_sex">{{ user.sex }}</span></p>
-								<p>邮箱：<span id="user_mail">{{ user.email }}</span></p>
-								<p>校区：<span id="user_place">南区</span></p>
-                <p>学院：<span id="user_institute">计算机科学与技术学院</span></p>
-                <p>入学年份：<span id="user_grade">2013</span></p>
-                <p>手机号：<span id="user_phone">15612345678</span></p>
-                <p>QQ：<span id="user_qq">12345678</span></p>
-                <button class="btn">编辑个人信息</button>
-            </div>
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-		{% else %}
-					<div><h2>请先登陆</h2></div>
-		{% endif %}
-		{% endblock body %}
+
+{% if user %}
+	 <div class="content_information" id="personal_information" style="height: auto; background-color: white; padding-top: 20px; padding-left: 60px; padding-bottom: 20px;">
+				<p>用户：<span id="user_name">{{ user.name }}</span></p>
+				<p>性别：<span id="user_sex">{{ user.get_sex_display }}</span></p>
+				<p>邮箱：<span id="user_mail">{{ user.email }}</span></p>
+				<p>校区：<span id="user_place">{{ user.get_campus_display }}</span></p>
+				<p>学院：<span id="user_institute">{{ user.get_college_display }}</span></p>
+				<p>入学年份：<span id="user_grade">{{ user.get_entry_year_display }}</span></p>
+				<p>手机号：<span id="user_phone">{{ user.phone }}</span></p>
+				<p>QQ：<span id="user_qq">{{ user.qq }}</span></p>
+				<a href="{% url 'person_info_edit' %}" role="button" class="btn" style="background-color: orange; color: white; border-radius: 3px;">编辑个人信息</a>
+		</div>
+{% else %}
+	<div><h2>请先登陆</h2></div>
+{% endif %}
+
+{% endblock body %}

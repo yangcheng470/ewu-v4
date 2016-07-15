@@ -30,7 +30,7 @@
 		}
         .headlabel li.ac a{
 		border:1px solid orange;
-        
+
 		}
     .headlabel li.Title a:hover{
 		background-color:white;
@@ -55,7 +55,7 @@
 		border:1px solid orange;
 		color:white;
 		}
-        
+
 
     </style>
 		{% endblock spec_css %}
@@ -74,7 +74,7 @@
          <li id="XM" class=""><a href="javascript:void(0)">新民</a></li>
          <li id="HP" class=""><a href="javascript:void(0)">和平</a></li>
          <li id="CY" class=""><a href="javascript:void(0)">朝阳</a></li>
-         
+
         </ul>
     </div>
     <div class="row">
@@ -94,7 +94,7 @@
          <li id="c_SK"><a href="javascript:void(0)">书刊</a></li>
          <li id="c_SP"><a href="javascript:void(0)">食品</a></li>
          <li id="c_QT"><a href="javascript:void(0)">其它</a></li>
-         
+
         </ul>
     </div>
     <div class="row">
@@ -153,7 +153,7 @@
                <!--</div>-->
         <!--</div>-->
 </div>
-<script type="text/javascript" >  
+<script type="text/javascript" >
 window.onload=function(){
 var aLis = $('#schoolNav li');
 var aLik = $('#kindNav li');
@@ -268,7 +268,7 @@ aLit[1].addEventListener('click', function() {
 for (i = 2; i < aLis.length; i++) {
    aLis[i].addEventListener('click', function() {
 			active_campus['all'] = 0;
-	  	if(this.className==""){ 
+	  	if(this.className==""){
 		     this.className="active";
 		  }else{this.className="";}
       aLis[1].className="";
@@ -284,13 +284,13 @@ for (i = 2; i < aLis.length; i++) {
 			
 
   }, false);
- 
+
 }
 // 12 categories
 for (i = 2; i < aLik.length; i++) {
    aLik[i].addEventListener('click', function() {
 			active_category['c_all'] = 0;
-	  	if(this.className==""){ 
+	  	if(this.className==""){
 		     this.className="active";
 		  }else{this.className="";}
       aLik[1].className="";
@@ -306,13 +306,13 @@ for (i = 2; i < aLik.length; i++) {
 			
 
   }, false);
- 
+
 }
 // 3 typies
 for (i = 2; i < aLit.length; i++) {
    aLit[i].addEventListener('click', function() {
 			active_type['t_all'] = 0;
-	  	if(this.className==""){ 
+	  	if(this.className==""){
 		     this.className="active";
 		  }else{this.className="";}
       aLit[1].className="";
@@ -328,7 +328,7 @@ for (i = 2; i < aLit.length; i++) {
 			
 
   }, false);
- 
+
 }
 }
 </script>

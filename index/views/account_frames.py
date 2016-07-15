@@ -11,7 +11,7 @@ from find_password.models import FindPassword
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.datastructures import MultiValueDictKeyError
 from .func import *
-from django.db.models import Q 
+from django.db.models import Q
 from django.utils import timezone
 from django.core.mail import send_mail
 from django.template import loader
