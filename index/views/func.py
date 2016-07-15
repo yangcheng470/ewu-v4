@@ -67,7 +67,7 @@ def page_items(category='new', page=1):
 
     if page<1 or page>max_page():
         page = 1
-    
+
     page_list = Product.objects.filter(valid=True).filter(deleted=False)
     if category == 'new':
         page_list = page_list.order_by('status','-pub_date')

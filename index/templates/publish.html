@@ -55,7 +55,7 @@ border-radius:4px;
         </ul>
         <div class="tab-content" id="main_div">
           <div id="baby_transfer_div" class="div" style="display:block;">
-             
+
             <form class="form-horizontal">
 							<div id="err_info" class="text-center" style="color: red;" hidden></div>
               <div class="form-group">
@@ -139,7 +139,7 @@ border-radius:4px;
                 </div>
               </div>
               <div class="form-group">
-                
+
                 <label class="col-sm-10 control-label">上传图片</label>
                 <div class="col-md-30  ">
 								<img id="uploadpicture"  src="{% static 'image/upfile.png' %}">
@@ -147,13 +147,13 @@ border-radius:4px;
                 </div>
               </div>
               <div class="form-group">
-                
+
                <label for="baby_transfer_product_detail" class="col-sm-10 control-label">详细描述</label>
                 <div class="col-sm-40 ">
                   <textarea cols="40" rows="10" class="form-control" id="baby_transfer_product_detail" name="baby_transfer_product_detail"></textarea>
                 </div>
               </div>
-                
+
             </form>
 						<button id="s_submit" type="submit" class="btn" {% if not user %}disabled title="请先登陆" {% endif %}>立即发布</button>
           </div>
@@ -231,7 +231,7 @@ border-radius:4px;
   </div>
 
 </div>
-    <script>  
+    <script>
 			$(function() {
 				
 							$('#s_submit').click(function(){

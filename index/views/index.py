@@ -16,7 +16,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.datastructures import MultiValueDictKeyError
 from .func import *
 from .publish_func import *
-from django.db.models import Q 
+from django.db.models import Q
 from django.utils import timezone
 from django.core.mail import send_mail
 from django.template import loader
@@ -40,7 +40,7 @@ def person_info_edit_service(request):
     entry_year = request.POST.get('entry_year', '')
     phone = request.POST.get('phone', '')
     qq = request.POST.get('qq', '')
-    
+
     if re.match(r'^.{2,15}$', name):
         user.name = name
     if re.match(r'^[MFU]$', sex):
@@ -80,7 +80,7 @@ def feedback_service(request):
     content = request.POST.get('content', '')
     if not content or len(content)>500:
         return HttpResponse('false')
-    
+
     feedback = Feedback(user=user,user_content=content)
     feedback.save()
 
@@ -129,7 +129,7 @@ def item_edit_service(request):
 
     # Save imgs
     save_big_and_small_files(big_imgs, small_imgs, files)
-    
+
     product = Product(id=product.id, name=name, purpose=purpose, category=category, price=price,
                       condition=condition, phone=phone, qq=qq, campus=campus,
                       content=content, big_imgs=big_imgs, small_imgs=small_imgs,
@@ -207,7 +207,7 @@ def publish_sale_service(request):
 
     # Save imgs
     save_big_and_small_files(big_imgs, small_imgs, files)
-    
+
     product = Product(name=name, purpose=purpose, category=category, price=price,
                       condition=condition, phone=phone, qq=qq, campus=campus,
                       content=content, big_imgs=big_imgs, small_imgs=small_imgs,
@@ -246,7 +246,7 @@ def reset_password(request):
         key = request.GET['key']
     except KeyError:
         key = None
-    
+
     email = None
     date_time = None
     try:
@@ -255,7 +255,7 @@ def reset_password(request):
         date_time = find_password_obj.date_time
         is_link_valid = find_password_obj.valid
 
-        # Reset link is valid within 30 mins      
+        # Reset link is valid within 30 mins
         now = datetime.datetime.utcnow().replace(tzinfo=pytz.utc)
         if (now - date_time).seconds>1800:
             find_password_obj.valid = False

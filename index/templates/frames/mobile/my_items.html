@@ -45,7 +45,7 @@ margin-right: 10px;
 .product-price{
 color:#F30;
 font-weight: bold;
-display: inline-block; 
+display: inline-block;
 position:absolute;
 bottom:0;
 margin:0;
@@ -71,7 +71,7 @@ margin-top:10px;
 {% endblock spec_css %}
 
 {% block body %}
-		<div id="my_product" class="others" style="padding: 0;margin: 0; margin-bottom: 30px; color: #777; ">            
+		<div id="my_product" class="others" style="padding: 0;margin: 0; margin-bottom: 30px; color: #777; ">
 				{% for item in items %}
 				<div class="div">
 								<div class="row product" style=" background-color: white; margin: 0; {% if forloop.counter0 != 0 %} margin-top: 5px;{% endif %} position:relative;">
@@ -80,8 +80,8 @@ margin-top:10px;
 											 <a href="{% url 'detail' %}?pid={{ item.id }}" style="margin-top: 10px;">{{ item.name }}</a>
 											 <p style="margin-top: 10px;">{{ item.content }}</p>
 											 <p class="product-price" style="color: #f30; display: inline-block; position: absolute; bottom: 0; margin: 0; font-size: 16px;">￥{{ item.price }}</p>
-							 </div>                
-							 <div class="dropdown col-md-10 col-sm-10" style="list-style-type: none; height: 20px; line-height: 20px;margin-top:40px;">  
+							 </div>
+							 <div class="dropdown col-md-10 col-sm-10" style="list-style-type: none; height: 20px; line-height: 20px;margin-top:40px;">
 											<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 								</div>
 					</div>
@@ -120,7 +120,7 @@ var  Odiv=document.getElementsByClassName("div");
 for(var i=0;i<Odiv.length;i++){
 var    Ospan=Odiv[i].getElementsByTagName("span")[0];
 Ospan.addEventListener("click",function(){
-	 
+	
 var Odetail=this.parentNode.parentNode.parentNode.getElementsByClassName("detail")[0];
 if(Odetail.style.display=="none")
 {
@@ -132,7 +132,7 @@ Odetail.style.display="none"
 
 }
 
-},false) 
+},false)
 
 
 }
